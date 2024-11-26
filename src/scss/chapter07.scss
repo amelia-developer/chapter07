@@ -1,0 +1,277 @@
+@charset "utf-8";
+
+.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.tab {
+    position: relative;
+    line-height: 4.583rem;
+    h1 {
+        margin: 0;
+        background: url('../img/logo.png') no-repeat 50%;
+        text-indent: -9999px;
+        height: 4rem;
+    }
+    .btn_menu {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 1.25rem;
+        width: 1.67rem;
+        height: 1.167rem;
+        margin-top: -.583rem;
+        cursor: pointer;
+        .menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1.67rem;
+            height: .1567rem;
+            border-bottom: 2px solid #c90a1f;
+            transition: all .5s ease;
+            &:before, &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 1.67rem;
+                height: .1567rem;
+                border-bottom: 2px solid #c90a1f;
+            }
+            &:before {
+                top: .5rem; 
+            }
+            &:after {
+                top: 1rem;
+            }
+        }
+    }
+} // tab종료
+
+nav {
+    position: fixed;
+    top: 0;
+    background-color: #261f19;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1;
+    opacity: .95;
+    transform: translateX(-100%);
+    transition: transform .5s ease;
+    z-index: 5;
+    &.on {
+        transform: translateX(0);
+    }
+    .btn_close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        span {
+            display: inline-block;
+            overflow: hidden;
+            width: 4.5rem;
+            height: 4.5rem;
+            box-sizing: border-box;
+            &:before, &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 6px;
+                width: 1.67rem;
+                height: .167rem;
+                background-color: #fc0;
+                transform: rotate(45deg);
+            }
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+    } // btn_close종료
+    ul {
+        padding: 4rem 0 0 0;
+        margin: 0;
+        &.subMenu {
+            display: none;
+        }
+        li {
+            list-style: none;
+            line-height: 60px;
+            border-bottom: 1px solid #494642;
+            box-sizing: border-box;
+            padding: 0 2.5rem;
+            text-align: left;
+            transition: height .5s;
+            a {
+                text-decoration: none;
+                color: #fff;
+                font-weight: 700;
+                position: relative;
+                display: block;
+                &.btn_subMenu {
+                    &.on {
+                        &:after {
+                            transform: rotate(0deg);
+                        }
+                    }
+                    &.on + .subMenu {
+                        display: block;
+                        padding-top: 0;
+                    }
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        width: 1.75rem;
+                        height: 1rem;
+                        margin-top: -.5rem;
+                        background-image: url('../img/ico_arr.png');
+                        background-repeat: no-repeat;
+                        background-size: 100% 100%;
+                        transform: rotate(180deg);
+                        transition: all .3s ease;
+                    }
+                } // btn_subMenu종료
+            }
+        } // li종료
+    }
+} // nav종료
+
+.swiper {
+    .swiper-wrapper {
+        position: relative;
+    }
+    .swiper-slide {
+        width: 100%;
+        height: 100%;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+} // swiper종료
+
+.bannerBox {
+    margin: 0;
+    padding: 2rem 0 0 0;
+    li {
+        list-style: none;
+        height: 100%;
+        width: 90%;
+        margin: 0 auto 0.5rem auto;
+        img {
+            display: block;
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+} // bannerBox종료
+
+.bestBox {
+    background-color: #f8f8f8;
+    padding: 0 20px;
+    .title {
+        img {
+            width: 100%;
+            max-width: 150px;
+            display: block;
+        }
+        h2 {
+            color: #2c251e;
+            margin-top: 1.67rem;
+            margin-bottom: 3.33rem;
+            font-size: 2rem;
+            line-height: 38px;
+            font-weight: 700;
+            text-align: left;
+            letter-spacing: -.05rem;
+        }
+    } // title종료
+    .items {
+        overflow: auto;
+        ul {
+            margin: 0 -10px 32px -10px;
+            padding: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            justify-content: flex-start;
+            // width: calc(100% + 20px);
+            width: calc(700% + 1000px);
+            li {
+                list-style: none;
+                padding: 0 10px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                width: 10%;
+                a {
+                    display: block;
+                    text-decoration: none;
+                    background-color: #fff;
+                    height: 100%;
+                    padding: 32px;
+                    border-radius: 16px;
+                    box-shadow: 0 10px 20px rgba(0,0,0,.1);
+                    box-sizing: border-box;
+                    transition: all .3s;
+                    img {
+                        width: 100%;
+                        display: block;
+                        margin-bottom: 32px;
+                    } // img종료
+                    span {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        width: 240px;
+                        &.title_menu {
+                            font-weight: 700;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            font-size: 1.4rem;
+                            color: #2c251e;
+                            margin-bottom: 4px;
+                        } // title_menu종료
+                        &.sub_text {
+                            font-weight: 500;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            font-size: 1.2rem;
+                            color: #2c251e;
+                            line-height: 20px;
+                            margin-bottom: 16px;
+                            display: block;
+                            height: 20px;
+                        } // sub_text종료
+                        &.price {
+                            color: #c90a1f;
+                            font-size: 1.6rem;
+                            line-height: 1.5;
+                            display: inline-block;
+                            background-image: url('../img/ico_price_red_sm.png');
+                            background-repeat: no-repeat;
+                            background-position-y: 50%;
+                            background-position-x: 0;
+                            padding-left: 1.9167rem;
+                            width: auto;
+                        } // price종료
+                    } // span종료
+                }
+            } // li종료
+        } // ul종료
+    } // items종료
+} // bestBox종료
