@@ -515,3 +515,56 @@ footer {
         margin-top: 40px;
     }
 } // footer종료
+
+.bottomNavbox {
+    background-color: #2c251e;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        li {
+            list-style: none;
+            width: 25%;
+            height: 4.3rem;           
+            &:first-child span {
+                width: 1.83rem;
+                background-position-x: .4167rem;
+                background-position-y: 106%;
+            } 
+            &:nth-child(2) span {
+                width: 2.5rem;
+                background-position-x: -1rem;
+                background-position-y: 106%;
+            }
+            &:nth-child(3) span {
+                width: 3.2rem;
+                background-position-x: -3.5rem;
+                background-position-y: 106%;
+            }
+            &:nth-child(4) span {
+                width: 5rem;
+                background-position-x: -6.3rem;
+                background-position-y: 106%;
+            }
+            a {
+                text-decoration: none;
+                span {
+                    background-image: url('../img/spr_nav_mobile2.png');
+                    background-repeat: no-repeat;
+                    background-size: 160px auto;
+                    margin-top: .83rem;
+                    display: inline-block;
+                    height: 2.9167rem;
+                    line-height: 2.4167rem;
+                    text-indent: -9999px;
+                }
+            }
+        } // li종료
+    }
+} // bottomNavbox종료
