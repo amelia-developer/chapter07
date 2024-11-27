@@ -7,3 +7,8 @@ export const setBestMenu = bestMenu => ({   // setBestMenu는 bestMenu(인자=�
 export const setLoading = () => ({
     type: "SET_LOADING"
 })
+
+export const setSNSList = snsList => ({
+    type: "SET_SNS",
+    payload: snsList
+})

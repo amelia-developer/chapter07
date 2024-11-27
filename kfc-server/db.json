@@ -84,5 +84,19 @@
             "subText":"",
             "price": 2100
         }
+    ],
+    "sns":[
+        {
+            "id":"e7BXYjyeSg14"
+        },
+        {
+            "id":"IKk0DxZvUEaz"
+        },
+        {
+            "id":"LAKUgK53IMM1"
+        },
+        {
+            "id":"ERNbxr3eVLzQ"
+        }
     ]
 }

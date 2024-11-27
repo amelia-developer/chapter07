@@ -4,22 +4,22 @@ import axios from 'axios'
 import { connect } from "react-redux"
 import { setBestMenu, setLoading } from '../redux/action'
 
-const mapDispatchtoProps = dispatch => {
-    return {
-        setBestMenu: Menus => dispatch(setBestMenu(Menus)),
-        setLoading: () => dispatch(setLoading())
-    }
-}
-
-const mapStateToProps = state => {
+const mapStateToProps = state => { // 상태를 읽어와서 화면에 표시해야하는 경우
     return {
         bestMenu: state.bestMenu,
         loading: state.loading
     }
 }
 
+const mapDispatchtoProps = dispatch => { // dispathch는 액션을 스토어로 보내는 함수, 액션을 디스패치해서 상태를 업데이트해야하는경우
+    return {
+        setBestMenu: Menus => dispatch(setBestMenu(Menus)),
+        setLoading: () => dispatch(setLoading())
+    }
+}
+
 const BestMenu = ({setBestMenu, bestMenu, setLoading, loading}) => {
-console.log(`bestMenu = ${JSON.stringify(bestMenu)}`);
+// console.log(`bestMenu = ${JSON.stringify(bestMenu)}`);
 
     useEffect(()=> {
         axios.get(`http://localhost:3000/menu`)
@@ -59,6 +59,9 @@ console.log(`bestMenu = ${JSON.stringify(bestMenu)}`);
                             })
                         }
                     </ul>
+                </div>
+                <div className="btnMoreMenu">
+                    <a href="#">다양한 메뉴 보러가기 &gt;</a>
                 </div>
             </div>
         </>
