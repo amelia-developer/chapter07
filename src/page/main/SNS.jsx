@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import kfcSprite from '../img/kfc_sprite.png'
+import kfcSprite from '../../img/kfc_sprite.png'
 import { connect } from "react-redux"
-import {setSNSList} from '../redux/action'
+import {setSNSList} from '../../redux/action'
 import axios from 'axios'
 
 const mapStateToProps = state => {

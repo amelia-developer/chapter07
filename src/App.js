@@ -1,6 +1,6 @@
 import './App.css';
 import "./scss/chapter07.scss";
-import Main from './page/Main'
+import Main from './page/main/Main'
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
-import banner1 from '../img/banner_storesearch.png'
-import banner2 from '../img/banner_Delivery_v2.png'
-import banner3 from '../img/banner_promotion_v2.png'
+import banner1 from '../../img/banner_storesearch.png'
+import banner2 from '../../img/banner_Delivery_v2.png'
+import banner3 from '../../img/banner_promotion_v2.png'
 
 const Banner = () => {
   return (

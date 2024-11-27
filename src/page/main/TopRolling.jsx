@@ -3,9 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import swiper1Img from '../img/MKWcUpuGySOr.png'
-import swiper2Img from '../img/RgPJjfVGyaps.png'
-import swiper3Img from '../img/aimIqX97EM7r.png'
+import swiper1Img from '../../img/MKWcUpuGySOr.png'
+import swiper2Img from '../../img/RgPJjfVGyaps.png'
+import swiper3Img from '../../img/aimIqX97EM7r.png'
 
 const TopRolling = () => {
     return (

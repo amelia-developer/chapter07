@@ -1,5 +1,5 @@
 import React from 'react'
-import kfcSprite from '../img/kfc_sprite.png'
+import kfcSprite from '../../img/kfc_sprite.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 

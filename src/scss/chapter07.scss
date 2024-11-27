@@ -568,3 +568,111 @@ footer {
         } // li종료
     }
 } // bottomNavbox종료
+
+.topBox {
+    background-color: #c90a1f;
+    height: 4.583rem;
+    text-align: center;
+    line-height: 4.583rem;
+    width: 100%;
+    position: relative;
+    top: 0;
+    h2 {
+        overflow: hidden;
+        height: 100%;
+        padding: .167rem 3.75rem;
+        font-size: 1.67rem;
+        line-height: 70px;
+        color: #fff;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 700;
+        margin: 0;
+    }
+    a {
+        text-decoration: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        &.btn_back {
+            display: block;
+            background-image: url('../img/ico_back.png');
+            background-size: .9167rem 1.67rem;
+            width: .916rem;
+            height: 1.67rem;
+            left: 10px;
+        } // btn_back종료
+        &.btn_basket {
+            display: block;
+            width: 2rem;
+            height: 4.5rem;
+            padding: .083rem;
+            background-image: url('../img/ico_basket.png');
+            background-position-x: 0;
+            background-position-y: 50%;
+            background-repeat: no-repeat;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+            background-size: 24px auto;
+            font-size: .75rem;
+            line-height: 55px;
+            text-indent: .25rem;
+            right: 10px;
+        } // btn_basket종료
+    }
+} // topBox종료
+
+.deliveryAddressBox {
+    background-color: #f7f7f7;
+    padding: .83rem 2rem .83rem 1.67rem;
+    height: 50px;
+    line-height: 48px;
+    .address {
+        font-size: 1rem;
+        line-height: 60px;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 50px;
+        p {
+            // max-width: calc(100% - 67px);
+            // float: left;
+            display: flex;
+            justify-content: space-between;
+            line-height: 2rem;
+            margin: 0;
+            span {
+                // max-width: 200px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: block;
+                max-width: 260px;
+            }
+            @media screen and (min-width: 376px) {
+                span {
+                    overflow: visible;
+                }
+            } 
+            .btn_change {
+                right: 0;
+                position: absolute;
+                top: 30%;
+                margin-top: -1rem;
+                background-color: transparent;
+                color: #666;
+                text-decoration: none;
+                height: 2.083rem;
+                padding: 0.5rem;
+                font-size: 1rem;
+                line-height: 15px;
+                border-width: 25px;
+                border: 1px solid #666;
+                box-sizing: border-box;
+                border-radius: 2.083rem;
+            }
+        } // p종료
+        
+    }
+} // deliveryAddressBox종료

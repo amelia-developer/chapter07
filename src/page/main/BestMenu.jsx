@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import kfcSprite from '../img/kfc_sprite.png'
+import kfcSprite from '../../img/kfc_sprite.png'
 import axios from 'axios'
 import { connect } from "react-redux"
-import { setBestMenu, setLoading } from '../redux/action'
+import { setBestMenu, setLoading } from '../../redux/action'
+import { useNavigate } from 'react-router-dom'
 
 const mapStateToProps = state => { // 상태를 읽어와서 화면에 표시해야하는 경우
     return {
@@ -21,6 +22,8 @@ const mapDispatchtoProps = dispatch => { // dispathch는 액션을 스토어로 
 const BestMenu = ({setBestMenu, bestMenu, setLoading, loading}) => {
 // console.log(`bestMenu = ${JSON.stringify(bestMenu)}`);
 
+    const pageNavigate = useNavigate()
+
     useEffect(()=> {
         axios.get(`http://localhost:3000/menu`)
             .then(response => {
@@ -33,6 +36,11 @@ const BestMenu = ({setBestMenu, bestMenu, setLoading, loading}) => {
     }, [setBestMenu, setLoading])
     if (loading) { // TODO:게시판만들었던거참고해서 로딩만들기
         return <div>로딩중 로딩중 로딩중</div>
+    }
+
+    const onDetailProduct = () => {
+        // navigate
+        pageNavigate(`/detail`)
     }
     return (
         <>
@@ -47,7 +55,7 @@ const BestMenu = ({setBestMenu, bestMenu, setLoading, loading}) => {
                             bestMenu.map((value, idx) => {
                                 // console.log(`value = ${JSON.stringify(value)}`);
                                return   <li key={idx}>
-                                            <a href="#">
+                                            <a href="#" onClick={onDetailProduct}>
                                                 <img src={`/images/${value.id}.png`} alt={value.title}/> 
                                         {/**src>img로 하면 빌드과정 필요 및 빌드과정에서 변환, 그리고 import도 필요함. 
                                          * 따라서 정적파일(폰트,이미지, 아이콘)등은 public으로 넣고, 이는 빌드과정에 포함되지 않음*/}
