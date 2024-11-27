@@ -41,21 +41,18 @@ const SNS = ({snsList, setSNSList}) => {
                 <div className="items">
                     <ul>
                         {
-                           snsList.map((value, idx) => {
-                                console.log(`value = ${JSON.stringify(value)}`);
-                                
+                           snsList.map((value, idx) => {                                
                                 return  <li key={idx}>
                                             <a href="#">
                                                 <img src={`/images/${value.id}.jpg`} alt=""/>
                                             </a>
-                                            {/* <p>
-                                                <span className="writer">kfc_korea</span>
+                                            <p>
+                                                <span className="writer"><img src="https://www.kfckorea.com/static/img/common/fandom_instagram.png" alt=""/><span>kfc_korea</span></span>
                                                 <span className="media">+팔로워</span>
-                                            </p> */}
+                                            </p>
                                         </li>
                             })
-                        }
-                        
+                        }                        
                     </ul>
                 </div>
             </div>
