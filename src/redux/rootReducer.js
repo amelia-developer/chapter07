@@ -1,7 +1,8 @@
 const initialState = { // state의 초기값을 정의하는 객체
     bestMenu: [], // 처음에 빈배열로 세팅을 해줌(이게 정답은 아니고)
     loading: false,
-    snsList: []
+    snsList: [],
+    bestMenuSelectedId: null // 새로운상태추가
 }
 
 const rootReducer  = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const rootReducer  = (state = initialState, action) => {
             return {...state, loading: true}
         case "SET_SNS":
             return {...state, snsList: action.payload}
+        case "SET_SELECTED_BESTMENU":
+            return {...state, bestMenuSelectedId: action.payload} // 새로운리듀서 추가
         default:
             return state
     }

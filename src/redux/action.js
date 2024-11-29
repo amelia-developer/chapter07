@@ -12,3 +12,8 @@ export const setSNSList = snsList => ({
     type: "SET_SNS",
     payload: snsList
 })
+
+export const setSelectedBestMenuProductId = bestMenuSelectedId => ({
+    type: "SET_SELECTED_BESTMENU",
+    payload: bestMenuSelectedId
+})

@@ -673,6 +673,145 @@ footer {
                 border-radius: 2.083rem;
             }
         } // p종료
-        
     }
 } // deliveryAddressBox종료
+
+.deliveryBannerBox {
+    margin: 32px 0;
+    background-image: url('../img/banner_delivery_pattern.png');
+    background-color: rgba(0,0,0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    .bannerContetns {
+        padding: 40px;
+        position: relative;
+        .bannerDesc {
+            text-align: left;
+            width: calc(70% - 20px);
+            padding-right: 8px;
+            p {
+                font-size: 12px;
+                color: #fff;
+                line-height: 1.5;
+                margin-bottom: 4px;
+            }
+            h3 {
+                font-size: 28px;
+                line-height: 1.2;
+                font-weight: 700;
+                color: #fff;
+                margin: 0;
+            }
+        } // bannerDesc종료
+        img {
+            max-width: 100%;
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+            max-width: 40%;
+            max-height: calc(100% + 32px);
+        }
+    } // bannerContetns종료
+} // deliveryBannerBox종료
+
+.menuLisBox {
+    .swiper-slide {
+        width: 9.167rem;
+        text-align: center;
+        display: inline-block;
+        a {
+            text-decoration: none;
+            &:hover, &:active {
+                span {
+                    color: #c90a1f;
+                }
+                .img_cover img {
+                    margin-top: -4.5rem;
+                }
+            }
+            .img_cover {
+                width: 3.75rem;
+                height: 3.75rem;
+                display: block;
+                overflow: hidden;
+                margin: 0 auto .5rem auto;
+                img {
+                    max-width: 100%;
+                    width: inherit;
+                }                    
+            } // img_cover종료
+            span {
+                font-size: 1rem;
+                color: #222;
+            }
+        } // a종료
+    }
+} // menuLisBox종료
+
+.infoBox {
+    img {
+        max-width: 100%;
+    }
+    .title {
+        font-size: 2.083rem;
+        line-height: 1.5;
+        color: #2c251e;
+        font-weight: 400;
+        padding-bottom: .83rem;
+        border-bottom: 2px solid #666;
+        box-sizing: border-box;
+        padding: 0 1.25rem .83rem 1.25rem;
+        margin-bottom: 2rem;
+    }
+    .itemInner {
+        padding: 1.25rem 0;
+        border-top: 1px solid #ddd;
+        box-sizing: border-box;
+        .title {
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: -.05rem;
+            color: #222;
+            border: none;
+        } // title종료
+        .optionBox {
+            padding: 0 1.25rem 0.83rem 1.25rem;
+            ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                justify-content: space-between;
+                li {
+                    list-style: none;
+                    width: 50%;
+                    &:first-child {
+                        margin-right: 10px;
+                    }
+                    select {
+                        width: 100%;
+                        height: 2.75rem;
+                        padding-left: .75rem;
+                        background-size: auto 6px;
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        background-image: url('../img/bg_select_lg.png');
+                        background-position-x: 100%;
+                        background-position-y: 50%;
+                        background-repeat: no-repeat;
+                        border: 1px solid #afafaf;
+                        background-color: #fff;
+                        color: #666;
+                        -o-appearance: none;
+                        -ms-appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                    }
+                } // li종료
+            }
+        } // optionBox종료
+    }
+} // infoBox종료
