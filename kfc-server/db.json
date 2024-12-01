@@ -11,11 +11,13 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"콜라 추가 없음"
+                            "label":"콜라 추가 없음",
+                            "price":0
                         },
                         {
                             "value":1,
-                            "label":"콜라 M추가"
+                            "label":"콜라 M추가",
+                            "price":500
                         }
                     ]
                 },
@@ -24,7 +26,8 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"소스 3번 변경없음"
+                            "label":"소스 3번 변경없음",
+                            "price":0
                         }
                     ]
                 }
@@ -41,15 +44,18 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"텐더 추가 없음"
+                            "label":"텐더 추가 없음",
+                            "price":0
                         },
                         {
                             "value":1,
-                            "label":"텐더 2조각 추가"
+                            "label":"텐더 2조각 추가",
+                            "price":1000
                         },
                         {
                             "value":2,
-                            "label":"텐더 1조각 추가"
+                            "label":"텐더 1조각 추가",
+                            "price":500
                         }
                     ]
                 }
@@ -66,15 +72,18 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"텐더 추가 없음"
+                            "label":"텐더 추가 없음",
+                            "price":0
                         },
                         {
                             "value":1,
-                            "label":"텐더 2조각 추가"
+                            "label":"텐더 2조각 추가",
+                            "price":1000
                         },
                         {
                             "value":2,
-                            "label":"텐더 1조각 추가"
+                            "label":"텐더 1조각 추가",
+                            "price":500
                         }
                     ]
                 }
@@ -91,15 +100,18 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"텐더 추가 없음"
+                            "label":"텐더 추가 없음",
+                            "price":0
                         },
                         {
                             "value":1,
-                            "label":"텐더 2조각 추가"
+                            "label":"텐더 2조각 추가",
+                            "price":1000
                         },
                         {
                             "value":2,
-                            "label":"텐더 1조각 추가"
+                            "label":"텐더 1조각 추가",
+                            "price":500
                         }
                     ]
                 }
@@ -116,15 +128,18 @@
                     "values": [
                         {
                             "value":0,
-                            "label":"텐더 추가 없음"
+                            "label":"텐더 추가 없음",
+                            "price":0
                         },
                         {
                             "value":1,
-                            "label":"텐더 2조각 추가"
+                            "label":"텐더 2조각 추가",
+                            "price":1000
                         },
                         {
                             "value":2,
-                            "label":"텐더 1조각 추가"
+                            "label":"텐더 1조각 추가",
+                            "price":500
                         }
                     ]
                 }

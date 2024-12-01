@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import kfcSprite from '../../img/kfc_sprite.png'
 import { connect } from "react-redux"
-import {setSNSList} from '../../redux/action'
-import axios from 'axios'
+import {fetchSNSList} from '../../redux/action'
 
 const mapStateToProps = state => {
     return {
@@ -12,24 +11,15 @@ const mapStateToProps = state => {
 
 const mapDispatchtoProps = dispatch => { // useEffect로 데이터를 가져와서 의존성배열의 상태에 따라 useEffect를 활용하므로 dispatch가 필요하다
     return {
-        setSNSList:value => dispatch(setSNSList(value))
+        fetchSNSList:() => dispatch(fetchSNSList())
     }
 }
 
-const SNS = ({snsList, setSNSList}) => {
-    
-    useEffect(()=> {
-        axios.get(`http://localhost:3000/sns`)
-            .then(response => {
-                /// console.log(`response.data = ${JSON.stringify(response.data)}`);      
-                setSNSList(response.data)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [setSNSList]) 
+const SNS = ({snsList, fetchSNSList}) => {
 
-    // console.log(`snsList = ${JSON.stringify(snsList)}`);
+    useEffect(()=> {
+        fetchSNSList()
+    }, [fetchSNSList]) 
 
     return (
         <>

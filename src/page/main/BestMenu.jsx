@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import kfcSprite from '../../img/kfc_sprite.png'
-import axios from 'axios'
 import { connect } from "react-redux"
-import { setBestMenu, setLoading, setSelectedBestMenuProductId } from '../../redux/action'
+import { fetchBestMenu, setLoading, setSelectedBestMenuProductId } from '../../redux/action'
 import { useNavigate } from 'react-router-dom'
 
 const mapStateToProps = state => { // 상태를 읽어와서 화면에 표시해야하는 경우
@@ -14,27 +13,21 @@ const mapStateToProps = state => { // 상태를 읽어와서 화면에 표시해
 
 const mapDispatchtoProps = dispatch => { // dispathch는 액션을 스토어로 보내는 함수, 액션을 디스패치해서 상태를 업데이트해야하는경우
     return {
-        setBestMenu: Menus => dispatch(setBestMenu(Menus)),
+        fetchBestMenu: () => dispatch(fetchBestMenu()),
         setLoading: () => dispatch(setLoading()),
         setSelectedBestMenuProductId: bestMenuId => dispatch(setSelectedBestMenuProductId(bestMenuId))
     }
 }
 
-const BestMenu = ({setBestMenu, bestMenu, setLoading, loading, setSelectedBestMenuProductId}) => {
+const BestMenu = ({fetchBestMenu, bestMenu, setLoading, loading, setSelectedBestMenuProductId}) => {
 // console.log(`bestMenu = ${JSON.stringify(bestMenu)}`);
 
     const pageNavigate = useNavigate()
 
     useEffect(()=> {
-        axios.get(`http://localhost:3000/bestMenu`)
-            .then(response => {
-                // console.log(`response = ${JSON.stringify(response.data)}`);
-                setBestMenu(response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [setBestMenu, setLoading])
+        fetchBestMenu(bestMenu)
+    }, [setLoading, fetchBestMenu])
+
     if (loading) { // TODO:해야함_게시판만들었던거참고해서 로딩만들기
         return <div>로딩중 로딩중 로딩중</div>
     }

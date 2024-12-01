@@ -4,6 +4,9 @@ import DeliveryAddress from './DeliveryAddress'
 import Banner from './Banner'
 import MenuList from './MenuList'
 import Info from './Info'
+import Footer from '../main/Footer'
+import BottomNav from '../main/BottomNav'
+import Button from './Button'
 
 const Detail = () => {
     return (
@@ -13,6 +16,9 @@ const Detail = () => {
             <Banner></Banner>
             <MenuList></MenuList>
             <Info></Info>
+            <Button></Button>
+            <Footer></Footer>
+            <BottomNav></BottomNav>
         </>
     )
 }

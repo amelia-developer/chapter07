@@ -1,21 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from "react-redux"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { fetchSelectedBestMenuProductId } from '../../redux/action'
 
 const mapStateToProps = state => {
     return {
         bestMenu: state.bestMenu,
-        bestMenuSelectedId: state.bestMenuSelectedId
+        // bestMenuSelectedId: state.bestMenuSelectedId
     }
 }
 
-const Top = ({bestMenu, bestMenuSelectedId}) => {
-    const selectedProduct = bestMenu.find(item  => item.id === bestMenuSelectedId)
-    
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchSelectedBestMenuProductId: selectId => dispatch(fetchSelectedBestMenuProductId(selectId)),
+    }
+}
+const Top = ({bestMenu, fetchSelectedBestMenuProductId}) => {
     const navigate = useNavigate()
     const onBack = () => {
         navigate(`/`)
     }
+
+    const location = useLocation()
+    const queryStr = new URLSearchParams(location.search)
+    const productNumber = queryStr.get('id')
+
+    useEffect(() => {
+        fetchSelectedBestMenuProductId(productNumber)
+    },[productNumber, fetchSelectedBestMenuProductId])
+
+    const selectedProduct = bestMenu[0]
 
     return (
         <>
@@ -28,4 +42,4 @@ const Top = ({bestMenu, bestMenuSelectedId}) => {
     )
 }
 
-export default connect(mapStateToProps)(Top)
+export default connect(mapStateToProps, mapDispatchToProps)(Top)
