@@ -21,6 +21,25 @@ export const fetchBestMenu = () => {
     }
 }
 
+// 치킨세트의 상태액션
+export const setChichenSet = chichenSet => ({
+    type:"SET_CHICKEN",
+    payload: chichenSet
+})
+
+// 치킨세트의 비동기액션
+export const fetchChicken = () => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/chickenSet`)
+            .then(response => {
+                dispatch(setChichenSet(response.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
 // 로딩액션
 export const setLoading = () => ({
     type: "SET_LOADING"

@@ -3,7 +3,10 @@ import React from 'react'
 const Button = () => {
   return (
     <>
-    버튼버튼버튼영역 {/**TODO:해야함_여기서부터 */}
+      <div className="btnBox">
+        <a className="btn_basket">장바구니</a>
+        <a className="btn_order">바로주문</a>
+      </div>
     </> 
   )
 }

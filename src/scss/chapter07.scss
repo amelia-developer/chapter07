@@ -724,7 +724,7 @@ footer {
         display: inline-block;
         a {
             text-decoration: none;
-            &:hover, &:active {
+            &.active {
                 span {
                     color: #c90a1f;
                 }
@@ -851,7 +851,7 @@ footer {
                 .num_count {
                     display: inline-block;
                     width: 6.583rem;
-                    height: 2.5rem;
+                    height: 2.2rem;
                     color: #2c251e;
                     font-size: 1.3rem;
                     line-height: 1.5;
@@ -962,3 +962,76 @@ footer {
         }
     } // inner종료
 } // layoutBox종료
+
+.btnBox {
+    display: flex;
+    position: fixed;
+    bottom: 4rem;
+    width: 100%;
+    border: 0;
+    height: 60px;
+    z-index: 10;
+    a {
+        display: block;
+        color: #fff;
+        font-size: 1rem;
+        line-height: 60px;
+        text-align: center;
+        font-weight: 400;
+        width: 100%;
+        &.btn_basket {
+            background-color: #666;            
+        }
+        &.btn_order {
+            background-color: #c90a1f;
+        }
+    }
+} // btnBox종료
+
+.detailCategoryBox {
+    margin-top: 40px;
+    ul {
+        margin: 0;
+        padding: 0 0.5rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        li {
+            list-style: none;
+            width: 45%;
+            a {
+                display: block;
+                text-align: center;
+                img {
+                    width: 100%;
+                }
+                .title {
+                    font-weight: 700;
+                }
+                .subtext {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    font-size: 0.8rem;
+                    min-height: 3.33rem;
+                }
+            }
+            p {
+                display: inline-block;
+                margin: 0;
+                background-image: url('../img/ico_price_red_sm.png');
+                background-position-x: 20%;
+                background-position-y: 50%;
+                background-repeat: no-repeat;
+                color: #c90a1f;
+                font-size: 1.5rem;
+                line-height: 1.5;
+                text-align: center;
+                width: 100%;
+            }
+        } // li종료
+    }
+} // detailCategoryBox종료

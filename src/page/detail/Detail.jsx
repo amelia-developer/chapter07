@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Top from './Top'
 import DeliveryAddress from './DeliveryAddress'
 import Banner from './Banner'
@@ -9,13 +9,19 @@ import BottomNav from '../main/BottomNav'
 import Button from './Button'
 
 const Detail = () => {
+    const [showInfo, setShowInfo] = useState(false)
+
+    const handleRecommendClick = () => {
+        setShowInfo(true)
+    }
+
     return (
         <>
             <Top></Top>
             <DeliveryAddress></DeliveryAddress>
             <Banner></Banner>
-            <MenuList></MenuList>
-            <Info></Info>
+            <MenuList onShowDetailCategory={handleRecommendClick}></MenuList>
+            {showInfo !== true ? <Info></Info> : null}
             <Button></Button>
             <Footer></Footer>
             <BottomNav></BottomNav>
