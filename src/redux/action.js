@@ -158,3 +158,9 @@ export const setOptionChoice = (optionChoice) => ({
     type: "SET_OPTION_CHOICE",
     payload: optionChoice
 })
+
+// 뒤로가기 버튼 클릭시 카운트옵션1로초기화액션
+export const setBackDefaultCount = (productDetailCount) => ({
+    type:"SET_DEFAULT_COUNT",
+    payload: productDetailCount
+})

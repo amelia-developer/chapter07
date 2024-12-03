@@ -939,7 +939,7 @@ footer {
         padding: 0 1.25rem 1.25rem;
         box-sizing: border-box;
         .panel {
-            margin: 4rem auto;
+            margin: 1rem auto;
             width: 100%;
             background-color: transparent;
             position: static;
@@ -1004,6 +1004,11 @@ footer {
             a {
                 display: block;
                 text-align: center;
+                &:hover {
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
                 img {
                     width: 100%;
                 }
@@ -1025,18 +1030,72 @@ footer {
                     min-height: 3.33rem;
                 }
             }
+            .order {
+                display: flex;
+                justify-content: center;
+                a {
+                    display: block;
+                    &.btn_basket {
+                        background-image: url('../img/ico-ui_basket_dark.png');
+                        background-repeat: no-repeat;
+                        border-radius: 25px 0 0 25px;
+                        width: 3rem;
+                        height: 1.5rem;
+                        border: 1px solid #2c251e;
+                        background-size: 16px auto;
+                        background-position-x: 1.25rem;
+                        background-position-y: .2rem;
+                        line-height: 2rem;
+                        &:hover {
+                            background-position-x: 1.25rem;
+                            background-position-y: 130%;
+                            background-color: #2c251e;
+                            transition: all .3s ease;
+                        }
+                    }
+                    &.btn_order {
+                        border: 1px solid #2c251e;
+                        height: 1.5rem;
+                        width: 5.5rem;
+                        margin-left: -0.08rem;
+                        font-size: 1rem;
+                        line-height: 1.5rem;
+                        border-width: 1px;
+                        border-radius: 0 25px 25px 0;
+                        font-size: 0.9rem;
+                    }
+                } // a종료
+            }
             p {
                 display: inline-block;
                 margin: 0;
-                background-image: url('../img/ico_price_red_sm.png');
-                background-position-x: 20%;
-                background-position-y: 50%;
                 background-repeat: no-repeat;
                 color: #c90a1f;
                 font-size: 1.5rem;
                 line-height: 1.5;
                 text-align: center;
                 width: 100%;
+                margin-top: 10px;
+                position: relative;
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    position: absolute;
+                    top: 50%;
+                    left: 30%;
+                    transform: translateY(-50%);
+                    background-image: url('../img/ico_price_red_sm.png');
+                    background-position-x: 40%;
+                    background-position-y: 50%;
+                    width: 1rem;
+                    height: 1rem;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+                span {
+                    display: block;
+                    padding-left: 2rem;
+                }
             }
         } // li종료
     }

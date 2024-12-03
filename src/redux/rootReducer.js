@@ -35,6 +35,8 @@ const rootReducer  = (state = initialState, action) => {
             return {...state, snackSideSet: action.payload}
         case "SET_DRINK":
             return {...state, drink: action.payload}
+        case "SET_DEFAULT_COUNT":
+            return {...state, productDetailCount: action.payload}
         default:
             return state
     }

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux"
 import { useLocation, useNavigate } from 'react-router-dom'
-import { fetchSelectedBestMenuProductId } from '../../redux/action'
+import { fetchSelectedBestMenuProductId, setBackDefaultCount } from '../../redux/action'
 
 const mapStateToProps = state => {
     return {
         bestMenu: state.bestMenu,
+        productDetailCount: state.productDetailCount
         // bestMenuSelectedId: state.bestMenuSelectedId
     }
 }
@@ -13,12 +14,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchSelectedBestMenuProductId: selectId => dispatch(fetchSelectedBestMenuProductId(selectId)),
+        setBackDefaultCount: defaultCount => dispatch(setBackDefaultCount(defaultCount))
     }
 }
-const Top = ({bestMenu, fetchSelectedBestMenuProductId}) => {
+const Top = ({bestMenu, fetchSelectedBestMenuProductId, setBackDefaultCount}) => {
     const navigate = useNavigate()
     const onBack = () => {
-        navigate(`/`)
+        navigate(`/`)        
+        setBackDefaultCount(1)
     }
 
     const location = useLocation()

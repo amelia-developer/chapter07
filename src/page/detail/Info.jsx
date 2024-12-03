@@ -85,20 +85,24 @@ const Info = ({bestMenu, fetchSelectedBestMenuProductId, productDetailCount, set
                     <div className="optionBox">
                         <ul>
                             {
-                                selectedProduct.option.map((element, idx) => { // li를 갖고오기위해
-                                    // console.log(`element = ${JSON.stringify(element)}`);                            
-                                    return  <li key={idx}>
-                                                <select key={idx} onChange={onSelectedOption}>
-                                                {                                                    
-                                                    element.values.map((optionValue, idx)=> { // option을 갖고오기위해
-                                                        // console.log(`optionValue.label = ${optionValue.label}`);                                                        
-                                                        // // console.log(`optionValue.value = ${JSON.stringify(optionValue.value)}`);
-                                                        return <option key={idx} value={optionValue.price}>{optionValue.label}</option>
-                                                    })
-                                                }
-                                                </select>
-                                            </li>
-                                })
+                                selectedProduct.option && selectedProduct.option.length > 0 ? (
+                                    selectedProduct.option.map((element, idx) => { // li를 갖고오기위해
+                                        // console.log(`element = ${JSON.stringify(element)}`);                            
+                                        return  <li key={idx}>
+                                                    {element.values.length > 0 ? (
+                                                        <select key={idx} onChange={onSelectedOption}>
+                                                        {                                                    
+                                                            element.values.map((optionValue, idx)=> { // option을 갖고오기위해
+                                                                // console.log(`optionValue.label = ${optionValue.label}`);                                                        
+                                                                // // console.log(`optionValue.value = ${JSON.stringify(optionValue.value)}`);
+                                                                return <option key={idx} value={optionValue.price}>{optionValue.label}</option>
+                                                            })
+                                                        }
+                                                        </select>) : (<span>옵션이 없습니다</span>)
+                                                    }
+                                                </li>
+                                    })
+                                ) : (<li>옵션이 없습니다</li>)
                             }
                         </ul>
                         <p className="text_notice">*하단의 알레르기 유발물질 정보를 참고해주세요</p>

@@ -44,7 +44,11 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
                                             <span className="title">{value.title}</span>
                                             <span className="subtext">{value.subText}</span>
                                         </a>
-                                        <p className="price">{value.price}</p>
+                                        <div className="order">
+                                            <a className="btn_basket"><span className="blind">장바구니</span></a>
+                                            <a className="btn_order"><span>바로주문</span></a>
+                                        </div>
+                                        <p className="price"><span>{value.price}</span></p>
                                     </li>
                         })
                     }
