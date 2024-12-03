@@ -1,3 +1,4 @@
+import { buildCreateSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 // 베스트메뉴의 상태액션
@@ -22,9 +23,9 @@ export const fetchBestMenu = () => {
 }
 
 // 치킨세트의 상태액션
-export const setChichenSet = chichenSet => ({
+export const setChichenSet = chickenSet => ({
     type:"SET_CHICKEN",
-    payload: chichenSet
+    payload: chickenSet
 })
 
 // 치킨세트의 비동기액션
@@ -40,6 +41,62 @@ export const fetchChicken = () => {
     }
 }
 
+// 버거세트의 상태액션
+export const setBurgerSet = burgerSet => ({
+    type: "SET_BURGER",
+    payload: burgerSet
+})
+
+// 버거세트의 비동기액션
+export const fetchBurger = () => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/burgerSet`)
+            .then(response => {
+                dispatch(setBurgerSet(response.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
+// 스낵사이드의 상태액션
+export const setSnackSideSet = snackSideSet => ({
+    type:"SET_SNACK_SIDE",
+    payload: snackSideSet
+})
+
+// 스낵사이드의 비동기액션
+export const fetchSnackSide = () => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/snackSideSet`)
+            .then(response => {
+                dispatch(setSnackSideSet(response.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
+// 음료의 상태액션
+export const setDrink = drink => ({
+    type:"SET_DRINK",
+    payload: drink
+})
+
+// 음료의 비동기액션
+export const fetchDrink = () => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/drink`)
+            .then(response => {
+                dispatch(setDrink(response.data))
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+}
 // 로딩액션
 export const setLoading = () => ({
     type: "SET_LOADING"

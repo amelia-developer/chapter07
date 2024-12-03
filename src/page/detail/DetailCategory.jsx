@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const DetailCategory = ({bestMenu, chichenSet, activeIndex}) => {
+const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex}) => {
     const [resultCategory, setResultCateGory] = useState([])
 
     useEffect(() => {
@@ -11,7 +11,19 @@ const DetailCategory = ({bestMenu, chichenSet, activeIndex}) => {
             },
             {
                 idx:1,
-                setName: chichenSet
+                setName: chickenSet
+            },
+            {
+                idx:2,
+                setName: burgerSet
+            },
+            {
+                idx:3,
+                setName: snackSideSet
+            },
+            {
+                idx:4,
+                setName: drinkSet
             }
         ] 
         let selectCategory = cateGubun.find((value) => value.idx === activeIndex)
@@ -19,8 +31,7 @@ const DetailCategory = ({bestMenu, chichenSet, activeIndex}) => {
         if(selectCategory) {
             setResultCateGory(selectCategory.setName)
         }        
-    }, [bestMenu, chichenSet, activeIndex])
-{/**TODO:해야함_치킨이미지넣는거부터 */}
+    }, [bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex])
     return (
         <>
             <div className="detailCategoryBox">

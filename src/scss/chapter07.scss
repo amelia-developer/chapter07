@@ -755,6 +755,7 @@ footer {
     overflow-y: auto;
     img {
         max-width: 100%;
+        width: 100%;
     }
     .title {
         font-size: 2.083rem;
@@ -1008,6 +1009,11 @@ footer {
                 }
                 .title {
                     font-weight: 700;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .subtext {
                     overflow: hidden;

@@ -8,24 +8,32 @@ import icon4 from '../../img/dv_mn_side_menu.png'
 import icon5 from '../../img/dv_mn_drink.png'
 import icon6 from '../../img/db_mn_address.png'
 import { connect } from 'react-redux'
-import {fetchBestMenu, fetchChicken} from '../../redux/action'
+import {fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink} from '../../redux/action'
 import DetailCategory from './DetailCategory'
 
 const mapStateToProps = state => {
     return {
         bestMenu: state.bestMenu,
-        chichenSet: state.chichenSet
+        chickenSet: state.chickenSet,
+        burgerSet: state.burgerSet,
+        snackSideSet: state.snackSideSet,
+        drinkSet2: state.drink
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchBestMenu: () => dispatch(fetchBestMenu()),
-        fetchChicken: () => dispatch(fetchChicken())
+        fetchChicken: () => dispatch(fetchChicken()),
+        fetchBurger: () => dispatch(fetchBurger()),
+        fetchSnackSide: () => dispatch(fetchSnackSide()),
+        fetchDrink: () => dispatch(fetchDrink())
     }
 }
 
-const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chichenSet, fetchChicken}) => {
+const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chickenSet, fetchChicken, burgerSet, fetchBurger,
+    snackSideSet, fetchSnackSide, drinkSet2, fetchDrink}) => {
+
     const [activeIndex, setActiveIndex] = useState()
     
     useEffect(()=> {
@@ -33,8 +41,14 @@ const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chichenSet, fe
             fetchBestMenu()
         } else if(activeIndex === 1) {
             fetchChicken()
+        } else if(activeIndex === 2) {
+            fetchBurger()
+        } else if(activeIndex === 3) {
+            fetchSnackSide()
+        } else if(activeIndex === 4) {
+            fetchDrink()
         }
-    }, [activeIndex, fetchBestMenu, fetchChicken])
+    }, [activeIndex, fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink])
 
     const onSelectDetailMenu = (indexNumber) => {
         setActiveIndex(indexNumber)
@@ -65,7 +79,10 @@ const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chichenSet, fe
                 </Swiper>
                 <div className="categoryListBox">
                     {
-                        activeIndex === 0 || activeIndex === 1 ? <DetailCategory bestMenu={bestMenu} chichenSet={chichenSet} activeIndex={activeIndex}></DetailCategory> : null
+                        activeIndex === 0 || activeIndex === 1 || activeIndex === 2 || 
+                        activeIndex === 3 || activeIndex === 4
+                        ? <DetailCategory bestMenu={bestMenu} chickenSet={chickenSet} burgerSet={burgerSet} 
+                        snackSideSet={snackSideSet} drinkSet={drinkSet2} activeIndex={activeIndex}></DetailCategory> : null
                     }
                 </div>
             </div>
