@@ -122,18 +122,29 @@ export const fetchSNSList = () => {
     }
 }
 
-// 선택한 베스트메뉴의 상태액션
+// 선택한 베스트메뉴정보 액션 -> 비동기액션은 '선택한 베스트메뉴ID의 비동기액션'에서 함께 dispatch됨
+export const setSelectedBestMenuProduct = selectedBestMenuProduct => ({
+    type:"SET_SELECTED_BESTMENUPRODUCT",
+    payload: selectedBestMenuProduct
+})
+
+// 선택한 베스트메뉴ID의 액션
 export const setSelectedBestMenuProductId = bestMenuSelectedId => ({
-    type:"SET_SELECTED_BESTMENU",
+    type:"SET_SELECTED_BESTMENUID",
     payload: bestMenuSelectedId
 })
 
-// 선택한 베스트메뉴의 비동기액션
+// 선택한 베스트메뉴ID의 비동기액션
 export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
     return dispatch => {
         axios.get(`http://localhost:3000/bestMenu?id=${bestMenuSelectedId}`)
             .then(response => {
-                dispatch(setBestMenu(response.data))
+                const resultData = response.data[0]
+                const resultID = resultData.id
+                if(resultData) {
+                    dispatch(setSelectedBestMenuProduct(resultData))
+                    dispatch(setSelectedBestMenuProductId(resultID))
+                }
             })
             .catch(error => {
                 console.error(error);
@@ -164,3 +175,33 @@ export const setBackDefaultCount = (productDetailCount) => ({
     type:"SET_DEFAULT_COUNT",
     payload: productDetailCount
 })
+
+// 상품페이지에서 상품의합계
+export const setDetailProductTotal = (detailProdctTotal) => ({
+    type:"SET_PRODUCT_DETAIL_TOTAL",
+    payload:detailProdctTotal
+})
+
+// 장바구니에 상품넣는 상태액션
+export const setBasketInProduct = inBasketProductId => ({
+    type:"IN_BASKET_PRODUCT",
+    payload:inBasketProductId
+})
+
+// 장바구니에 상품넣는 비동기액션
+export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice) => {
+    return dispatch => {
+        axios.post(`http://localhost:3000/basket/`, {
+            id: inBasketProductId,
+            count:productDetailCount,
+            price: detailProdctTotal,
+            option: optionChoice
+        })
+        .then(response => {
+            dispatch(setBasketInProduct(response.data))
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+}
