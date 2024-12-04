@@ -28,7 +28,7 @@ const BestMenu = ({fetchBestMenu, bestMenu, setLoading, loading, setSelectedBest
         fetchBestMenu(bestMenu)
     }, [setLoading, fetchBestMenu])
 
-    if (loading) { // TODO:해야함_게시판만들었던거참고해서 로딩만들기
+    if (loading) { {/**TODO:해야함*/}
         return <div>로딩중 로딩중 로딩중</div>
     }
 

@@ -27,7 +27,7 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
             }
         ] 
         let selectCategory = cateGubun.find((value) => value.idx === activeIndex)
-        
+       
         if(selectCategory) {
             setResultCateGory(selectCategory.setName)
         }        
