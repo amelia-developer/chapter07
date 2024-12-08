@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import store from './redux/store'
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Detail from './page/detail/Detail';
+import Basket from './page/basket/Basket';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
           <Routes>
               <Route path="/" element={<App />} />
               <Route path="/detail" element={<Detail />}></Route>
+              <Route path="/basket" element={<Basket />}></Route>
           </Routes>
         </Provider>
       </BrowserRouter>

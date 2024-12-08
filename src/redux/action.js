@@ -144,6 +144,7 @@ export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
                 if(resultData) {
                     dispatch(setSelectedBestMenuProduct(resultData))
                     dispatch(setSelectedBestMenuProductId(resultID))
+                    dispatch(setBasketInProductTitle(resultData.title))
                 }
             })
             .catch(error => {
@@ -164,10 +165,16 @@ export const setProductCountMinus = (productMinusCount) => ({
     payload: productMinusCount
 })
 
-// 상품페이지에서의 옵션선택액션
+// 상품페이지에서의 선택한상품 하위에 있는 옵션의가격액션
 export const setOptionChoice = (optionChoice) => ({
     type: "SET_OPTION_CHOICE",
     payload: optionChoice
+})
+
+// 상품페이지에서의 선택한상품 하위에 있는 옵션의이름액션
+export const setOptionChoiceName = (optionChoiceName) => ({
+    type: "SET_OPTION_CHOICE_NAME",
+    payload: optionChoiceName
 })
 
 // 뒤로가기 버튼 클릭시 카운트옵션1로초기화액션
@@ -182,6 +189,12 @@ export const setDetailProductTotal = (detailProdctTotal) => ({
     payload:detailProdctTotal
 })
 
+// 장바구니에 상품명넣는 상태액션
+export const setBasketInProductTitle = productTitle => ({
+    type:"IN_BASKET_PRODUCT_TITLE",
+    payload:productTitle
+})
+
 // 장바구니에 상품넣는 상태액션
 export const setBasketInProduct = inBasketProductId => ({
     type:"IN_BASKET_PRODUCT",
@@ -189,13 +202,17 @@ export const setBasketInProduct = inBasketProductId => ({
 })
 
 // 장바구니에 상품넣는 비동기액션
-export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice) => {
+// export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice, productTitle) => {
+export const fetchBasketInProduct = (basketInProduct) => {
     return dispatch => {
+        const {id, count, price, option, title, optionName} = basketInProduct // export const fetchBasketInProduct구조분해
         axios.post(`http://localhost:3000/basket/`, {
-            id: inBasketProductId,
-            count:productDetailCount,
-            price: detailProdctTotal,
-            option: optionChoice
+            id,
+            count,
+            price,
+            option,
+            title,
+            optionName
         })
         .then(response => {
             dispatch(setBasketInProduct(response.data))
@@ -203,5 +220,52 @@ export const fetchBasketInProduct = (inBasketProductId, productDetailCount, deta
         .catch(error => {
             console.error(error)
         })
+    }
+}
+
+// 검색한 주소의 상태액션
+export const setSearchAddress = (searchAddress) => ({ // 여기서는, 데이터를 상태에 저장하기위해서 파라미터searchAddress가 필요한거임
+    type:"SET_SEARCH_ADDRESS",
+    payload: searchAddress
+})
+
+// 장바구니에 상품부르는 액션
+export const setBasketCallProduct = callProduct => ({
+    type:"CALL_PRODUCT",
+    payload: callProduct
+})
+
+// 장바구니에 상품부르는 비동기액션
+export const fetchBasketCallProduct = () => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/basket`)
+            .then(response => {
+                dispatch(setBasketCallProduct(response.data))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+}
+
+// 장바구니에 있는 상품의 카운트감소액션
+export const setEachProductMinus = eachProductMinus => ({
+    type:"EACH_PRODUCT_MINUS",
+    payload: eachProductMinus
+})
+
+// 장바구니에 있는 상품의 카운트감소 비동기액션
+export const fetchEachProductMinus = (inBasketProductId) => {
+    return dispatch => {
+        axios.put(`http://localhost:3000/basket?id=${inBasketProductId}`)
+            .then(response => {
+console.log(`response.data = ${JSON.stringify(`response.data`)}`); // TODO:해야함_이거부터확인해야함_이거하고 OrderList.jsx
+
+                dispatch(setEachProductMinus(response.data))
+                
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 }

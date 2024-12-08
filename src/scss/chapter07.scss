@@ -960,6 +960,123 @@ footer {
                 font-size: 0;
                 border: none;
             }
+            .cover {
+                padding: 2.83rem 1.67rem 1.67rem;
+                background-size: 10rem 2.083rem;
+                position: relative;
+                background-image: url('../img/ly_bg_01.png');
+                background-position-x: 100%;
+                background-position-y: 0;
+                background-repeat: no-repeat;
+                background-color: #fff;
+                .post {
+                    h2 {
+                        padding-bottom: .83rem;
+                        font-size: 1.6rem;
+                        line-height: 1.5;
+                        font-weight: 400;
+                        border-bottom: 1px solid #ddd;
+                        margin: 0 0 1.25rem 0;
+                    }
+                    .search {
+                        margin: 1.25rem 0;
+                        zoom: 1;
+                        &:after {
+                            content: "";
+                            display: block;
+                            clear: both;
+                            font-size: 0;
+                            height: 0;
+                            visibility: hidden;
+                        }
+                        input[type='text'] {
+                            float: left;
+                            width: calc(100% - 95px);
+                            border-radius: 0;
+                            height: 2.75rem;
+                            padding-left: .416rem;
+                            box-sizing: border-box;
+                            border: 1px solid #afafaf;
+                            font-size: 0.8rem;
+                            line-height: 1.5;
+                            text-indent: 10px;
+                        }
+                        .btn_search {
+                            width: 3rem;
+                            height: 2.6rem;
+                            line-height: 2.6rem;
+                            float: right;
+                            padding: 0 .83rem;
+                            border: 1px solid #666;
+                            text-align: center;
+                            border-radius: 23px;
+                        }
+                    } // search종료
+                    .list-wrapper {
+                        width: 100%;
+                        height: 20rem;
+                        border: 1px solid #ddd;
+                        background-color: #f7f7f7;
+                        border-radius: .25rem;
+                        box-sizing: border-box;
+                        .info {
+                            padding: 1rem;
+                            font-size: 0.8rem;
+                            line-height: 1;
+                            box-sizing: border-box;
+                            p {
+                                margin-bottom: 1.25rem;
+                                color: #666;
+                                line-height: 1.2rem;
+                            }
+                            dl {
+                                dt {
+                                    color: #c90a1f;
+                                }
+                                dd {
+                                    margin-bottom: 1.25rem;
+                                    color: #acacac;
+                                    font-weight: 200;
+                                    margin-left: 0;
+                                }
+                            } // dl종료
+                        }
+                    } // list-wrapper종료
+                    .detail {
+                        input[type='text'] {
+                            width: 100%;
+                            height: 2.75rem;
+                            padding-left: .416rem;
+                            box-sizing: border-box;
+                            border: 1px solid #afafaf !important;
+                            font-size: 0.8rem;
+                            line-height: 1.5;
+                            text-indent: 10px;    
+                        }                        
+                    } // detail종료
+                    .btn-cover {
+                        margin-top: 1rem;
+                        text-align: center;
+                        justify-content: center;
+                        gap: 10px;
+                        .btn {
+                            vertical-align: top;
+                            display: inline-block;
+                            height: 2rem;
+                            padding: 0 1.41666667rem;
+                            border: 1px solid #2c251e;
+                            border-radius: 2.08rem;
+                            background-color: #fff;
+                            box-sizing: border-box;
+                            font-size: 0.8rem;
+                            line-height: 2rem;
+                            color: #2c251e;
+                            text-align: center;
+                            transition: all .3s ease;
+                        }
+                    } // btn-cover종료
+                } // post종료
+            } // cover종료
         }
     } // inner종료
 } // layoutBox종료
@@ -1101,3 +1218,235 @@ footer {
         } // li종료
     }
 } // detailCategoryBox종료
+
+.basketTopBox {
+    padding: 1.25rem 0;
+    position: relative;
+    background-color: #c90a1f;
+    text-align: center;
+    p {
+        margin: 0;
+        color: #fff;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    button {
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        text-indent: -9999px;
+        position: absolute;
+        display: block;
+        top: 1.2rem;
+        right: 1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: url('../img/ico_close_dark.png');
+        background-position-x: 50%;
+        background-position-y: 50%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+} // basketTopBox종료
+
+.orderListBox {
+    ul.raw {
+        max-width: 100%;
+        display: block;
+        padding: 0;
+        margin: 0;
+        li {
+            display: block;
+            width: auto;
+            padding: 2rem 1rem;
+            border-top: 1px solid #ddd;
+            height: auto;
+            position: relative;
+            &:first-child {
+                border-top: none;
+            } 
+        }
+        .info {
+            padding: 0 0 0 45%;
+            text-align: left;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            .imgbox {
+                img {
+                    position: absolute;
+                    height: auto;
+                    left: 0;
+                    width: 10rem;
+                }    
+            } // imgbox종료
+            .textbox {
+                h3 {
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    margin-bottom: 0;
+                    padding: 0;
+                    margin-top: .33rem;
+                    color: #2c251e;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-weight: 400;
+                }
+                p {
+                    font-size: 0.8rem;
+                    color: #222;
+                    margin: 0;
+                }
+                .btn_delete {
+                    position: absolute;
+                    width: 1.25rem;
+                    height: 1.25rem;
+                    background-image: url('../img/ico_close_gray_sm.png');
+                    background-repeat: no-repeat;
+                    right: 0;
+                    top: 0.5rem;
+                }    
+            } // textbox종료
+        }
+        .price {
+            padding: 0 1.67rem;
+            text-align: left;
+            padding-left: 45%;
+            margin-top: -.83%;
+            .ico_price {
+                display: inline-block;
+                padding-left: 2.083rem;
+                background-image: url("../img/ico_price_red_sm.png");
+                background-position-x: 0;
+                background-position-y: 50%;
+                background-repeat: no-repeat;
+                color: #c90a1f;
+                font-size: 1rem;
+                line-height: 1.5;
+                margin: 1rem 0 0 0;
+            } // ico_price종료
+            .amount {
+                float: none;
+                margin-top: .83rem;
+                span {
+                    position: relative;
+                    button {
+                        width: 2.083rem;
+                        height: 2.083rem;
+                        background-image: url("../img/ui_num.png");
+                        position: relative;
+                        z-index: 1;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        border: 1px solid #ddd;
+                        background-repeat: no-repeat;
+                        color: #adadad;
+                        font-size: 1.83rem;
+                        line-height: 2.8;
+                        background-color: #fff;
+                        &.minus {
+                            background-position-y: -1.5rem;
+                            background-position-x: 0.3rem;
+                        }
+                        &.plus {
+                            background-position-y: 0.5rem;
+                            background-position-x: 0.3rem;
+                        }
+                    }
+                    input[type='text'] {
+                        display: inline-block;
+                        border: 1px solid #e1e1e1;
+                        border-radius: 2rem;
+                        margin: 0 -2rem;
+                        width: 8rem;
+                        height: 1.91rem;
+                        padding: 0;
+                        color: #2c251e;
+                        font-size: 1.33rem;
+                        line-height: 1.5;
+                        font-weight: 700;
+                        text-align: center;
+                        vertical-align: top;
+                    }
+                }
+            } // amount종료
+        }
+        .bottom {
+            padding-bottom: 2.08rem;
+            background-color: #f7f7f7;
+            &:after {
+                content: '';
+                display: block;
+                clear: both;
+                font-size: 0;
+                height: 0;
+                visibility: hidden;
+            }
+            .total {
+                padding: 2.08rem 1.67rem 0;
+                border-top: 1px solid #ddd;
+                .values {
+                    min-width: 16.33rem;
+                    display: inline-block;
+                    width: 100%;
+                    dl.price {
+                        padding: 0;
+                        margin-bottom: 0 !important;
+                        dt {
+                            line-height: 2.4;
+                        }
+                    }
+                    dl.amount, dl.price {
+                        overflow: hidden;
+                        margin-bottom: 1rem;
+                        color: #2c251e;
+                        font-size: 0.9rem;
+                        line-height: 1.5;
+                        &:after {
+                            content: '';
+                            display: block;
+                            clear: both;
+                            font-size: 0;
+                            height: 0;
+                            visibility: hidden;
+                        }
+                        dt {
+                            float: left;
+                        }
+                        dd {
+                            float: right;
+                            .ico_price {
+                                background-image: url('../img/ico_price_blk_lg.png');
+                                color: #2c251e;
+                                padding-left: 2.5rem;
+                                background-position-x: 0;
+                                background-position-y: .416rem;
+                                background-repeat: no-repeat;
+                                font-size: 2rem;
+                                line-height: 28px;
+                                font-weight: 700;
+                                margin-top: 0;
+                            } // ico_price종료
+                        }
+                    }
+                } // values종료
+                .btn_order {
+                    display: block;
+                    background-color: #c41230;
+                    border: 2px solid #a6192e !important;
+                    color: #fff;
+                    display: inline-block;
+                    min-width: 14.3rem;
+                    margin: 1.41rem 0 0 0;
+                    height: 2rem;
+                    padding: 0 2.5rem;
+                    border: 2px solid #666;
+                    font-size: 1rem;
+                    line-height: 2rem;
+                    border-radius: 2.083rem;
+                    text-align: center;
+                }
+            } // total종료
+        }
+    }
+} // orderListBox종료

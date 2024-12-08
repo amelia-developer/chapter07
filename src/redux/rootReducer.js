@@ -11,7 +11,12 @@ const initialState = { // state의 초기값을 정의하는 객체
     snackSideSet: [],
     drink: [],
     inBasketProductId: [],
-    detailProdctTotal: 0
+    detailProdctTotal: 0,
+    searchAddress:[],
+    productTitle:"",
+    callProductInfo:[],
+    optionChoiceName: "",
+    eachProductMinus: 0
 }
 
 const rootReducer  = (state = initialState, action) => {
@@ -30,8 +35,10 @@ const rootReducer  = (state = initialState, action) => {
             return {...state, productDetailCount: action.payload}
         case "SET_PRODUCT_COUNT_MINUS":
             return {...state, productDetailCount: action.payload}
-        case "SET_OPTION_CHOICE":
+        case "SET_OPTION_CHOICE": // 선택한상품의 하위에 있는 옵션의값
             return {...state, optionChoice:action.payload}
+        case "SET_OPTION_CHOICE_NAME": // 선택한상품의 하위에 있는 옵션의이름
+            return {...state, optionChoiceName:action.payload}
         case "SET_CHICKEN":
             return {...state, chickenSet: action.payload}
         case "SET_BURGER":
@@ -46,6 +53,14 @@ const rootReducer  = (state = initialState, action) => {
             return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]} // action.payload에는 productDetailCount, detailProdctTotal 2개들어가있음
         case "SET_PRODUCT_DETAIL_TOTAL":
             return {...state, detailProdctTotal:action.payload}
+        case "SET_SEARCH_ADDRESS":
+            return {...state, searchAddress:action.payload}
+        case "IN_BASKET_PRODUCT_TITLE":
+            return {...state, productTitle:action.payload}
+        case "CALL_PRODUCT":
+            return {...state, callProductInfo: action.payload}
+        case "EACH_PRODUCT_MINUS":
+            return {...state, eachProductMinus: action.payload}
         default:
             return state
     }

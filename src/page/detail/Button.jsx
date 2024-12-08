@@ -1,28 +1,42 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {fetchBasketInProduct, setSelectedBestMenuProductId} from '../../redux/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchBasketInProduct } from '../../redux/action'
+import {useNavigate} from 'react-router-dom'
 
-const mapStateToProps = state => {
-  return {
-    bestMenuSelectedId: state.bestMenuSelectedId,
-    productDetailCount: state.productDetailCount,
-    detailProdctTotal: state.detailProdctTotal,
-    optionChoice: state.optionChoice
+// 메모이제이션된 셀렉터 정의
+const selectBestMenuSelectedId = state => state.bestMenuSelectedId
+const selectProductDetailCount = state => state.productDetailCount
+const selectOptionChoice = state => state.optionChoice
+const selectDetailProdctTotal = state => state.detailProdctTotal
+const selectProductTitle = state => state.productTitle
+const selectOptionName = state => state.optionChoiceName
+
+const Button = () => {
+  
+  // 상태구독
+  const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
+  const productDetailCount = useSelector(selectProductDetailCount)
+  const optionChoice = useSelector(selectOptionChoice)
+  const detailProdctTotal = useSelector(selectDetailProdctTotal)
+  const productTitle = useSelector(selectProductTitle)
+  const optionName = useSelector(selectOptionName)
+
+  const dispatch = useDispatch()
+  const basketInProduct = {
+      id: bestMenuSelectedId,
+      count:productDetailCount,
+      price: detailProdctTotal,
+      option: optionChoice,
+      title: productTitle,
+      optionName: optionName
   }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setSelectedBestMenuProductId:selectedProductId => dispatch(setSelectedBestMenuProductId(selectedProductId)),
-    fetchBasketInProduct:(bestMenuSelectedId, productDetailCount, detailProdctTotal, optionChoice) => dispatch(fetchBasketInProduct(bestMenuSelectedId, productDetailCount, detailProdctTotal, optionChoice))
-  }
-}
-
-const Button = ({bestMenuSelectedId, productDetailCount, detailProdctTotal, optionChoice, fetchBasketInProduct}) => {
+  const navigate = useNavigate()
 
   const onBasket = () => {
-    fetchBasketInProduct(bestMenuSelectedId, productDetailCount, detailProdctTotal, optionChoice);
+    dispatch(fetchBasketInProduct(basketInProduct));
     alert(`상품이 장바구니에 담겼습니다`)
+    navigate(`/basket`)
   }
   return (
     <>
@@ -34,4 +48,4 @@ const Button = ({bestMenuSelectedId, productDetailCount, detailProdctTotal, opti
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Button)
+export default Button

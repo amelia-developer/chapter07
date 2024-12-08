@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from "react-redux"
-import { fetchSelectedBestMenuProductId, setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal } from '../../redux/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchSelectedBestMenuProductId, setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName } from '../../redux/action'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
 import { useLocation } from "react-router-dom";
 
-const mapStateToProps = state => {
-    return {
-        bestMenuSelectedId: state.bestMenuSelectedId,
-        selectedBestMenuProduct: state.selectedBestMenuProduct,
-        productDetailCount: state.productDetailCount,
-        optionChoice: state.optionChoice,
-        detailProdctTotal: state.detailProdctTotal
-    }
-}
+// 메모이제이션된 셀렉터 정의
+const selectBestMenuSelectedId = state => state.bestMenuSelectedId
+const selectselectedBestMenuProduct = state => state.selectedBestMenuProduct // TODO:해야함_다시다시다시다시___이름
+const selectProductDetailCount = state => state.productDetailCount
+const selectOptionChoice = state => state.optionChoice
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchSelectedBestMenuProductId: selectId => dispatch(fetchSelectedBestMenuProductId(selectId)),
-        setProductCountMinus: countMinus => dispatch((setProductCountMinus(countMinus))),
-        setProductCountPlus: countPlus => dispatch(setProductCountPlus(countPlus)),
-        setOptionChoice: optionEach => dispatch((setOptionChoice(optionEach))),
-        setDetailProductTotal: detailTotalPrice => dispatch((setDetailProductTotal(detailTotalPrice)))
-    }
-}
+const Info = () => {
+    // 상태구독
+    const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
+    const selectedBestMenuProduct = useSelector(selectselectedBestMenuProduct) // TODO:해야함_다시다시다시다시___이름
+    const productDetailCount = useSelector(selectProductDetailCount)
+    const optionChoice = useSelector(selectOptionChoice)
 
-const Info = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMenuProductId, 
-    productDetailCount, 
-    setProductCountMinus, setProductCountPlus, 
-    optionChoice, setOptionChoice, 
-    detailProdctTotal, setDetailProductTotal}) => {
+    const dispatch = useDispatch()
 
     // const navigate = useNavigate() // 최상위 레벨에서 호출되도록(리엑트 훅들은 최상위 레벨에서만 호출되도록, useEffect/useState/useNavigage모두 동일)
     const [isLayerOpen, setIsLayerOpen] = useState(false)
@@ -41,18 +30,23 @@ const Info = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMen
 
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
         if(bestMenuSelectedId === null) {
-            fetchSelectedBestMenuProductId(productNumber); // 초기화 되서, id는 url 파라미터로 가져와서 해당id를 넣어줌
+            dispatch(fetchSelectedBestMenuProductId(productNumber)); // 초기화 되서, id는 url 파라미터로 가져와서 해당id를 넣어줌
         } else {
-            fetchSelectedBestMenuProductId(bestMenuSelectedId); 
+            dispatch(fetchSelectedBestMenuProductId(bestMenuSelectedId));
         }
     }, [bestMenuSelectedId, fetchSelectedBestMenuProductId]);    
     
+    const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     useEffect(() => {
         if(selectedBestMenuProduct) { // 비동기로 state값들을 불러올때 체크해야하는 3가지(undefined, null, 빈값) 中 나는 빈값체크(=length)
-            const calculatePrice = ((parseInt(optionChoice) + selectedBestMenuProduct.price) * productDetailCount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            setDetailProductTotal(calculatePrice)    
+            // const calculatePrice = ((parseInt(optionChoice) + selectedBestMenuProduct.price) * productDetailCount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            const calculatePrice = ((optionChoice + selectedBestMenuProduct.price) * productDetailCount)
+            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            setTypeOfTotalPrice(calculatePriceCommaDigit)
+            
+            dispatch(setDetailProductTotal(calculatePrice))
         }
-    }, [productDetailCount, optionChoice, detailProdctTotal, selectedBestMenuProduct])
+    }, [productDetailCount, optionChoice, selectedBestMenuProduct])
 
     if(!selectedBestMenuProduct) { {/**TODO:해야함*/}
         return <div>loading...</div>
@@ -62,16 +56,18 @@ const Info = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMen
         if(productDetailCount <= 1){
             productDetailCount = 1
         } else {
-            setProductCountMinus(productDetailCount-1)
+            dispatch(setProductCountMinus(productDetailCount-1))
         }
     }
 
     const onCountPlus = () => {
-        setProductCountPlus(productDetailCount+1)
+        dispatch(setProductCountPlus(productDetailCount+1))
     }
 
     const onSelectedOption = (e) => {
-        setOptionChoice(e.target.value)
+        dispatch(setOptionChoice(Number(e.target.value)))
+        const selectOptionName = e.target.options[e.target.selectedIndex].text
+        dispatch(setOptionChoiceName(selectOptionName))
     }
 
     // 딤드레이어열기
@@ -124,7 +120,7 @@ const Info = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMen
                     </div>
                     <div className="totalBox">
                         <span className="title">합계</span>
-                        <span className="price">{detailProdctTotal}</span>
+                        <span className="price">{typeOfTotalPrice}</span>
                         <div className="countBox">
                             <button type="button" className="btn_minus" onClick={onCountMinus}></button>
                             <span className="num_count">{productDetailCount}</span>
@@ -150,4 +146,4 @@ const Info = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMen
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Info)
+export default Info
