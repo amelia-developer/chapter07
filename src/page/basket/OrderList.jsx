@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBasketCallProduct, setEachProductMinus } from '../../redux/action'
+import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus } from '../../redux/action'
 
 // 메모이제이션 셀렉터 정의
 const selectCallProductInfo = state => state.callProductInfo
+const selectEachProductMinus = state => state.eachProductMinus
+const selectEachProductPlus = state => state.eachProductPlus
 
 const OrderList = () => {
     // 상태구독
     const callProductInfo = useSelector(selectCallProductInfo)
+    const eachProductMinus = useSelector(selectEachProductMinus)
+    const eachProductPlus = useSelector(selectEachProductPlus)
 
     const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch(fetchBasketCallProduct())
-    }, [dispatch]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
+    }, [dispatch, eachProductMinus, eachProductPlus]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
 
     const countTotal = callProductInfo.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.count
@@ -25,11 +29,30 @@ const OrderList = () => {
     }, 0)
     const priceTotalCommaDigit = priceTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-    const onMinusCount = (param) => {
-        // 하는중하는중...........리듀서에쓰던거 재활용...? 
-        // dispatch(fetchEachProductMinus(param-1))
-        // console.log(`callProductInfo = ${JSON.stringify(param)}`);
-        dispatch(setEachProductMinus(param-1))
+    const onMinusCount = (product) => {
+        if(product.count > 1 && product.id) {
+            const newCount = product.count - 1
+            const calculatePrice = product.price - product.originPrice
+            const updateProductData = {
+                ...product,
+                count: newCount,
+                price: calculatePrice
+            }
+            dispatch(fetchEachProductMinus(product.id, updateProductData, calculatePrice))
+        }
+    }
+
+    const onPlusCount = (product) => {
+        if(product.id) {
+            const newCount = product.count + 1
+            const calculatePrice = product.price + product.originPrice
+            const updateProductData = {
+                ...product,
+                count: newCount,
+                price: calculatePrice
+            }
+            dispatch(fetchEachProductPlus(product.id, updateProductData, calculatePrice))
+        }
     }
     return (
         <>
@@ -37,11 +60,11 @@ const OrderList = () => {
                 <ul className="raw">
                     {
                         callProductInfo.map((value, idx) => {
-                            const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')                          
+                            const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                             return  <li key={idx}>
                                         <div className="info">
                                             <div className="imgbox">
-                                                <img src={`/images/${value.id}.png`} alt=""/>
+                                                <img src={`/images/${value.productID}.png`} alt=""/>
                                             </div>
                                             <div className="textbox">
                                                 <h3>{value.title}</h3>
@@ -53,9 +76,9 @@ const OrderList = () => {
                                             <p className="ico_price">{formatPrice}</p>
                                             <div className="amount">
                                                 <span>
-                                                    <button className="minus" onClick={() => onMinusCount(value.count)}>-</button>
+                                                    <button className="minus" onClick={() => onMinusCount(value)}>-</button>
                                                     <input type="text" readOnly="readyOnly" value={value.count}/>
-                                                    <button className="plus">+</button>
+                                                    <button className="plus" onClick={() => onPlusCount(value)}>+</button>
                                                 </span>
                                             </div>
                                         </div>                                        

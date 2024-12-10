@@ -1,5 +1,6 @@
 import { buildCreateSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import {v4 as uuid4} from 'uuid'
 
 // 베스트메뉴의 상태액션
 export const setBestMenu = bestMenu => ({   // setBestMenu는 bestMenu(인자=매개변수)라는 새로 변경해줄 데이터를 받아서 reducer에 전달해주는 action이다.
@@ -195,6 +196,12 @@ export const setBasketInProductTitle = productTitle => ({
     payload:productTitle
 })
 
+// 장바구니에 상품의원가 넣는 상태액션
+export const setBasketInOriginProductPrice = originProductPrice => ({
+    type:"SET_ORIGIN_PRODUCT_PRICE",
+    payload: originProductPrice
+})
+
 // 장바구니에 상품넣는 상태액션
 export const setBasketInProduct = inBasketProductId => ({
     type:"IN_BASKET_PRODUCT",
@@ -205,10 +212,13 @@ export const setBasketInProduct = inBasketProductId => ({
 // export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice, productTitle) => {
 export const fetchBasketInProduct = (basketInProduct) => {
     return dispatch => {
-        const {id, count, price, option, title, optionName} = basketInProduct // export const fetchBasketInProduct구조분해
+        const {productID, count, price, originPrice, option, title, optionName} = basketInProduct // export const fetchBasketInProduct구조분해
+        const id = uuid4()
         axios.post(`http://localhost:3000/basket/`, {
             id,
+            productID,
             count,
+            originPrice,
             price,
             option,
             title,
@@ -255,17 +265,57 @@ export const setEachProductMinus = eachProductMinus => ({
 })
 
 // 장바구니에 있는 상품의 카운트감소 비동기액션
-export const fetchEachProductMinus = (inBasketProductId) => {
+export const fetchEachProductMinus = (id, updateProductData) => {
     return dispatch => {
-        axios.put(`http://localhost:3000/basket?id=${inBasketProductId}`)
+        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
             .then(response => {
-console.log(`response.data = ${JSON.stringify(`response.data`)}`); // TODO:해야함_이거부터확인해야함_이거하고 OrderList.jsx
-
-                dispatch(setEachProductMinus(response.data))
-                
+                dispatch(setEachProductMinus(response.data))                
             })
             .catch(error => {
                 console.error(error)
             })
     }
 }
+
+// 장바구니에 있는 상품의 카운트증가액션
+export const setEachProductPlus = eachProductPlus => ({
+    type:"EACH_PRODUCT_PLUS",
+    payload: eachProductPlus
+})
+
+// 장바구니에 있는 상품의 카운트증가 비동기액션
+export const fetchEachProductPlus = (id, updateProductData) => {
+    return dispatch => {
+        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
+            .then(response => {
+                dispatch(setEachProductPlus(response.data))
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+}
+
+// 장바구니에 있는 상품카운트옵션에 따른 금액상태
+export const setProductCountPrice = productCountPrice => ({
+    type:"SET_PRODUCT_COUNT_PRICE",
+    payload: productCountPrice
+})
+
+// 장바구니에 있는 상품카운트옵션 비동기액션
+export const fetchProductCountPrice = (id, updateProductPrice) => {
+    return dispatch => {
+        axios.put(`http://localhost:3000/basket/${id}`, updateProductPrice)
+            .then(response => {
+                dispatch(setProductCountPrice(response.data))
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+}
+
+// 장바구니에서 '닫기'버튼 클릭시 상품의정보(옵션, 카운트갯수)초기화 액션
+export const resetProductDetail = () => ({
+    type:"RESET_PRODUCT_DETAIL"
+})

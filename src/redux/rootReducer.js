@@ -16,7 +16,10 @@ const initialState = { // state의 초기값을 정의하는 객체
     productTitle:"",
     callProductInfo:[],
     optionChoiceName: "",
-    eachProductMinus: 0
+    eachProductMinus: 0,
+    eachProductPlus: 0,
+    productCountPrice: 0,
+    originProductPrice: 0
 }
 
 const rootReducer  = (state = initialState, action) => {
@@ -50,9 +53,11 @@ const rootReducer  = (state = initialState, action) => {
         case "SET_DEFAULT_COUNT":
             return {...state, productDetailCount: action.payload}
         case "IN_BASKET_PRODUCT":
-            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]} // action.payload에는 productDetailCount, detailProdctTotal 2개들어가있음
+            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]}
         case "SET_PRODUCT_DETAIL_TOTAL":
             return {...state, detailProdctTotal:action.payload}
+        case "SET_ORIGIN_PRODUCT_PRICE": // 상품의 원래가격
+            return {...state, originProductPrice: action.payload}
         case "SET_SEARCH_ADDRESS":
             return {...state, searchAddress:action.payload}
         case "IN_BASKET_PRODUCT_TITLE":
@@ -61,6 +66,15 @@ const rootReducer  = (state = initialState, action) => {
             return {...state, callProductInfo: action.payload}
         case "EACH_PRODUCT_MINUS":
             return {...state, eachProductMinus: action.payload}
+        case "EACH_PRODUCT_PLUS":
+            return {...state, eachProductPlus: action.payload}
+        case "SET_PRODUCT_COUNT_PRICE":
+            return {...state, productCountPrice: action.payload}
+        case "RESET_PRODUCT_DETAIL": // 초기화
+            return {...state,
+                productDetailCount: 1,
+                optionChoice: 0
+            }
         default:
             return state
     }

@@ -1,44 +1,59 @@
 import React, { useEffect } from 'react'
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
-import { fetchSelectedBestMenuProductId, setBackDefaultCount } from '../../redux/action'
+import { fetchSelectedBestMenuProductId, setBackDefaultCount, fetchBasketInProduct } from '../../redux/action'
 
-const mapStateToProps = state => {
-    return {
-        bestMenuSelectedId: state.bestMenuSelectedId,
-        selectedBestMenuProduct: state.selectedBestMenuProduct,
-        productDetailCount: state.productDetailCount
-    }
-}
+// 메모이제이션된 셀렉터 정의
+const selectBestMenuSelectedId = state => state.bestMenuSelectedId
+const selectProductDetailCount = state => state.productDetailCount
+const selectOptionChoice = state => state.optionChoice
+const selectDetailProdctTotal = state => state.detailProdctTotal
+const selectProductTitle = state => state.productTitle
+const selectOptionName = state => state.optionChoiceName
+const selectOriginPrice = state => state.originProductPrice
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchSelectedBestMenuProductId: selectId => dispatch(fetchSelectedBestMenuProductId(selectId)),
-        setBackDefaultCount: defaultCount => dispatch(setBackDefaultCount(defaultCount))
-    }
-}
-const Top = ({bestMenuSelectedId, selectedBestMenuProduct, fetchSelectedBestMenuProductId, setBackDefaultCount}) => {
+const Top = () => {
+     // 상태구독
+    const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
+    const productDetailCount = useSelector(selectProductDetailCount)
+    const optionChoice = useSelector(selectOptionChoice)
+    const detailProdctTotal = useSelector(selectDetailProdctTotal)
+    const productTitle = useSelector(selectProductTitle)
+    const optionName = useSelector(selectOptionName)
+    const originPrice = useSelector(selectOriginPrice)
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const basketInProduct = {
+        productID: bestMenuSelectedId,
+        count:productDetailCount,
+        price: detailProdctTotal,
+        option: optionChoice,
+        title: productTitle,
+        optionName: optionName,
+        originPrice: originPrice
+    }
+
     const onBack = () => {
         navigate(`/`)        
-        setBackDefaultCount(1)
+        dispatch(setBackDefaultCount(1))
     }
-
-    useEffect(() => {
-        if(bestMenuSelectedId){
-            fetchSelectedBestMenuProductId(bestMenuSelectedId)
-        }
-    },[bestMenuSelectedId, fetchSelectedBestMenuProductId])
-
+    
+    const onBasket = () => {
+        dispatch(fetchBasketInProduct(basketInProduct));
+        alert(`상품이 장바구니에 담겼습니다`)
+        navigate(`/basket`)
+    }
     return (
         <>
             <div className="topBox">
-                <h2>{selectedBestMenuProduct ? selectedBestMenuProduct.title : '상품명없음'}</h2>
+                <h2>{productTitle ? productTitle : '상품명없음'}</h2>
                 <a href="#" className="btn_back" onClick={onBack}><span className="blind">뒤로가기</span></a>
-                <a href="#" className="btn_basket"><span className="blind">장바구니</span></a>
+                <a href="#" className="btn_basket" onClick={onBasket}><span className="blind">장바구니</span></a>
             </div>
         </>
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Top)
+export default Top

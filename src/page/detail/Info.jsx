@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSelectedBestMenuProductId, setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName } from '../../redux/action'
+import { fetchSelectedBestMenuProductId, setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName, setBasketInOriginProductPrice } from '../../redux/action'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
 import { useLocation } from "react-router-dom";
@@ -42,8 +42,10 @@ const Info = () => {
             // const calculatePrice = ((parseInt(optionChoice) + selectedBestMenuProduct.price) * productDetailCount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             const calculatePrice = ((optionChoice + selectedBestMenuProduct.price) * productDetailCount)
             const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
             setTypeOfTotalPrice(calculatePriceCommaDigit)
             
+            dispatch(setBasketInOriginProductPrice(selectedBestMenuProduct.price)) // 상품의 원가
             dispatch(setDetailProductTotal(calculatePrice))
         }
     }, [productDetailCount, optionChoice, selectedBestMenuProduct])

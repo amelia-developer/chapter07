@@ -10,9 +10,9 @@ const selectOptionChoice = state => state.optionChoice
 const selectDetailProdctTotal = state => state.detailProdctTotal
 const selectProductTitle = state => state.productTitle
 const selectOptionName = state => state.optionChoiceName
+const selectOriginPrice = state => state.originProductPrice
 
 const Button = () => {
-  
   // 상태구독
   const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
   const productDetailCount = useSelector(selectProductDetailCount)
@@ -20,15 +20,17 @@ const Button = () => {
   const detailProdctTotal = useSelector(selectDetailProdctTotal)
   const productTitle = useSelector(selectProductTitle)
   const optionName = useSelector(selectOptionName)
+  const originPrice = useSelector(selectOriginPrice)
 
   const dispatch = useDispatch()
   const basketInProduct = {
-      id: bestMenuSelectedId,
+      productID: bestMenuSelectedId,
       count:productDetailCount,
       price: detailProdctTotal,
       option: optionChoice,
       title: productTitle,
-      optionName: optionName
+      optionName: optionName,
+      originPrice: originPrice
   }
 
   const navigate = useNavigate()
