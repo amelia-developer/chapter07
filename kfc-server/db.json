@@ -598,12 +598,22 @@
     {
       "id": "296c73d0-7118-41c7-b8ff-c6a9390a1072",
       "productID": "2176926",
-      "count": 3,
+      "count": 4,
       "originPrice": 1900,
-      "price": 5700,
+      "price": 7600,
       "option": 0,
       "title": "닭껍질튀김1900원",
       "optionName": ""
+    },
+    {
+      "id": "9b1eb97c-44db-42ac-800c-82b6a4386e6f",
+      "productID": "2176926",
+      "count": 1,
+      "originPrice": 1900,
+      "price": 2900,
+      "option": 500,
+      "title": "닭껍질튀김1900원",
+      "optionName": "콜라 M추가"
     }
   ]
 }

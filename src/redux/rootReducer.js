@@ -19,7 +19,9 @@ const initialState = { // state의 초기값을 정의하는 객체
     eachProductMinus: 0,
     eachProductPlus: 0,
     productCountPrice: 0,
-    originProductPrice: 0
+    originProductPrice: 0,
+    chickenSelectedId: null, // 선택한 치킨상품의id
+    selectedChickenMenuProduct: null // 선택한 치킨상품
 }
 
 const rootReducer  = (state = initialState, action) => {
@@ -75,6 +77,10 @@ const rootReducer  = (state = initialState, action) => {
                 productDetailCount: 1,
                 optionChoice: 0
             }
+        case "SET_SELECTED_CHICKENMENUID":
+            return {...state, chickenSelectedId:action.payload}
+        case "SET_SELECTED_CHICKENMENUPRODUCT":
+            return {...state, selectedChickenMenuProduct:action.payload}
         default:
             return state
     }

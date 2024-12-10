@@ -31,11 +31,12 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chickenSet, fetchChicken, burgerSet, fetchBurger,
-    snackSideSet, fetchSnackSide, drinkSet2, fetchDrink}) => {
+
+const MenuList = ({bestMenu, fetchBestMenu, chickenSet, fetchChicken, burgerSet, fetchBurger,
+    snackSideSet, fetchSnackSide, drinkSet2, fetchDrink, onShowCategoryMenu, onProductClick, showCategoryList}) => {
 
     const [activeIndex, setActiveIndex] = useState()
-    
+
     useEffect(()=> {
         if(activeIndex === 0) {
             fetchBestMenu()
@@ -52,9 +53,9 @@ const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chickenSet, fe
 
     const onSelectDetailMenu = (indexNumber) => {
         setActiveIndex(indexNumber)
-        onShowDetailCategory(true)
+        onShowCategoryMenu() // 메뉴클릭시 호출
     }
-    
+
     return (
         <>
             <div className="menuLisBox">
@@ -77,14 +78,17 @@ const MenuList = ({bestMenu, fetchBestMenu, onShowDetailCategory, chickenSet, fe
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(4)} className={activeIndex === 4 ? 'active': ''}><span className="img_cover"><img src={icon5} alt="음료"/></span><span>음료</span></a></SwiperSlide>
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(5)} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
                 </Swiper>
-                <div className="categoryListBox">
-                    {
-                        activeIndex === 0 || activeIndex === 1 || activeIndex === 2 || 
-                        activeIndex === 3 || activeIndex === 4
-                        ? <DetailCategory bestMenu={bestMenu} chickenSet={chickenSet} burgerSet={burgerSet} 
-                        snackSideSet={snackSideSet} drinkSet={drinkSet2} activeIndex={activeIndex}></DetailCategory> : null
-                    }
-                </div>
+                {
+                    showCategoryList && 
+                    <div className="categoryListBox">
+                        {                        
+                            activeIndex === 0 || activeIndex === 1 || activeIndex === 2 || 
+                            activeIndex === 3 || activeIndex === 4
+                            ? <DetailCategory bestMenu={bestMenu} chickenSet={chickenSet} burgerSet={burgerSet} 
+                            snackSideSet={snackSideSet} drinkSet={drinkSet2} activeIndex={activeIndex} onProductClick={onProductClick}></DetailCategory> : null
+                        }
+                    </div>
+                }
             </div>
         </>
     )
