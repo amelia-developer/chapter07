@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName, setBasketInOriginProductPrice } from '../../redux/action'
-import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSelectedBurgerProductId, fetchSelectedSnackSideProductId } from '../../redux/setMenuAction'
+import { setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName} from '../../redux/action'
+import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSelectedBurgerProductId, fetchSelectedSnackSideProductId, fetchSelectedDrinkProductId } from '../../redux/setMenuAction'
+import { setBasketInOriginProductPrice } from '../../redux/setBasketAction'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
 import { useLocation } from "react-router-dom";
@@ -17,6 +18,8 @@ const selectBurgerMenuSelectedId = state => state.setMenu.burgerSelectedId
 const selectBurgerMenuProduct = state => state.setMenu.selectedBurgerProduct
 const selectSnackSideSelectedId = state => state.setMenu.snackSideSelectedId
 const selectSnackSideProduct = state => state.setMenu.selectedSnackSideProduct
+const selectDrinkSelectedId = state => state.setMenu.drinkSelectedId
+const selectDrinkProduct = state => state.setMenu.selectedDrinkProduct
 
 const Info = () => {
     // 상태구독
@@ -30,6 +33,8 @@ const Info = () => {
     const burgerMenuProduct = useSelector(selectBurgerMenuProduct)
     const snackSideSelectedId = useSelector(selectSnackSideSelectedId)
     const snackSideProduct = useSelector(selectSnackSideProduct)
+    const drinkSelectedId = useSelector(selectDrinkSelectedId)
+    const drinkProduct = useSelector(selectDrinkProduct)
 
     const dispatch = useDispatch()
 
@@ -44,12 +49,13 @@ const Info = () => {
     // ★이게 핵심임, 리덕스초기화하는 useEffect(동기적성격) 에서 핵심은 1. url매개변수기반 초기화 2. 리덕스기반 초기화
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
         const initializeState = async() => { // async를 쓴이유는 비동기작업dispatch의 완료를 기다리려고
-            if(!bestMenuSelectedId && !chickenMenuSelectedId && !snackSideSelectedId) {
+            if(!bestMenuSelectedId && !chickenMenuSelectedId && !burgerMenuSelectedId && !snackSideSelectedId && !drinkSelectedId) {
                 // url기반 초기화상태
                 await dispatch(fetchSelectedBestMenuProductId(productNumber))
                 await dispatch(fetchSelectedChickenProductId(productNumber))
                 await dispatch(fetchSelectedBurgerProductId(productNumber))
                 await dispatch(fetchSelectedSnackSideProductId(productNumber))
+                await dispatch(fetchSelectedDrinkProductId(productNumber))
             } else {
                 // 리덕스기반 초기화상태
                 if(bestMenuSelectedId) {
@@ -64,10 +70,13 @@ const Info = () => {
                 if(snackSideSelectedId) {
                     await dispatch(fetchSelectedSnackSideProductId(productNumber))
                 }
+                if(drinkSelectedId) {
+                    await dispatch(fetchSelectedDrinkProductId(productNumber))
+                }
             }
         }
         initializeState()
-    }, [bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, productNumber, dispatch]); 
+    }, [bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, drinkSelectedId, productNumber, dispatch]); 
         
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 베스트메뉴
@@ -110,7 +119,6 @@ const Info = () => {
     }, [productDetailCount, optionChoice, burgerMenuProduct, dispatch])
 
     // 스낵사이드메뉴
-    // 버거메뉴
     useEffect(() => {
         if(snackSideProduct) {
             const calculatePrice = ((optionChoice + snackSideProduct.price) * productDetailCount)
@@ -122,6 +130,19 @@ const Info = () => {
             dispatch(setDetailProductTotal(calculatePrice))
         }
     }, [productDetailCount, optionChoice, snackSideProduct, dispatch])
+
+    // 음료메뉴
+    useEffect(() => {
+        if(drinkProduct) {
+            const calculatePrice = ((optionChoice + drinkProduct.price) * productDetailCount)
+            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+            setTypeOfTotalPrice(calculatePriceCommaDigit)
+
+            dispatch(setBasketInOriginProductPrice(drinkProduct.price))
+            dispatch(setDetailProductTotal(calculatePrice))
+        }
+    }, [productDetailCount, optionChoice, drinkProduct, dispatch])
 
     const onCountMinus = () => {
         if(productDetailCount <= 1){
@@ -216,7 +237,7 @@ const Info = () => {
     )
     return (
         <>
-            {/**TODO:해야함*/}
+            {/**TODO:해야함_로딩*/}
             {
                     selectedBestMenuProduct 
                     ? renderProductDetail(selectedBestMenuProduct)
@@ -226,6 +247,8 @@ const Info = () => {
                     ? renderProductDetail(burgerMenuProduct)
                     : snackSideProduct
                     ? renderProductDetail(snackSideProduct)
+                    : drinkProduct
+                    ? renderProductDetail(drinkProduct)
                     :<div>Loading...</div>
             }
         </>

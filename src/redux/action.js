@@ -1,6 +1,5 @@
 import { buildCreateSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
-import {v4 as uuid4} from 'uuid'
 
 // 베스트메뉴의 상태액션
 export const setBestMenu = bestMenu => ({   // setBestMenu는 bestMenu(인자=매개변수)라는 새로 변경해줄 데이터를 받아서 reducer에 전달해주는 action이다.
@@ -98,6 +97,7 @@ export const fetchDrink = () => {
             })
     }
 }
+
 // 로딩액션
 export const setLoading = () => ({
     type: "SET_LOADING"
@@ -159,126 +159,13 @@ export const setDetailProductTotal = (detailProdctTotal) => ({
     payload:detailProdctTotal
 })
 
-// 장바구니에 상품의원가 넣는 상태액션
-export const setBasketInOriginProductPrice = originProductPrice => ({
-    type:"SET_ORIGIN_PRODUCT_PRICE",
-    payload: originProductPrice
-})
-
-// 장바구니에 상품넣는 상태액션
-export const setBasketInProduct = inBasketProductId => ({
-    type:"IN_BASKET_PRODUCT",
-    payload:inBasketProductId
-})
-
-// 장바구니에 상품넣는 비동기액션
-// export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice, productTitle) => {
-export const fetchBasketInProduct = (basketInProduct) => {
-    return dispatch => {
-        const {productID, count, price, originPrice, option, title, optionName} = basketInProduct // export const fetchBasketInProduct구조분해
-        const id = uuid4()
-        axios.post(`http://localhost:3000/basket/`, {
-            id,
-            productID,
-            count,
-            originPrice,
-            price,
-            option,
-            title,
-            optionName
-        })
-        .then(response => {
-            dispatch(setBasketInProduct(response.data))
-        })
-        .catch(error => {
-            console.error(error)
-        })
-    }
-}
-
 // 검색한 주소의 상태액션
 export const setSearchAddress = (searchAddress) => ({ // 여기서는, 데이터를 상태에 저장하기위해서 파라미터searchAddress가 필요한거임
     type:"SET_SEARCH_ADDRESS",
     payload: searchAddress
 })
 
-// 장바구니에 상품부르는 액션
-export const setBasketCallProduct = callProduct => ({
-    type:"CALL_PRODUCT",
-    payload: callProduct
-})
-
-// 장바구니에 상품부르는 비동기액션
-export const fetchBasketCallProduct = () => {
-    return dispatch => {
-        axios.get(`http://localhost:3000/basket`)
-            .then(response => {
-                dispatch(setBasketCallProduct(response.data))
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-}
-
-// 장바구니에 있는 상품의 카운트감소액션
-export const setEachProductMinus = eachProductMinus => ({
-    type:"EACH_PRODUCT_MINUS",
-    payload: eachProductMinus
-})
-
-// 장바구니에 있는 상품의 카운트감소 비동기액션
-export const fetchEachProductMinus = (id, updateProductData) => {
-    return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
-            .then(response => {
-                dispatch(setEachProductMinus(response.data))                
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
-}
-
-// 장바구니에 있는 상품의 카운트증가액션
-export const setEachProductPlus = eachProductPlus => ({
-    type:"EACH_PRODUCT_PLUS",
-    payload: eachProductPlus
-})
-
-// 장바구니에 있는 상품의 카운트증가 비동기액션
-export const fetchEachProductPlus = (id, updateProductData) => {
-    return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
-            .then(response => {
-                dispatch(setEachProductPlus(response.data))
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
-}
-
-// 장바구니에 있는 상품카운트옵션에 따른 금액상태
-export const setProductCountPrice = productCountPrice => ({
-    type:"SET_PRODUCT_COUNT_PRICE",
-    payload: productCountPrice
-})
-
-// 장바구니에 있는 상품카운트옵션 비동기액션
-export const fetchProductCountPrice = (id, updateProductPrice) => {
-    return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductPrice)
-            .then(response => {
-                dispatch(setProductCountPrice(response.data))
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
-}
-
 // 장바구니에서 '닫기'버튼 클릭시 상품의정보(옵션, 카운트갯수)초기화 액션
-export const resetProductDetail = () => ({
+export const resetProductDetail = () => ({ 
     type:"RESET_PRODUCT_DETAIL"
 })

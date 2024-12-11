@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
-import { fetchSelectedBestMenuProductId, setBackDefaultCount, fetchBasketInProduct } from '../../redux/action'
+import { setBackDefaultCount } from '../../redux/action'
+import { fetchBasketInProduct } from '../../redux/setBasketAction'
 
 // 메모이제이션된 셀렉터 정의
 const selectBestMenuSelectedId = state => state.setMenu.bestMenuSelectedId
 const selectProductDetailCount = state => state.other.productDetailCount
 const selectOptionChoice = state => state.other.optionChoice
 const selectDetailProdctTotal = state => state.other.detailProdctTotal
-const selectProductTitle = state => state.other.productTitle
+const selectProductTitle = state => state.setMenu.productTitle
 const selectOptionName = state => state.other.optionChoiceName
 const selectOriginPrice = state => state.other.originProductPrice
 

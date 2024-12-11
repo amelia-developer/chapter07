@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus } from '../../redux/action'
+import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus  } from '../../redux/setBasketAction'
 
 // 메모이제이션 셀렉터 정의
-const selectCallProductInfo = state => state.callProductInfo
-const selectEachProductMinus = state => state.eachProductMinus
-const selectEachProductPlus = state => state.eachProductPlus
+const selectCallProductInfo = state => state.setBasket.callProductInfo
+const selectEachProductMinus = state => state.setBasket.eachProductMinus
+const selectEachProductPlus = state => state.setBasket.eachProductPlus
 
 const OrderList = () => {
     // 상태구독

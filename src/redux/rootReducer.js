@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import setMenuReducer from './setMenuReducer'
+import setBasketReducer from './setBasketReducer'
 
 const initialState = { // state의 초기값을 정의하는 객체
     bestMenu: [], // 처음에 빈배열로 세팅을 해줌(이게 정답은 아니고)
@@ -11,16 +12,9 @@ const initialState = { // state의 초기값을 정의하는 객체
     burgerSet: [],
     snackSideSet: [],
     drink: [],
-    inBasketProductId: [],
     detailProdctTotal: 0,
     searchAddress:[],
-    productTitle:"",
-    callProductInfo:[],
-    optionChoiceName: "",
-    eachProductMinus: 0,
-    eachProductPlus: 0,
-    productCountPrice: 0,
-    originProductPrice: 0
+    optionChoiceName: ""
 }
 
 const otherReducers  = (state = initialState, action) => {
@@ -49,24 +43,10 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, drink: action.payload}
         case "SET_DEFAULT_COUNT":
             return {...state, productDetailCount: action.payload}
-        case "IN_BASKET_PRODUCT":
-            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]}
         case "SET_PRODUCT_DETAIL_TOTAL":
             return {...state, detailProdctTotal:action.payload}
-        case "SET_ORIGIN_PRODUCT_PRICE": // 상품의 원래가격
-            return {...state, originProductPrice: action.payload}
         case "SET_SEARCH_ADDRESS":
             return {...state, searchAddress:action.payload}
-        case "IN_BASKET_PRODUCT_TITLE":
-            return {...state, productTitle:action.payload}
-        case "CALL_PRODUCT":
-            return {...state, callProductInfo: action.payload}
-        case "EACH_PRODUCT_MINUS":
-            return {...state, eachProductMinus: action.payload}
-        case "EACH_PRODUCT_PLUS":
-            return {...state, eachProductPlus: action.payload}
-        case "SET_PRODUCT_COUNT_PRICE":
-            return {...state, productCountPrice: action.payload}
         case "RESET_PRODUCT_DETAIL": // 초기화
             return {...state,
                 productDetailCount: 1,
@@ -79,7 +59,8 @@ const otherReducers  = (state = initialState, action) => {
 
 const rootReducer = combineReducers ({
     other: otherReducers,
-    setMenu: setMenuReducer
+    setMenu: setMenuReducer,
+    setBasket: setBasketReducer,
 })
 
 export default rootReducer

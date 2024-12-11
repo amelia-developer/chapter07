@@ -10,6 +10,8 @@ export const SET_SELECTED_BURGERPRODUCT = "SET_SELECTED_BURGERPRODUCT"
 export const IN_BASKET_PRODUCT_TITLE = "IN_BASKET_PRODUCT_TITLE"
 export const SET_SELECTED_SNACKSIDEID = "SET_SELECTED_SNACKSIDEID"
 export const SET_SELECTED_SNACKSIDEPRODUCT = "SET_SELECTED_SNACKSIDEPRODUCT"
+export const SET_SELECTED_DRINKID = "SET_SELECTED_DRINKID"
+export const SET_SELECTED_DRINK = "SET_SELECTED_DRINK"
 
 // 액션생성자들
 export const setSelectedBestMenuProductId = bestMenuSelectedId => ({ // 선택한 베스트상품의id
@@ -52,6 +54,16 @@ export const setSelectedSnackSideProduct = selectedSnackSideProduct => ({ // 선
     payload: selectedSnackSideProduct
 })
 
+export const setSelectedDrinkProductId = drinkSelectedId => ({ // 선택한 음료의id
+    type:SET_SELECTED_DRINKID,
+    payload: drinkSelectedId
+})
+
+export const setSelectedDrinkProduct = selectedDrinkProduct => ({ // 선택한 음료
+    type:SET_SELECTED_DRINK,
+    payload: selectedDrinkProduct
+})
+
 export const setBasketInProductTitle = productTitle => ({ // 장바구니에 상품명넣는 상태액션
     type: IN_BASKET_PRODUCT_TITLE,
     payload:productTitle
@@ -69,6 +81,7 @@ export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
                         dispatch(setSelectedChickenProduct(null)) // 베스트메뉴가 아닌 치킨메뉴는null
                         dispatch(setSelectedBurgerProduct(null)) // 베스트메뉴가 아닌 버거메뉴는null
                         dispatch(setSelectedSnackSideProduct(null)) // 베스트메뉴가 아닌 스낵사이드메뉴는null
+                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
                         dispatch(setSelectedBestMenuProduct(resultData))
                         dispatch(setSelectedBestMenuProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
@@ -93,9 +106,10 @@ export const fetchSelectedChickenProductId = chickenSelectedId => {
                         dispatch(setSelectedBestMenuProduct(null)) // 치킨메뉴가 아닌 베스트메뉴는null
                         dispatch(setSelectedBurgerProduct(null)) // 치킨메뉴가 아닌 버거메뉴는 null
                         dispatch(setSelectedSnackSideProduct(null)) // 치킨메뉴가 아닌 스낵사이드메뉴는null
+                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
                         dispatch(setSelectedChickenProduct(resultData))
                         dispatch(setSelectedChickenProductId(resultID))
-                        // dispatch(setBasketInProductTitle(resultData.title)) // TODO:해야함_이게꼭필요한건지다시확인
+                        dispatch(setBasketInProductTitle(resultData.title))
                     }
                 }
             })
@@ -117,8 +131,10 @@ export const fetchSelectedBurgerProductId = burgerSelectedId => {
                         dispatch(setSelectedBestMenuProduct(null)) // 버거메뉴가 아닌 베스트메뉴는null
                         dispatch(setSelectedChickenProduct(null)) // 버거메뉴가 아닌 치킨메뉴는null
                         dispatch(setSelectedSnackSideProduct(null)) // 버거메뉴가 아닌 스낵사이드메뉴는null
+                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
                         dispatch(setSelectedBurgerProduct(resultData))
                         dispatch(setSelectedBurgerProductId(resultID))
+                        dispatch(setBasketInProductTitle(resultData.title))
                     }
                 }
             })
@@ -140,8 +156,35 @@ export const fetchSelectedSnackSideProductId = snackSideSelectedId => {
                         dispatch(setSelectedBestMenuProduct(null)) // 스낵사이드메뉴가 아닌 베스트메뉴는null
                         dispatch(setSelectedChickenProduct(null)) // 스낵사이드메뉴가 아닌 치킨메뉴는null
                         dispatch(setSelectedBurgerProduct(null)) // 스낵사이드메뉴가 아닌 버거메뉴는null
+                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
                         dispatch(setSelectedSnackSideProduct(resultData))
                         dispatch(setSelectedSnackSideProductId(resultID))
+                        dispatch(setBasketInProductTitle(resultData.title))
+                    }
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+}
+
+//  선택한 드링크ID의 비동기액션
+export const fetchSelectedDrinkProductId = drinkSelectedId => {
+    return dispatch => {
+        axios.get(`http://localhost:3000/drink?id=${drinkSelectedId}`)
+            .then(response => {
+                if(response.data && response.data.length > 0) {
+                    const resultData = response.data[0]
+                    const resultID = resultData.id
+                    if(resultData) {
+                        dispatch(setSelectedBestMenuProduct(null)) // 음료메뉴가 아닌 베스트메뉴는null
+                        dispatch(setSelectedChickenProduct(null)) // 음료메뉴가 아닌 치킨메뉴는null
+                        dispatch(setSelectedBurgerProduct(null)) // 음료메뉴가 아닌 버거메뉴는null
+                        dispatch(setSelectedSnackSideProduct(null)) // 음료메뉴가 아닌 스낵사이드메뉴는null
+                        dispatch(setSelectedDrinkProduct(resultData))
+                        dispatch(setSelectedDrinkProductId(resultID))
+                        dispatch(setBasketInProductTitle(resultData.title))
                     }
                 }
             })
