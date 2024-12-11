@@ -150,7 +150,7 @@ export const setOptionChoiceName = (optionChoiceName) => ({
 // 뒤로가기 버튼 클릭시 카운트옵션1로초기화액션
 export const setBackDefaultCount = (productDetailCount) => ({
     type:"SET_DEFAULT_COUNT",
-    payload: productDetailCount
+    payload: productDetailCount,
 })
 
 // 상품페이지에서 상품의합계
@@ -166,6 +166,7 @@ export const setSearchAddress = (searchAddress) => ({ // 여기서는, 데이터
 })
 
 // 장바구니에서 '닫기'버튼 클릭시 상품의정보(옵션, 카운트갯수)초기화 액션
-export const resetProductDetail = () => ({ 
-    type:"RESET_PRODUCT_DETAIL"
+export const resetProductDetail = (productDetailCount) => ({ 
+    type:"RESET_PRODUCT_DETAIL",
+    payload: productDetailCount
 })

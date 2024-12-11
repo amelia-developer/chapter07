@@ -10,7 +10,7 @@ const initialState = {
 const setBasketReducer = (state = initialState, action) => {
     switch (action.type) {
         case "IN_BASKET_PRODUCT":
-            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]}
+            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]}            
         case "CALL_PRODUCT":
             return {...state, callProductInfo: action.payload}
         case "SET_PRODUCT_COUNT_PRICE":

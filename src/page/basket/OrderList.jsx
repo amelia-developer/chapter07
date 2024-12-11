@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus  } from '../../redux/setBasketAction'
@@ -54,6 +54,7 @@ const OrderList = () => {
             dispatch(fetchEachProductPlus(product.id, updateProductData, calculatePrice))
         }
     }
+        
     return (
         <>
             <div className="orderListBox">

@@ -41,13 +41,16 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, snackSideSet: action.payload}
         case "SET_DRINK":
             return {...state, drink: action.payload}
-        case "SET_DEFAULT_COUNT":
-            return {...state, productDetailCount: action.payload}
+        case "SET_DEFAULT_COUNT": // 뒤로가기버튼클릭했을때
+            return {...state,
+                productDetailCount: 1,
+                optionChoice: 0
+            }
         case "SET_PRODUCT_DETAIL_TOTAL":
             return {...state, detailProdctTotal:action.payload}
         case "SET_SEARCH_ADDRESS":
             return {...state, searchAddress:action.payload}
-        case "RESET_PRODUCT_DETAIL": // 초기화
+        case "RESET_PRODUCT_DETAIL": // 장바구니화면에서 닫기버튼 클릭했을때
             return {...state,
                 productDetailCount: 1,
                 optionChoice: 0
