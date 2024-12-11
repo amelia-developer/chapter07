@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {setSelectedBestMenuProductId, setSelectedChickenProductId} from '../../redux/action'
+import {setSelectedBestMenuProductId, setSelectedChickenProductId, setSelectedBurgerProductId, setSelectedSnackSideProductId} from '../../redux/setMenuAction'
 
 const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex, onProductClick}) => {
     const [resultCategory, setResultCateGory] = useState([])
@@ -33,23 +33,38 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
         ] 
         let selectCategory = cateGubun.find((value) => value.idx === activeIndex)
        
-        if(selectCategory) {
+        if(selectCategory && selectCategory.setName) {
             setResultCateGory(selectCategory.setName)
-        }        
+        }
     }, [bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex])
-
-    const onDetailProduct = (param) => {
+    
+    const onDetailProduct = async(param) => {
         if(activeIndex === 0) {
-            dispatch(setSelectedBestMenuProductId(param))
-            dispatch(setSelectedChickenProductId(null))
+            await dispatch(setSelectedBestMenuProductId(param))
+            await dispatch(setSelectedChickenProductId(null))
+            await dispatch(setSelectedBurgerProductId(null))
+            await dispatch(setSelectedSnackSideProductId(null)) 
         } else if(activeIndex === 1) {
-            dispatch(setSelectedChickenProductId(param))
-            dispatch(setSelectedBestMenuProductId(null))
+            await dispatch(setSelectedChickenProductId(param))
+            await dispatch(setSelectedBestMenuProductId(null))
+            await dispatch(setSelectedBurgerProductId(null))
+            await dispatch(setSelectedSnackSideProductId(null)) 
+        } else if(activeIndex === 2) {
+            await dispatch(setSelectedBurgerProductId(param))
+            await dispatch(setSelectedChickenProductId(null))
+            await dispatch(setSelectedBestMenuProductId(null))
+            await dispatch(setSelectedSnackSideProductId(null))
+        } else if(activeIndex === 3) {
+            await dispatch(setSelectedSnackSideProductId(param))
+            await dispatch(setSelectedChickenProductId(null))
+            await dispatch(setSelectedBestMenuProductId(null))
+            await dispatch(setSelectedBurgerProductId(null)) 
         }
         // navigate
         pageNavigate(`/detail?id=${param}`)
         onProductClick()
     }
+
     return (
         <>
             <div className="detailCategoryBox">

@@ -13,11 +13,11 @@ import DetailCategory from './DetailCategory'
 
 const mapStateToProps = state => {
     return {
-        bestMenu: state.bestMenu,
-        chickenSet: state.chickenSet,
-        burgerSet: state.burgerSet,
-        snackSideSet: state.snackSideSet,
-        drinkSet2: state.drink
+        bestMenu: state.other.bestMenu,
+        chickenSet: state.other.chickenSet,
+        burgerSet: state.other.burgerSet,
+        snackSideSet: state.other.snackSideSet,
+        drinkSet2: state.other.drink
     }
 }
 

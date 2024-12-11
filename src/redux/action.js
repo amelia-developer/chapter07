@@ -123,84 +123,6 @@ export const fetchSNSList = () => {
     }
 }
 
-/**베스트메뉴[s] */
-// 선택한 베스트메뉴정보 액션 -> 비동기액션은 '선택한 베스트메뉴ID의 비동기액션'에서 함께 dispatch됨
-export const setSelectedBestMenuProduct = selectedBestMenuProduct => ({
-    type:"SET_SELECTED_BESTMENUPRODUCT",
-    payload: selectedBestMenuProduct
-})
-
-// 선택한 베스트메뉴ID의 액션
-export const setSelectedBestMenuProductId = bestMenuSelectedId => ({
-    type:"SET_SELECTED_BESTMENUID",
-    payload: bestMenuSelectedId
-})
-
-// 선택한 베스트메뉴ID의 비동기액션
-export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
-    return dispatch => {
-        axios.get(`http://localhost:3000/bestMenu?id=${bestMenuSelectedId}`)
-            .then(response => {
-                if (response.data && response.data.length > 0) {
-                    const resultData = response.data[0]
-                    const resultID = resultData.id
-                    if(resultData) {
-                        dispatch(setSelectedChickenProduct(null)) // 베스트메뉴가 아닌 치킨메뉴는null
-                        dispatch(setSelectedBestMenuProduct(resultData))
-                        dispatch(setSelectedBestMenuProductId(resultID))
-                        dispatch(setBasketInProductTitle(resultData.title))
-                    }
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }
-}
-/**베스트메뉴[e] */
-
-/**치킨세트메뉴[s] */
-// 선택한 치킨세트메뉴정보 액션 -> 비동기액션은 '선택한 치킨세트ID의 비동기액션'에서 함께 dispatch됨
-export const setSelectedChickenProduct = selectedChickenMenuProduct => ({
-    type: "SET_SELECTED_CHICKENMENUPRODUCT",
-    payload: selectedChickenMenuProduct
-})
-
-// 선택한 치킨세트ID의 액션
-export const setSelectedChickenProductId = chickenSelectedId => ({
-    type:"SET_SELECTED_CHICKENMENUID",
-    payload: chickenSelectedId
-})
-
-// 선택한 치킨세트ID의 비동기액션
-export const fetchSelectedChickenProductId = chickenSelectedId => {
-    return dispatch => {
-        axios.get(`http://localhost:3000/chickenSet?id=${chickenSelectedId}`)
-            .then(response => {
-                if (response.data && response.data.length > 0) {
-                    const resultData = response.data[0]
-                    const resultID = resultData.id
-                    if(resultData) {
-                        dispatch(setSelectedBestMenuProduct(null)) // 치킨세트가 아닌 베스트메뉴는null
-                        dispatch(setSelectedChickenProduct(resultData))
-                        dispatch(setSelectedChickenProductId(resultID))
-                        // dispatch(setBasketInProductTitle(resultData.title)) // TODO:해야함_이게꼭필요한건지다시확인
-                    }
-                }
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    }
-}
-/**치킨세트메뉴[e] */
-
-/**버거세트메뉴[s] */
-// 선택한 버거세트메뉴정보 액션 -> 비동기액션은 '선택한 버거세트ID의 비동기액션'에서 함께 dispatch됨
-
-
-/**버거세트메뉴[e] */
-
 // 상품페이지에서의 카운트증가액션
 export const setProductCountPlus = (productPlusCount) => ({
     type: "SET_PRODUCT_COUNT_PLUS",
@@ -235,12 +157,6 @@ export const setBackDefaultCount = (productDetailCount) => ({
 export const setDetailProductTotal = (detailProdctTotal) => ({
     type:"SET_PRODUCT_DETAIL_TOTAL",
     payload:detailProdctTotal
-})
-
-// 장바구니에 상품명넣는 상태액션
-export const setBasketInProductTitle = productTitle => ({
-    type:"IN_BASKET_PRODUCT_TITLE",
-    payload:productTitle
 })
 
 // 장바구니에 상품의원가 넣는 상태액션

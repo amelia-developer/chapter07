@@ -5,7 +5,7 @@ import {fetchSNSList} from '../../redux/action'
 
 const mapStateToProps = state => {
     return {
-        snsList: state.snsList
+        snsList: state.other.snsList
     }
 }
 

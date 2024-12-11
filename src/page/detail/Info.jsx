@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName, setBasketInOriginProductPrice, setSelectedChickenProduct } from '../../redux/action'
+import { setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName, setBasketInOriginProductPrice } from '../../redux/action'
+import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSelectedBurgerProductId, fetchSelectedSnackSideProductId } from '../../redux/setMenuAction'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
 import { useLocation } from "react-router-dom";
 
 // 메모이제이션된 셀렉터 정의
-const selectBestMenuSelectedId = state => state.bestMenuSelectedId
-const selectselectedBestMenuProduct = state => state.selectedBestMenuProduct // TODO:해야함_다시다시다시다시___이름
-const selectProductDetailCount = state => state.productDetailCount
-const selectOptionChoice = state => state.optionChoice
-const selectChickenMenuSelectedId = state => state.chickenSelectedId
-const selectChickenMenuProduct = state => state.selectedChickenMenuProduct
+const selectBestMenuSelectedId = state => state.setMenu.bestMenuSelectedId
+const selectselectedBestMenuProduct = state => state.setMenu.selectedBestMenuProduct // TODO:해야함_다시다시다시다시___이름
+const selectProductDetailCount = state => state.other.productDetailCount
+const selectOptionChoice = state => state.other.optionChoice
+const selectChickenMenuSelectedId = state => state.setMenu.chickenSelectedId
+const selectChickenMenuProduct = state => state.setMenu.selectedChickenMenuProduct
+const selectBurgerMenuSelectedId = state => state.setMenu.burgerSelectedId
+const selectBurgerMenuProduct = state => state.setMenu.selectedBurgerProduct
+const selectSnackSideSelectedId = state => state.setMenu.snackSideSelectedId
+const selectSnackSideProduct = state => state.setMenu.selectedSnackSideProduct
 
 const Info = () => {
     // 상태구독
@@ -21,6 +26,10 @@ const Info = () => {
     const optionChoice = useSelector(selectOptionChoice)
     const chickenMenuSelectedId = useSelector(selectChickenMenuSelectedId)
     const chickenMenuProduct = useSelector(selectChickenMenuProduct)
+    const burgerMenuSelectedId = useSelector(selectBurgerMenuSelectedId)
+    const burgerMenuProduct = useSelector(selectBurgerMenuProduct)
+    const snackSideSelectedId = useSelector(selectSnackSideSelectedId)
+    const snackSideProduct = useSelector(selectSnackSideProduct)
 
     const dispatch = useDispatch()
 
@@ -32,17 +41,34 @@ const Info = () => {
     const queryStr = new URLSearchParams(location.search);
     const productNumber = queryStr.get('id');
 
+    // ★이게 핵심임, 리덕스초기화하는 useEffect(동기적성격) 에서 핵심은 1. url매개변수기반 초기화 2. 리덕스기반 초기화
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
-        if(bestMenuSelectedId === null || chickenMenuSelectedId === null) {
-            dispatch(fetchSelectedBestMenuProductId(productNumber)); // 초기화 되서, id는 url 파라미터로 가져와서 해당id를 넣어줌
-            dispatch(fetchSelectedChickenProductId(productNumber))
-        } else if(bestMenuSelectedId !== null) {
-            dispatch(fetchSelectedBestMenuProductId(bestMenuSelectedId));
-        } else if(chickenMenuSelectedId !== null) {
-            dispatch(fetchSelectedChickenProductId(chickenMenuSelectedId))
+        const initializeState = async() => { // async를 쓴이유는 비동기작업dispatch의 완료를 기다리려고
+            if(!bestMenuSelectedId && !chickenMenuSelectedId && !snackSideSelectedId) {
+                // url기반 초기화상태
+                await dispatch(fetchSelectedBestMenuProductId(productNumber))
+                await dispatch(fetchSelectedChickenProductId(productNumber))
+                await dispatch(fetchSelectedBurgerProductId(productNumber))
+                await dispatch(fetchSelectedSnackSideProductId(productNumber))
+            } else {
+                // 리덕스기반 초기화상태
+                if(bestMenuSelectedId) {
+                    await dispatch(fetchSelectedBestMenuProductId(productNumber))
+                }
+                if(chickenMenuSelectedId) {
+                    await dispatch(fetchSelectedChickenProductId(productNumber))
+                }
+                if(burgerMenuSelectedId) {
+                    await dispatch(fetchSelectedBurgerProductId(productNumber))
+                }
+                if(snackSideSelectedId) {
+                    await dispatch(fetchSelectedSnackSideProductId(productNumber))
+                }
+            }
         }
-    }, [bestMenuSelectedId, chickenMenuSelectedId, dispatch]);    
-    
+        initializeState()
+    }, [bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, productNumber, dispatch]); 
+        
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 베스트메뉴
     useEffect(() => {
@@ -70,9 +96,32 @@ const Info = () => {
         }
     }, [productDetailCount, optionChoice, chickenMenuProduct, dispatch])
 
-    if(!selectedBestMenuProduct && !chickenMenuProduct) { {/**TODO:해야함*/}
-        return <div>loading...</div>
-    }
+    // 버거메뉴
+    useEffect(() => {
+        if(burgerMenuProduct) {
+            const calculatePrice = ((optionChoice + burgerMenuProduct.price) * productDetailCount)
+            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+            setTypeOfTotalPrice(calculatePriceCommaDigit)
+
+            dispatch(setBasketInOriginProductPrice(burgerMenuProduct.price))
+            dispatch(setDetailProductTotal(calculatePrice))
+        }
+    }, [productDetailCount, optionChoice, burgerMenuProduct, dispatch])
+
+    // 스낵사이드메뉴
+    // 버거메뉴
+    useEffect(() => {
+        if(snackSideProduct) {
+            const calculatePrice = ((optionChoice + snackSideProduct.price) * productDetailCount)
+            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+            setTypeOfTotalPrice(calculatePriceCommaDigit)
+
+            dispatch(setBasketInOriginProductPrice(snackSideProduct.price))
+            dispatch(setDetailProductTotal(calculatePrice))
+        }
+    }, [productDetailCount, optionChoice, snackSideProduct, dispatch])
 
     const onCountMinus = () => {
         if(productDetailCount <= 1){
@@ -167,9 +216,17 @@ const Info = () => {
     )
     return (
         <>
+            {/**TODO:해야함*/}
             {
-                selectedBestMenuProduct ? renderProductDetail(selectedBestMenuProduct) : 
-                chickenMenuProduct ? renderProductDetail(chickenMenuProduct) : null
+                    selectedBestMenuProduct 
+                    ? renderProductDetail(selectedBestMenuProduct)
+                    : chickenMenuProduct 
+                    ? renderProductDetail(chickenMenuProduct)
+                    : burgerMenuProduct
+                    ? renderProductDetail(burgerMenuProduct)
+                    : snackSideProduct
+                    ? renderProductDetail(snackSideProduct)
+                    :<div>Loading...</div>
             }
         </>
     )

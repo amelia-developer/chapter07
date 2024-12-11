@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { fetchSelectedBestMenuProductId, setBackDefaultCount, fetchBasketInProduct } from '../../redux/action'
 
 // 메모이제이션된 셀렉터 정의
-const selectBestMenuSelectedId = state => state.bestMenuSelectedId
-const selectProductDetailCount = state => state.productDetailCount
-const selectOptionChoice = state => state.optionChoice
-const selectDetailProdctTotal = state => state.detailProdctTotal
-const selectProductTitle = state => state.productTitle
-const selectOptionName = state => state.optionChoiceName
-const selectOriginPrice = state => state.originProductPrice
+const selectBestMenuSelectedId = state => state.setMenu.bestMenuSelectedId
+const selectProductDetailCount = state => state.other.productDetailCount
+const selectOptionChoice = state => state.other.optionChoice
+const selectDetailProdctTotal = state => state.other.detailProdctTotal
+const selectProductTitle = state => state.other.productTitle
+const selectOptionName = state => state.other.optionChoiceName
+const selectOriginPrice = state => state.other.originProductPrice
 
 const Top = () => {
      // 상태구독

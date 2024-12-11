@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import kfcSprite from '../../img/kfc_sprite.png'
 import { connect } from "react-redux"
-import { fetchBestMenu, setLoading, setSelectedBestMenuProductId } from '../../redux/action'
+import { fetchBestMenu, setLoading } from '../../redux/action'
+import { setSelectedBestMenuProductId } from '../../redux/setMenuAction'
 import { useNavigate } from 'react-router-dom'
 
 const mapStateToProps = state => { // 상태를 읽어와서 화면에 표시해야하는 경우
     return {
-        bestMenu: state.bestMenu,
-        loading: state.loading
+        bestMenu: state.other.bestMenu,
+        loading: state.other.loading
     }
 }
 
