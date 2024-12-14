@@ -7,53 +7,32 @@ import icon3 from '../../img/dv_mn_set_burger.png'
 import icon4 from '../../img/dv_mn_side_menu.png'
 import icon5 from '../../img/dv_mn_drink.png'
 import icon6 from '../../img/db_mn_address.png'
-import { connect } from 'react-redux'
-import {fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink} from '../../redux/action'
+import { useDispatch, useSelector } from 'react-redux'
 import DetailCategory from './DetailCategory'
+import { useNavigate } from 'react-router-dom'
+import { setUpdateCategory, setActiveIndex } from '../../redux/action'
+import { setResetProductTitle } from '../../redux/setMenuAction'
 
-const mapStateToProps = state => {
-    return {
-        bestMenu: state.other.bestMenu,
-        chickenSet: state.other.chickenSet,
-        burgerSet: state.other.burgerSet,
-        snackSideSet: state.other.snackSideSet,
-        drinkSet2: state.other.drink
-    }
-}
+const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
+    // 상태구독
+    const bestMenu = useSelector(state => state.other.bestMenu)
+    const chickenSet = useSelector(state => state.other.chickenSet)
+    const burgerSet = useSelector(state => state.other.burgerSet)
+    const snackSideSet = useSelector(state => state.other.snackSideSet)
+    const drinkSet2 = useSelector(state => state.other.drink)
+    const activeIndex = useSelector(state => state.other.activeIndex)
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchBestMenu: () => dispatch(fetchBestMenu()),
-        fetchChicken: () => dispatch(fetchChicken()),
-        fetchBurger: () => dispatch(fetchBurger()),
-        fetchSnackSide: () => dispatch(fetchSnackSide()),
-        fetchDrink: () => dispatch(fetchDrink())
-    }
-}
-
-
-const MenuList = ({bestMenu, fetchBestMenu, chickenSet, fetchChicken, burgerSet, fetchBurger,
-    snackSideSet, fetchSnackSide, drinkSet2, fetchDrink, onShowCategoryMenu, onProductClick, showCategoryList}) => {
-
-    const [activeIndex, setActiveIndex] = useState()
-
-    useEffect(()=> {
-        if(activeIndex === 0) {
-            fetchBestMenu()
-        } else if(activeIndex === 1) {
-            fetchChicken()
-        } else if(activeIndex === 2) {
-            fetchBurger()
-        } else if(activeIndex === 3) {
-            fetchSnackSide()
-        } else if(activeIndex === 4) {
-            fetchDrink()
-        }
-    }, [activeIndex, fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const onSelectDetailMenu = (indexNumber) => {
-        setActiveIndex(indexNumber)
-        onShowCategoryMenu() // 메뉴클릭시 호출
+        if(indexNumber !== activeIndex){ // 이전상태랑비교
+            dispatch(setActiveIndex(indexNumber)) // 리덕스 상태 업데이트(카테고리인덱스)
+            dispatch(setUpdateCategory(indexNumber)) // 리덕스 상태 업데이트(카테고리명)
+            dispatch(setResetProductTitle(indexNumber)) // 리덕스 상태 업데이트(상품명 초기화)
+            onShowCategoryMenu() // 메뉴클릭시 호출            
+            navigate(`/detail/category/${indexNumber}`) // url변경   
+        }
     }
 
     return (
@@ -94,4 +73,4 @@ const MenuList = ({bestMenu, fetchBestMenu, chickenSet, fetchChicken, burgerSet,
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MenuList)
+export default MenuList

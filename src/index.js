@@ -4,21 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
-import store from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+import {store, persistor} from './redux/store'
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Detail from './page/detail/Detail';
 import Basket from './page/basket/Basket';
+import DetailCategoryBind from './page/detail/DetailCategoryBind';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
       <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
         <Provider store={store}>
-          <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/detail" element={<Detail />}></Route>
-              <Route path="/basket" element={<Basket />}></Route>
-          </Routes>
+          <PersistGate loading={null} persistor={persistor}>
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/detail" element={<Detail />}>
+                  {/**detail페이지에서 카테고리 메뉴를 클릭했을때 navigate로 주소도 바뀌어야하면 이렇게 라우트 설정 쌉가능 */}
+                  <Route path="category/:indexNumber" element={<DetailCategoryBind/>}></Route>
+                </Route>
+                <Route path="/basket" element={<Basket />}></Route>
+            </Routes>
+          </PersistGate>
         </Provider>
       </BrowserRouter>
     // </React.StrictMode>

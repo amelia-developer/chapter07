@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus  } from '../../redux/setBasketAction'
+import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus } from '../../redux/setBasketAction'
 
 // 메모이제이션 셀렉터 정의
 const selectCallProductInfo = state => state.setBasket.callProductInfo

@@ -10,7 +10,6 @@ const initialState = {
     drinkSelectedId: null, // 선택한 음료상품의 id
     selectedDrinkProduct: null, // 선택한 음료상품
     productTitle: "" // 세트상품을 포함하여, 상품상세 상단에 나오는 상품타이틀
-
 }
 
 const setMenuReducer  = (state = initialState, action) => {
@@ -37,6 +36,8 @@ const setMenuReducer  = (state = initialState, action) => {
             return {...state, selectedDrinkProduct:action.payload}
         case "IN_BASKET_PRODUCT_TITLE": // 세트상품을 포함하여, 상품상세 상단에 나오는 상품타이틀
             return {...state, productTitle:action.payload}
+        case "RESET_PRODUCT_TITLE": // 상품명이 있는 상태에서 카테고리명을 클릭하면, 계속 상품명이 보여져서 이를 강제초기화하려고
+            return {...state, productTitle: ''}
         default:
             return state
     }

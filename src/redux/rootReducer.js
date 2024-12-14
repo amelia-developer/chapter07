@@ -14,7 +14,9 @@ const initialState = { // state의 초기값을 정의하는 객체
     drink: [],
     detailProdctTotal: 0,
     searchAddress:[],
-    optionChoiceName: ""
+    optionChoiceName: "",
+    categoryTitle: "",
+    activeIndex: null,
 }
 
 const otherReducers  = (state = initialState, action) => {
@@ -55,6 +57,10 @@ const otherReducers  = (state = initialState, action) => {
                 productDetailCount: 1,
                 optionChoice: 0
             }
+        case "SET_CATEGORY_TITLE": // 선택한 카테고리의 이름
+            return {...state, categoryTitle: action.payload}
+        case "SET_ACTIVE_INDEX": // 선택한 카테고리의 인덱스
+            return {...state, activeIndex: action.payload}
         default:
             return state
     }

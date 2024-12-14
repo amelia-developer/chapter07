@@ -16,9 +16,9 @@ export const setBasketInProduct = inBasketProductId => ({ // 장바구니에 상
     payload:inBasketProductId
 })
 
-export const setBasketCallProduct = callProduct => ({ // 장바구니에 상품부르는 액션
+export const setBasketCallProduct = callProductInfo => ({ // 장바구니에 상품부르는 액션
     type:CALL_PRODUCT,
-    payload: callProduct
+    payload: callProductInfo
 })
 
 export const setProductCountPrice = productCountPrice => ({ // 장바구니에 있는 상품카운트옵션에 따른 금액상태

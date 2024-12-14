@@ -7,34 +7,20 @@ import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
 import { useLocation } from "react-router-dom";
 
-// 메모이제이션된 셀렉터 정의
-const selectBestMenuSelectedId = state => state.setMenu.bestMenuSelectedId
-const selectselectedBestMenuProduct = state => state.setMenu.selectedBestMenuProduct // TODO:해야함_다시다시다시다시___이름
-const selectProductDetailCount = state => state.other.productDetailCount
-const selectOptionChoice = state => state.other.optionChoice
-const selectChickenMenuSelectedId = state => state.setMenu.chickenSelectedId
-const selectChickenMenuProduct = state => state.setMenu.selectedChickenMenuProduct
-const selectBurgerMenuSelectedId = state => state.setMenu.burgerSelectedId
-const selectBurgerMenuProduct = state => state.setMenu.selectedBurgerProduct
-const selectSnackSideSelectedId = state => state.setMenu.snackSideSelectedId
-const selectSnackSideProduct = state => state.setMenu.selectedSnackSideProduct
-const selectDrinkSelectedId = state => state.setMenu.drinkSelectedId
-const selectDrinkProduct = state => state.setMenu.selectedDrinkProduct
-
 const Info = () => {
     // 상태구독
-    const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
-    const selectedBestMenuProduct = useSelector(selectselectedBestMenuProduct) // TODO:해야함_다시다시다시다시___이름
-    const productDetailCount = useSelector(selectProductDetailCount)
-    const optionChoice = useSelector(selectOptionChoice)
-    const chickenMenuSelectedId = useSelector(selectChickenMenuSelectedId)
-    const chickenMenuProduct = useSelector(selectChickenMenuProduct)
-    const burgerMenuSelectedId = useSelector(selectBurgerMenuSelectedId)
-    const burgerMenuProduct = useSelector(selectBurgerMenuProduct)
-    const snackSideSelectedId = useSelector(selectSnackSideSelectedId)
-    const snackSideProduct = useSelector(selectSnackSideProduct)
-    const drinkSelectedId = useSelector(selectDrinkSelectedId)
-    const drinkProduct = useSelector(selectDrinkProduct)
+    const bestMenuSelectedId = useSelector(state => state.setMenu.bestMenuSelectedId)
+    const selectedBestMenuProduct = useSelector(state => state.setMenu.selectedBestMenuProduct) // TODO:해야함_다시다시다시다시___이름
+    const productDetailCount = useSelector(state => state.other.productDetailCount)
+    const optionChoice = useSelector(state => state.other.optionChoice)
+    const chickenMenuSelectedId = useSelector(state => state.setMenu.chickenSelectedId)
+    const chickenMenuProduct = useSelector(state => state.setMenu.selectedChickenMenuProduct)
+    const burgerMenuSelectedId = useSelector(state => state.setMenu.burgerSelectedId)
+    const burgerMenuProduct = useSelector(state => state.setMenu.selectedBurgerProduct)
+    const snackSideSelectedId = useSelector(state => state.setMenu.snackSideSelectedId)
+    const snackSideProduct = useSelector(state => state.setMenu.selectedSnackSideProduct)
+    const drinkSelectedId = useSelector(state => state.setMenu.drinkSelectedId)
+    const drinkProduct = useSelector(state => state.setMenu.selectedDrinkProduct)
 
     const dispatch = useDispatch()
 
@@ -49,9 +35,11 @@ const Info = () => {
     // ★이게 핵심임, 리덕스초기화하는 useEffect(동기적성격) 에서 핵심은 1. url매개변수기반 초기화 2. 리덕스기반 초기화
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
         const initializeState = async() => { // async를 쓴이유는 비동기작업dispatch의 완료를 기다리려고
-            if(!bestMenuSelectedId && !chickenMenuSelectedId && !burgerMenuSelectedId && !snackSideSelectedId && !drinkSelectedId) {
+            const selectedId = bestMenuSelectedId || chickenMenuSelectedId || burgerMenuSelectedId || snackSideSelectedId || drinkSelectedId;
+
+            if(!selectedId) {
                 // url기반 초기화상태
-                await dispatch(fetchSelectedBestMenuProductId(productNumber))
+                await dispatch(fetchSelectedBestMenuProductId(productNumber)) // 이거하는중
                 await dispatch(fetchSelectedChickenProductId(productNumber))
                 await dispatch(fetchSelectedBurgerProductId(productNumber))
                 await dispatch(fetchSelectedSnackSideProductId(productNumber))
@@ -59,7 +47,7 @@ const Info = () => {
             } else {
                 // 리덕스기반 초기화상태
                 if(bestMenuSelectedId) {
-                    await dispatch(fetchSelectedBestMenuProductId(productNumber))
+                    await dispatch(fetchSelectedBestMenuProductId(productNumber))                    
                 }
                 if(chickenMenuSelectedId) {
                     await dispatch(fetchSelectedChickenProductId(productNumber))
@@ -77,7 +65,7 @@ const Info = () => {
         }
         initializeState()
     }, [bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, drinkSelectedId, productNumber, dispatch]); 
-        
+
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 베스트메뉴
     useEffect(() => {

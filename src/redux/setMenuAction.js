@@ -12,6 +12,8 @@ export const SET_SELECTED_SNACKSIDEID = "SET_SELECTED_SNACKSIDEID"
 export const SET_SELECTED_SNACKSIDEPRODUCT = "SET_SELECTED_SNACKSIDEPRODUCT"
 export const SET_SELECTED_DRINKID = "SET_SELECTED_DRINKID"
 export const SET_SELECTED_DRINK = "SET_SELECTED_DRINK"
+export const SET_CATEGORY_TITLE = "SET_CATEGORY_TITLE"
+export const RESET_PRODUCT_TITLE = "RESET_PRODUCT_TITLE"
 
 // 액션생성자들
 export const setSelectedBestMenuProductId = bestMenuSelectedId => ({ // 선택한 베스트상품의id
@@ -64,9 +66,15 @@ export const setSelectedDrinkProduct = selectedDrinkProduct => ({ // 선택한 �
     payload: selectedDrinkProduct
 })
 
-export const setBasketInProductTitle = productTitle => ({ // 장바구니에 상품명넣는 상태액션
+export const setBasketInProductTitle = productTitle => ({ // 장바구니에 상품명넣는 상태액션 + 상품상세 상단에 보여지는 타이틀의 상태액션
     type: IN_BASKET_PRODUCT_TITLE,
     payload:productTitle
+})
+
+export const setResetProductTitle = productTitle => ({ // 상단에 상품명 또는 카테고리명을 보여줄때
+    // 상품상세에서 카테고리 클릭했을때, 카테고리명을 보여주기 위해 상품명을 강제 초기화
+    type:RESET_PRODUCT_TITLE,
+    payload: productTitle
 })
 
 // 선택한 베스트메뉴ID의 비동기액션

@@ -407,13 +407,15 @@
       "id": "1249315",
       "title": "클래식징거통다리",
       "subText": "",
-      "price": 6600
+      "price": 6600,
+      "category": "버거&세트"
     },
     {
       "id": "2278228",
       "title": "갓양념켄치밥세트",
       "subText": "갓양념켄치밥+콜라M+코울슬로",
-      "price": 7400
+      "price": 7400,
+      "category": "버거&세트"
     },
     {
       "id": "2278226",
@@ -536,61 +538,51 @@
   ],
   "basket": [
     {
-      "id": "d5cc1f43-810c-40af-a5b0-e5ecdc7f4772",
-      "productID": "2278055",
-      "count": 2,
-      "originPrice": 18900,
-      "price": 37800,
-      "option": 0,
-      "title": "신메뉴꿀조합1인세트",
-      "optionName": ""
-    },
-    {
-      "id": "2d7245e1-8caa-45d1-a1bd-6432483a755e",
-      "productID": "1471782",
+      "id": "b17d88f8-9bc6-4197-b7f8-fc0229451d91",
+      "productID": "2342921",
       "count": 1,
-      "originPrice": 1800,
-      "price": 1800,
+      "originPrice": 4000,
+      "price": 4000,
       "option": 0,
-      "title": "아이스아메리카노(M)",
+      "title": "메쉬포테이토치킨콤보",
       "optionName": ""
     },
     {
-      "id": "712f7b4a-3f4c-4af3-853c-80d0d7aff8d5",
-      "productID": "1471805",
-      "count": 3,
+      "id": "8514ddc5-21fb-4f0a-971e-a26a902a79c6",
+      "productID": "1345856",
+      "count": 1,
+      "originPrice": 3000,
+      "price": 3000,
+      "option": 0,
+      "title": "프렌치프라이L",
+      "optionName": ""
+    },
+    {
+      "id": "47920845-0959-4601-9be0-e6f517512bbc",
+      "productID": "1471774",
+      "count": 1,
       "originPrice": 2600,
-      "price": 7800,
+      "price": 2600,
       "option": 0,
-      "title": "스프라이트제로(L)",
+      "title": "코카콜라(L)",
       "optionName": ""
     },
     {
-      "id": "2675be8c-76a9-47ba-a194-8a5e59d72b6f",
-      "productID": "2176730",
-      "count": 4,
-      "originPrice": 26200,
-      "price": 104800,
+      "id": "0c0579ba-b2ba-410f-a921-d1daf039392e",
+      "productID": "1444649",
+      "count": 2,
+      "originPrice": 1000,
+      "price": 2000,
       "option": 0,
-      "title": "갓양념치킨8조각",
+      "title": "생수",
       "optionName": ""
     },
     {
-      "id": "5c26354a-7247-43c6-b943-b99c7309e2e8",
-      "productID": "2278055",
-      "count": 7,
-      "originPrice": 18900,
-      "price": 132300,
-      "option": 0,
-      "title": "신메뉴꿀조합1인세트",
-      "optionName": ""
-    },
-    {
-      "id": "b49911f6-6894-4795-b0c7-c1d028a5fcdd",
+      "id": "5d3d462c-b542-48ae-b46e-034d379ba90a",
       "productID": "1471777",
-      "count": 5,
+      "count": 1,
       "originPrice": 2600,
-      "price": 13000,
+      "price": 2600,
       "option": 0,
       "title": "환타오렌지(L)",
       "optionName": ""

@@ -1,6 +1,29 @@
 import { buildCreateSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
+// 선택한 카테고리명의 상태액션
+export const setCategoryTitle = categoryTitle => ({
+    type: "SET_CATEGORY_TITLE",
+    payload: categoryTitle
+})
+
+ // 선택한 카테고리 메뉴 이름
+export const setUpdateCategory = (index) => {
+    const categoryNames = ['추천메뉴', '치킨&세트', '버거&세트', '스낵&사이드', '음료']
+
+    return (dispatch) => {
+        if(index >= 0 && index < categoryNames.length) {
+            dispatch(setCategoryTitle(categoryNames[index]))
+        }
+    }
+}
+
+// 선택한 카테고리명의 인덱스액션
+export const setActiveIndex = activeIndex => ({
+    type: "SET_ACTIVE_INDEX",
+    payload: activeIndex
+})
+
 // 베스트메뉴의 상태액션
 export const setBestMenu = bestMenu => ({   // setBestMenu는 bestMenu(인자=매개변수)라는 새로 변경해줄 데이터를 받아서 reducer에 전달해주는 action이다.
                                             // setBestMenu는 액션의 생성자 함수

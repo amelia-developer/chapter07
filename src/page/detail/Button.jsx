@@ -41,7 +41,7 @@ const Button = () => {
       drinkSelectedId ||
       snackSideSelectedId
     )
-  }, [bestMenuSelectedId, burgerMenuSelectedId, chickenMenuSelectedId, drinkSelectedId, snackSideSelectedId, productsId])
+  }, [bestMenuSelectedId, burgerMenuSelectedId, chickenMenuSelectedId, drinkSelectedId, snackSideSelectedId])
 
   const navigate = useNavigate()
 
