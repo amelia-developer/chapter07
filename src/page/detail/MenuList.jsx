@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import icon1 from '../../img/dv_mn_new.png'
@@ -32,6 +32,9 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
             dispatch(setResetProductTitle(indexNumber)) // 리덕스 상태 업데이트(상품명 초기화)
             onShowCategoryMenu() // 메뉴클릭시 호출            
             navigate(`/detail/category/${indexNumber}`) // url변경   
+        } else { // 상품상세에서 다시 카테고리 클릭하면, 클릭한 카테고리명 리스트들 보여주기
+            navigate(`/detail/category/${indexNumber}`)
+            dispatch(setResetProductTitle(indexNumber)) 
         }
     }
 
