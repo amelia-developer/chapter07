@@ -1,27 +1,23 @@
 import React from 'react'
 import { useState } from 'react'
 
-const Nav = () => {
+const Nav = ({className, onNaviMenu}) => {
     const [isActiveMenu, setIsActiveMenu] = useState(null)
-    const [isNaviMenu, setIsNaviMenu] = useState(false)
-    const onNaviMenu = () => {        
-        setIsNaviMenu(!isNaviMenu)
-    }
-
+    
     const onSubMenu = (menu) => {
         setIsActiveMenu(isActiveMenu === menu ? null : menu)
     }
-    
+
     return (
         <>
             <div className="tab">
                 <h1>KFC</h1>
-                <a href="#" className="btn_menu" onClick={onNaviMenu}>
+                <a className="btn_menu" onClick={onNaviMenu}>
                     <span className="blind">메뉴</span>
                     <span className="menu"></span>
                 </a>
             </div>
-            <nav className={isNaviMenu === true ? 'on' : ''}>
+            <nav className={className}>
                 <a className="btn_close" onClick={onNaviMenu}><span></span></a>
                 <ul>
                     <li>

@@ -51,7 +51,6 @@ const OrderList = () => {
     }
         
     const onDeleteProduct = (productID) => {
-        // TODO:해야함_하는중임_상품지우는거
 // console.log(`product = ${JSON.stringify(productID)}`);
         alert(`삭제되었습니다`)
         dispatch(fetchBasketOutProdut(productID))
