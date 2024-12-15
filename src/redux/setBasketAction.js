@@ -9,11 +9,17 @@ export const SET_ORIGIN_PRODUCT_PRICE = "SET_ORIGIN_PRODUCT_PRICE"
 export const EACH_PRODUCT_MINUS = "EACH_PRODUCT_MINUS"
 export const EACH_PRODUCT_PLUS = "EACH_PRODUCT_PLUS"
 export const RESET_PRODUCT_DETAIL = "RESET_PRODUCT_DETAIL"
+export const OUT_BASKET_PRODUCT = "OUT_BASKET_PRODUCT"
 
 // 액션생성자들
 export const setBasketInProduct = inBasketProductId => ({ // 장바구니에 상품넣는 상태액션
     type:IN_BASKET_PRODUCT,
     payload:inBasketProductId
+})
+
+export const setBasketOutProduct = callProductInfo => ({
+    type:OUT_BASKET_PRODUCT,
+    payload:callProductInfo
 })
 
 export const setBasketCallProduct = callProductInfo => ({ // 장바구니에 상품부르는 액션
@@ -65,6 +71,19 @@ export const fetchBasketInProduct = (basketInProduct) => {
         })
     }
 }
+
+// 장바구니에 상품빼는 비동기액션 -> Request Body로 id를 전달하는방식
+export const fetchBasketOutProdut = (callProductInfo) => {
+    return dispatch => {
+        axios.delete(`http://localhost:3000/basket/${callProductInfo}`)
+        .then(() => {
+            dispatch(setBasketOutProduct(callProductInfo))
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+} 
 
 // 장바구니에 상품부르는 비동기액션
 export const fetchBasketCallProduct = () => {

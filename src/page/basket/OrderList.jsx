@@ -1,24 +1,19 @@
 import React, { useEffect } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus } from '../../redux/setBasketAction'
-
-// 메모이제이션 셀렉터 정의
-const selectCallProductInfo = state => state.setBasket.callProductInfo
-const selectEachProductMinus = state => state.setBasket.eachProductMinus
-const selectEachProductPlus = state => state.setBasket.eachProductPlus
+import { fetchBasketCallProduct, fetchEachProductMinus, fetchEachProductPlus, fetchBasketOutProdut } from '../../redux/setBasketAction'
 
 const OrderList = () => {
     // 상태구독
-    const callProductInfo = useSelector(selectCallProductInfo)
-    const eachProductMinus = useSelector(selectEachProductMinus)
-    const eachProductPlus = useSelector(selectEachProductPlus)
+    const callProductInfo = useSelector(state => state.setBasket.callProductInfo)
+    const eachProductMinus = useSelector(state => state.setBasket.eachProductMinus)
+    const eachProductPlus = useSelector(state => state.setBasket.eachProductPlus)
 
     const dispatch = useDispatch()
     
     useEffect(() => {
         dispatch(fetchBasketCallProduct())
-    }, [dispatch, eachProductMinus, eachProductPlus]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
+    }, [dispatch, eachProductMinus, eachProductPlus, callProductInfo]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
 
     const countTotal = callProductInfo.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.count
@@ -55,13 +50,21 @@ const OrderList = () => {
         }
     }
         
+    const onDeleteProduct = (productID) => {
+        // TODO:해야함_하는중임_상품지우는거
+// console.log(`product = ${JSON.stringify(productID)}`);
+        alert(`삭제되었습니다`)
+        dispatch(fetchBasketOutProdut(productID))
+        dispatch(fetchBasketCallProduct())
+    }
     return (
         <>
             <div className="orderListBox">
                 <ul className="raw">
                     {
                         callProductInfo.map((value, idx) => {
-                            const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                            const formatPrice = value.price
+                            const priceCustom = formatPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                             return  <li key={idx}>
                                         <div className="info">
                                             <div className="imgbox">
@@ -70,11 +73,11 @@ const OrderList = () => {
                                             <div className="textbox">
                                                 <h3>{value.title}</h3>
                                                 <p>{value.optionName}</p>
-                                                <a className="btn_delete"></a>
+                                                <a className="btn_delete" onClick={() => onDeleteProduct(value.id)}></a>
                                             </div>
                                         </div>
                                         <div className="price">
-                                            <p className="ico_price">{formatPrice}</p>
+                                            <p className="ico_price">{priceCustom}</p>
                                             <div className="amount">
                                                 <span>
                                                     <button className="minus" onClick={() => onMinusCount(value)}>-</button>

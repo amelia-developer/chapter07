@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {setSelectedBestMenuProductId, setSelectedChickenProductId, setSelectedBurgerProductId,
 setSelectedSnackSideProductId, setSelectedDrinkProductId} from '../../redux/setMenuAction'
@@ -9,19 +9,6 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
     const [resultCategory, setResultCateGory] = useState([])
     const pageNavigate = useNavigate()
     const dispatch = useDispatch()
-
-    // 상태구독
-    const bestMenuSelectedId = useSelector(state => state.setMenu.bestMenuSelectedId)
-    const burgerMenuSelectedId = useSelector(state => state.setMenu.burgerSelectedIdctBurgerMenuSelectedId)
-    const chickenMenuSelectedId = useSelector(state => state.setMenu.chickenSelectedId)
-    const drinkSelectedId = useSelector(state => state.setMenu.drinkSelectedId)
-    const snackSideSelectedId = useSelector(state => state.setMenu.snackSideSelectedId)
-    const productDetailCount = useSelector(state => state.other.productDetailCount)
-    const optionChoice = useSelector(state => state.other.optionChoice)
-    const detailProdctTotal = useSelector(state => state.other.detailProdctTotal)
-    const productTitle = useSelector(state => state.setMenu.productTitle)
-    const optionName = useSelector(state => state.other.optionChoiceName)
-    const originPrice = useSelector(state => state.setBasket.originProductPrice)
 
     useEffect(() => {
         let cateGubun = [
@@ -90,32 +77,23 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
         onProductClick()
     }
 
-    const [productsId, setProductId] = useState(null)
-    useEffect(() => {
-        setProductId (
-            bestMenuSelectedId ||
-            burgerMenuSelectedId ||
-            chickenMenuSelectedId ||
-            drinkSelectedId ||
-            snackSideSelectedId
-        )
-    }, [bestMenuSelectedId, burgerMenuSelectedId, chickenMenuSelectedId, drinkSelectedId, snackSideSelectedId])
-    
-    const onBasket = () => {
+    const onBasket = (productInfo) => {
+// console.log(`productInfo = ${JSON.stringify(productInfo)}`);
+
         const basketInProduct = {
-            productID: productsId, // 베스트메뉴id or 치킨상품id or 버거상품id or 스넥사이드상품id or 음료id
-            count: productDetailCount,
-            price: detailProdctTotal,
-            option: optionChoice,
-            title: productTitle,
-            optionName: optionName,
-            originPrice: originPrice
+            productID: productInfo.id, // 베스트메뉴id or 치킨상품id or 버거상품id or 스넥사이드상품id or 음료id
+            count: 1,
+            price: productInfo.price,
+            option: '',
+            title: productInfo.title,
+            optionName: '',
+            originPrice: productInfo.price
         }
 
-        // dispatch(fetchBasketInProduct(basketInProduct)); // 이거하는중(카테고리에서 장바구니아이콘 클릭했을때 올바르게 담기지 않아서 임시주석)
+        dispatch(fetchBasketInProduct(basketInProduct));
         alert(`상품이 장바구니에 담겼습니다`)
-console.log(`basketInProduct = ${JSON.stringify(basketInProduct)}`);
-        // pageNavigate(`/basket`) // 이거하는중(카테고리에서 장바구니아이콘 클릭했을때 올바르게 담기지 않아서 임시주석)
+// console.log(`basketInProduct = ${JSON.stringify(basketInProduct)}`);
+        pageNavigate(`/basket`)
     }
 
     return (
@@ -132,7 +110,7 @@ console.log(`basketInProduct = ${JSON.stringify(basketInProduct)}`);
                                             <span className="subtext">{value.subText}</span>
                                         </a>
                                         <div className="order">
-                                            <a className="btn_basket" onClick={onBasket}><span className="blind">장바구니</span></a>
+                                            <a className="btn_basket" onClick={() => onBasket(value)}><span className="blind">장바구니</span></a>
                                             <a className="btn_order"><span>바로주문</span></a>
                                         </div>
                                         <p className="price"><span>{formatPrice}</span></p>

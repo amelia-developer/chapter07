@@ -538,53 +538,23 @@
   ],
   "basket": [
     {
-      "id": "b17d88f8-9bc6-4197-b7f8-fc0229451d91",
-      "productID": "2342921",
-      "count": 1,
-      "originPrice": 4000,
-      "price": 4000,
-      "option": 0,
-      "title": "메쉬포테이토치킨콤보",
-      "optionName": ""
-    },
-    {
-      "id": "8514ddc5-21fb-4f0a-971e-a26a902a79c6",
-      "productID": "1345856",
-      "count": 1,
-      "originPrice": 3000,
-      "price": 3000,
-      "option": 0,
-      "title": "프렌치프라이L",
-      "optionName": ""
-    },
-    {
-      "id": "47920845-0959-4601-9be0-e6f517512bbc",
-      "productID": "1471774",
-      "count": 1,
-      "originPrice": 2600,
-      "price": 2600,
-      "option": 0,
-      "title": "코카콜라(L)",
-      "optionName": ""
-    },
-    {
-      "id": "0c0579ba-b2ba-410f-a921-d1daf039392e",
-      "productID": "1444649",
+      "id": "f52b1fc5-726c-4dbb-a7cd-2e0e740d9c2c",
+      "productID": "2342857",
       "count": 2,
-      "originPrice": 1000,
-      "price": 2000,
+      "originPrice": 2600,
+      "price": 5200,
       "option": 0,
-      "title": "생수",
+      "title": "버터 비스켓",
       "optionName": ""
     },
     {
-      "id": "5d3d462c-b542-48ae-b46e-034d379ba90a",
-      "productID": "1471777",
+      "id": "50a17510-c27f-4ff0-8f7a-9459925bdc52",
+      "productID": "2278049",
       "count": 1,
-      "originPrice": 2600,
-      "price": 2600,
+      "originPrice": 11400,
+      "price": 11400,
       "option": 0,
-      "title": "환타오렌지(L)",
+      "title": "징거더블다운통다리세트",
       "optionName": ""
     }
   ]

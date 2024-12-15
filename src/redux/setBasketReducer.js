@@ -21,6 +21,11 @@ const setBasketReducer = (state = initialState, action) => {
             return {...state, eachProductMinus: action.payload}
         case "EACH_PRODUCT_PLUS":
             return {...state, eachProductPlus: action.payload}
+        case "OUT_BASKET_PRODUCT":
+            return  {...state, 
+                        callProductInfo: state.callProductInfo.filter(
+                            removeProduct => removeProduct.id !== action.payload
+                    )}
         default:
             return state
     }
