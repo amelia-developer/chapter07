@@ -40,38 +40,30 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
         }
     }, [bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex])
     
+    const actionMap  = {
+        0: setSelectedBestMenuProductId,
+        1: setSelectedChickenProductId,
+        2: setSelectedBurgerProductId,
+        3: setSelectedSnackSideProductId,
+        4: setSelectedDrinkProductId
+    }
+
     const onDetailProduct = async(param) => {
-        if(activeIndex === 0) {
-            await dispatch(setSelectedBestMenuProductId(param))
-            await dispatch(setSelectedChickenProductId(null))
-            await dispatch(setSelectedBurgerProductId(null))
-            await dispatch(setSelectedSnackSideProductId(null))
-            await dispatch(setSelectedDrinkProductId(null)) 
-        } else if(activeIndex === 1) {
-            await dispatch(setSelectedChickenProductId(param))
-            await dispatch(setSelectedBestMenuProductId(null))
-            await dispatch(setSelectedBurgerProductId(null))
-            await dispatch(setSelectedSnackSideProductId(null)) 
-            await dispatch(setSelectedDrinkProductId(null)) 
-        } else if(activeIndex === 2) {
-            await dispatch(setSelectedBurgerProductId(param))
-            await dispatch(setSelectedChickenProductId(null))
-            await dispatch(setSelectedBestMenuProductId(null))
-            await dispatch(setSelectedSnackSideProductId(null))
-            await dispatch(setSelectedDrinkProductId(null)) 
-        } else if(activeIndex === 3) {
-            await dispatch(setSelectedSnackSideProductId(param))
-            await dispatch(setSelectedChickenProductId(null))
-            await dispatch(setSelectedBestMenuProductId(null))
-            await dispatch(setSelectedBurgerProductId(null))
-            await dispatch(setSelectedDrinkProductId(null))  
-        } else if(activeIndex === 4) {
-            await dispatch(setSelectedDrinkProductId(param)) 
-            await dispatch(setSelectedChickenProductId(null))
-            await dispatch(setSelectedBestMenuProductId(null))
-            await dispatch(setSelectedBurgerProductId(null))
-            await dispatch(setSelectedSnackSideProductId(null))  
+        const action = actionMap[activeIndex]
+        if(action) {
+            await dispatch(action(param))
         }
+        // if(activeIndex === 0) {
+        //     await dispatch(setSelectedBestMenuProductId(param))
+        // } else if(activeIndex === 1) {
+        //     await dispatch(setSelectedChickenProductId(param))
+        // } else if(activeIndex === 2) {
+        //     await dispatch(setSelectedBurgerProductId(param))
+        // } else if(activeIndex === 3) {
+        //     await dispatch(setSelectedSnackSideProductId(param))
+        // } else if(activeIndex === 4) {
+        //     await dispatch(setSelectedDrinkProductId(param)) 
+        // }
         // navigate
         pageNavigate(`/detail?id=${param}`)
         onProductClick()
