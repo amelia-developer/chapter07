@@ -750,16 +750,6 @@
       "optionName": ""
     },
     {
-      "id": "dc59bee1-11ea-403e-82a2-8ff33d3458ae",
-      "productID": "2278113",
-      "count": 2,
-      "originPrice": 24900,
-      "price": 50800,
-      "option": 500,
-      "title": "커넬데리야끼징거팩",
-      "optionName": "콜라 M추가"
-    },
-    {
       "id": "c052a231-7930-4213-964d-116b206da8b5",
       "productID": "2278113",
       "count": 1,
@@ -778,6 +768,16 @@
       "option": 0,
       "title": "",
       "optionName": "환타 M추가"
+    },
+    {
+      "id": "4ec368e6-8e17-49bd-a21f-39ee840894de",
+      "productID": "2278172",
+      "count": 2,
+      "originPrice": 6700,
+      "price": 13400,
+      "option": "",
+      "title": "커넬 데리야끼세트",
+      "optionName": ""
     }
   ]
 }

@@ -48,7 +48,7 @@ const Detail = ({isNaviMenu, onNaviMenu, topTitle, setTopTitle}) => {
                 setTopTitle={setTopTitle} /**setTopTile함수자체를 props로보냄(함수 참조만 전달) */
             ></MenuList>
             {showInfo && <Info></Info>} {/* showInfo 상태에 따라 Info 컴포넌트 표시 */}
-            <Button></Button>
+            {showInfo && <Button></Button>}
             <Footer></Footer>
             <BottomNav  onNaviMenu={onNaviMenu} isNaviMenu={isNaviMenu}></BottomNav>
             <Routes>

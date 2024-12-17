@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import kfcSprite from '../../img/kfc_sprite.png'
 import { useDispatch, useSelector } from "react-redux"
-import { fetchBestMenu, setLoading } from '../../redux/action'
+import { fetchBestMenu, setLoading, setActiveIndex, setUpdateCategory } from '../../redux/action'
 import { setSelectedBestMenuProductId } from '../../redux/setMenuAction'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,6 +22,8 @@ const BestMenu = () => {
     // }
 
     const onDetailProduct = (param) => {
+        dispatch(setActiveIndex(0));
+        dispatch(setUpdateCategory(0));
         dispatch(setSelectedBestMenuProductId(param))
         // navigate
         pageNavigate(`/detail?id=${param}`)
