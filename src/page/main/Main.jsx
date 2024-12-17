@@ -1,5 +1,4 @@
-import React,  { useState } from 'react'
-import Nav from './Nav'
+import React from 'react'
 import TopRolling from './TopRolling'
 import Banner from './Banner'
 import BestMenu from './BestMenu'
@@ -9,15 +8,9 @@ import Youtube from './Youtube'
 import Footer from './Footer'
 import BottomNav from './BottomNav'
 
-const Main = () => {
-  const [isNaviMenu, setIsNaviMenu] = useState(false)
-  const toggleNaviMenu = () => {
-    setIsNaviMenu(!isNaviMenu)  
-  }
-
+const Main = ({isNaviMenu, onNaviMenu}) => {
   return (
     <>
-        <Nav className={isNaviMenu ? 'on' : ''} onNaviMenu={toggleNaviMenu} />
         <TopRolling></TopRolling>
         <Banner></Banner>
         <BestMenu></BestMenu>
@@ -25,7 +18,7 @@ const Main = () => {
         <SNS></SNS>
         <Youtube></Youtube>
         <Footer></Footer>
-        <BottomNav onNaviMenu={toggleNaviMenu}></BottomNav>
+        <BottomNav onNaviMenu={onNaviMenu} isNaviMenu={isNaviMenu}></BottomNav>
     </>
   )
 }

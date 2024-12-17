@@ -1,13 +1,32 @@
-import './App.css';
-import "./scss/chapter07.scss";
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Main from './page/main/Main'
+import Detail from './page/detail/Detail'
+import Nav from './page/main/Nav'
+import "./scss/chapter07.scss"
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategoryTitle } from './redux/action'
 
-function App() {
-  return (
-    <div className="App">
-      <Main></Main>
-    </div>
-  );
-}
+const App = () => {
+    const [isNaviMenu, setIsNaviMenu] = useState(false)
+    const dispatch = useDispatch()
+    const cateName = useSelector(state => state.categoryTitle)
+    const toggleNaviMenu = () => {
+        setIsNaviMenu(!isNaviMenu)
+        dispatch(setCategoryTitle(cateName))
+    }
+
+    const [topTitle, setTopTitle] = useState("") // 상단 타이틀상태
+
+    return (
+      <>
+        <Nav className={isNaviMenu ? 'on' : ''} onNaviMenu={toggleNaviMenu} setTopTitle={setTopTitle}/>
+        <Routes>
+            <Route path="/" element={<Main isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} />} />
+            <Route path="/detail/*" element={<Detail isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} topTitle={topTitle} setTopTitle={setTopTitle}/>} />
+        </Routes>
+      </>
+    );
+};
 
 export default App;

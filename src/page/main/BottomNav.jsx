@@ -12,7 +12,6 @@ const BottomNav = ({onNaviMenu}) => {
   const onSetHome = () => {
     navigate(`/`)
   }
-
   return (
     <>
         <div className="bottomNavbox">

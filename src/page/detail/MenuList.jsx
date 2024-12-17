@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { setUpdateCategory, setActiveIndex } from '../../redux/action'
 import { setResetProductTitle } from '../../redux/setMenuAction'
 
-const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
+const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopTitle}) => {
     // 상태구독
     const bestMenu = useSelector(state => state.other.bestMenu)
     const chickenSet = useSelector(state => state.other.chickenSet)
@@ -25,13 +25,14 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onSelectDetailMenu = (indexNumber) => {
+    const onSelectDetailMenu = (indexNumber, cateName) => {
         if(indexNumber !== activeIndex){ // 이전상태랑비교
             dispatch(setActiveIndex(indexNumber)) // 리덕스 상태 업데이트(카테고리인덱스)
             dispatch(setUpdateCategory(indexNumber)) // 리덕스 상태 업데이트(카테고리명)
             dispatch(setResetProductTitle(indexNumber)) // 리덕스 상태 업데이트(상품명 초기화)
-            onShowCategoryMenu() // 메뉴클릭시 호출            
-            navigate(`/detail/category/${indexNumber}`) // url변경   
+            onShowCategoryMenu() // 메뉴클릭시 호출     
+            setTopTitle(cateName) // props로 받은 함수를 다시 콜했네? 이게 콜백함수(파라미터 유무랑 상관없음)
+            navigate(`/detail/category/${indexNumber}`) // url변경 
         } else { // 상품상세에서 다시 카테고리 클릭하면, 클릭한 카테고리명 리스트들 보여주기
             navigate(`/detail/category/${indexNumber}`)
             dispatch(setResetProductTitle(indexNumber)) 
@@ -53,12 +54,12 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
                     slidesPerView={2.5}
                     style={{width:'100%', height:'100%'}}
                 >
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(0)} className={activeIndex === 0 ? 'active': ''}><span className="img_cover"><img src={icon1} alt="추천메뉴"/></span><span>추천메뉴</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(1)} className={activeIndex === 1 ? 'active': ''}><span className="img_cover"><img src={icon2} alt="치킨세트"/></span><span>치킨&세트</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(2)} className={activeIndex === 2 ? 'active': ''}><span className="img_cover"><img src={icon3} alt="버거세트"/></span><span>버거&세트</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(3)} className={activeIndex === 3 ? 'active': ''}><span className="img_cover"><img src={icon4} alt="스낵사이드"/></span><span>스낵&사이드</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(4)} className={activeIndex === 4 ? 'active': ''}><span className="img_cover"><img src={icon5} alt="음료"/></span><span>음료</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(5)} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(0, '추천메뉴')} className={activeIndex === 0 ? 'active': ''}><span className="img_cover"><img src={icon1} alt="추천메뉴"/></span><span>추천메뉴</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(1, '치킨세트')} className={activeIndex === 1 ? 'active': ''}><span className="img_cover"><img src={icon2} alt="치킨세트"/></span><span>치킨&세트</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(2, '버거세트')} className={activeIndex === 2 ? 'active': ''}><span className="img_cover"><img src={icon3} alt="버거세트"/></span><span>버거&세트</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(3, '스낵사이드')} className={activeIndex === 3 ? 'active': ''}><span className="img_cover"><img src={icon4} alt="스낵사이드"/></span><span>스낵&사이드</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(4, '음료')} className={activeIndex === 4 ? 'active': ''}><span className="img_cover"><img src={icon5} alt="음료"/></span><span>음료</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(5, '주소등록')} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
                 </Swiper>
                 {
                     showCategoryList && 

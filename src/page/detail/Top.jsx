@@ -5,7 +5,9 @@ import { setBackDefaultCount } from '../../redux/action'
 import { fetchBasketInProduct } from '../../redux/setBasketAction'
 import { setResetProductTitle } from '../../redux/setMenuAction'
 
-const Top = () => {
+const Top = ({topTitle}) => {
+// console.log(`topTitle = ${topTitle}`);
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -57,7 +59,9 @@ const Top = () => {
         navigate(`/basket`)
     }
 
-    const displayTitle = productTitle !== '' ? productTitle : categoryTitle
+    // const displayTitle = productTitle !== '' ? productTitle : categoryTitle
+    const displayTitle = topTitle || (productTitle !== '' ? productTitle : categoryTitle)
+
     return (
         <>
             <div className="topBox">

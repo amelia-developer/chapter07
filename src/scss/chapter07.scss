@@ -268,9 +268,11 @@ nav {
                             background-image: url('../img/ico_price_red_sm.png');
                             background-repeat: no-repeat;
                             background-position-y: 50%;
-                            background-position-x: 0;
+                            background-position-x: 36%;
                             padding-left: 1.9167rem;
-                            width: auto;
+                            // width: auto;
+                            text-align: center;
+                            width: 80%;
                         } // price종료
                     } // span종료
                 }
