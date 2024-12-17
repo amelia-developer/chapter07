@@ -1,5 +1,5 @@
 import React from 'react'
-import kfcSprite from '../../img/kfc_sprite.png'
+// import sprite from '../../img/sprite.png'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -8,8 +8,8 @@ const Youtube = () => {
         <>
             <div className="youtubeBox">
                 <div className="title">
-                    <img src={kfcSprite} alt="kfc스프라이트이미지"/>
-                    <h2>KFC YOUTUBE</h2>
+                    {/* <img src={sprite} alt=""/> */}
+                    <h2>BURGER YOUTUBE</h2>
                 </div>
                 <div className="item" style={{width: 'auto', height: 'auto'}}>
                     <Swiper

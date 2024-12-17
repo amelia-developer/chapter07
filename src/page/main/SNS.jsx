@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import kfcSprite from '../../img/kfc_sprite.png'
+// import sprite from '../../img/sprite.png'
 import { connect } from "react-redux"
 import {fetchSNSList} from '../../redux/action'
 
@@ -25,8 +25,8 @@ const SNS = ({snsList, fetchSNSList}) => {
         <>
             <div className="snsBox">
                 <div className="title">
-                    <img src={kfcSprite} alt="kfc스프라이트이미지"/>
-                    <h2>KFC FACEBOOK,<br/>INSTAGRAM</h2>
+                    {/* <img src={sprite} alt=""/> */}
+                    <h2>BURGER FACEBOOK,<br/>INSTAGRAM</h2>
                 </div>
                 <div className="items">
                     <ul>
@@ -37,7 +37,7 @@ const SNS = ({snsList, fetchSNSList}) => {
                                                 <img src={`/images/${value.id}.jpg`} alt=""/>
                                             </a>
                                             <p>
-                                                <span className="writer"><img src="https://www.kfckorea.com/static/img/common/fandom_instagram.png" alt=""/><span>kfc_korea</span></span>
+                                                <span className="writer"><img src="https://www.kfckorea.com/static/img/common/fandom_instagram.png" alt=""/><span>burger_korea</span></span>
                                                 <span className="media">+팔로워</span>
                                             </p>
                                         </li>

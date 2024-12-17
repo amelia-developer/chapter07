@@ -17,9 +17,11 @@
     line-height: 4.583rem;
     h1 {
         margin: 0;
-        background: url('../img/logo.png') no-repeat 50%;
+        background: url('../img/logo.jpg') no-repeat 50%;
         text-indent: -9999px;
         height: 4rem;
+        background-size: cover;
+        background-position-y: 10%;
     }
     .btn_menu {
         display: block;
@@ -36,7 +38,7 @@
             left: 0;
             width: 1.67rem;
             height: .1567rem;
-            border-bottom: 2px solid #c90a1f;
+            border-bottom: 4px solid #fff;
             transition: all .5s ease;
             &:before, &:after {
                 content: '';
@@ -44,7 +46,7 @@
                 position: absolute;
                 width: 1.67rem;
                 height: .1567rem;
-                border-bottom: 2px solid #c90a1f;
+                border-bottom: 4px solid #fff;
             }
             &:before {
                 top: .5rem; 
@@ -169,10 +171,15 @@ nav {
         height: 100%;
         width: 90%;
         margin: 0 auto 0.5rem auto;
-        img {
+        a {
             display: block;
-            width: 100%;
-            border-radius: 10px;
+            height: 310px;
+            img {
+                display: block;
+                width: 100%;
+                height: inherit;
+                border-radius: 10px;
+            }    
         }
     }
 } // bannerBox종료
@@ -181,15 +188,19 @@ nav {
     background-color: #f8f8f8;
     padding: 0 20px 100px 20px;
     .title {
+        background-image: url('../img/title_bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 2rem 0 1rem 0;
         img {
             width: 100%;
             max-width: 150px;
             display: block;
         }
         h2 {
-            color: #2c251e;
-            margin-top: 1.67rem;
-            margin-bottom: 3.33rem;
+            margin: 0;
+            color: #fff;
+            padding: 1.67rem 0 1.67rem 1rem;
             font-size: 2rem;
             line-height: 38px;
             font-weight: 700;
@@ -285,7 +296,7 @@ nav {
             max-width: 400px;
             width: 100%;
             box-sizing: border-box;
-            background-color: #211817;
+            background-color: #E80;
             border-radius: 16px;
             color: #fff;
             padding: 24px;
@@ -302,10 +313,16 @@ nav {
 
 .bannerOrder {
     .inner {
-        background-color: #e21e2d;
-        padding: 5rem 1.67rem 0;
+        // background-color: #E80;
+        background-image: url('../img/text_bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 5rem 1.67rem;
         .top {
             margin-bottom: 45px;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #fff;
             img {
                 max-width: 100%;
             }
@@ -338,15 +355,19 @@ nav {
     background-size: cover;
     padding: 0 20px 100px 20px;
     .title {
+        margin: 2rem 0 1rem 0;
+        background-image: url('../img/title_bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
         img {
             width: 100%;
             max-width: 150px;
             display: block;
         }
         h2 {
-            color: #2c251e;
-            margin-top: 1.67rem;
-            margin-bottom: 3.33rem;
+            color: #fff;
+            padding: 1.67rem 0 1.67rem 1rem;
+            margin: 0;
             font-size: 2rem;
             line-height: 38px;
             font-weight: 700;
@@ -380,6 +401,7 @@ nav {
                     margin-bottom: -4px;
                     img {
                         max-width: 100%;
+                        width: 100%;
                     }
                 } // a종료
                 p {
@@ -428,15 +450,19 @@ nav {
 .youtubeBox {
     padding: 0 20px 100px 20px;
     .title {
+        margin: 2rem 0 1rem 0;
+        background-image: url('../img/title_bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
         img {
             width: 100%;
             max-width: 150px;
             display: block;
         }
         h2 {
-            color: #2c251e;
-            margin-top: 1.67rem;
-            margin-bottom: 3.33rem;
+            color: #fff;
+            padding: 1.67rem 0 1.67rem 1rem;
+            margin: 0;
             font-size: 2rem;
             line-height: 38px;
             font-weight: 700;
@@ -574,7 +600,7 @@ footer {
 } // bottomNavbox종료
 
 .topBox {
-    background-color: #c90a1f;
+    background-color: #E80;
     height: 4.583rem;
     text-align: center;
     line-height: 4.583rem;
@@ -693,7 +719,7 @@ footer {
         .bannerDesc {
             text-align: left;
             width: calc(70% - 20px);
-            padding-right: 8px;
+            // padding-right: 8px;
             p {
                 font-size: 12px;
                 color: #fff;
@@ -712,9 +738,11 @@ footer {
             max-width: 100%;
             position: absolute;
             bottom: 0;
-            right: 20px;
-            max-width: 40%;
+            top: -30px;
+            right: 0;
+            max-width: 45%;
             max-height: calc(100% + 32px);
+            height: 116%;
         }
     } // bannerContetns종료
 } // deliveryBannerBox종료

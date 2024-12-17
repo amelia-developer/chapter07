@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import kfcSprite from '../../img/kfc_sprite.png'
+// import sprite from '../../img/logo.jpg'
 import { useDispatch, useSelector } from "react-redux"
 import { fetchBestMenu, setLoading, setActiveIndex, setUpdateCategory } from '../../redux/action'
 import { setSelectedBestMenuProductId } from '../../redux/setMenuAction'
@@ -32,7 +32,7 @@ const BestMenu = () => {
         <>
             <div className="bestBox">
                 <div className="title">
-                    <img src={kfcSprite} alt="kfc스프라이트이미지"/>
+                    {/* <img src={sprite} alt=""/> */}
                     <h2>BEST MENU</h2>
                 </div>
                 <div className="items">
@@ -55,7 +55,7 @@ const BestMenu = () => {
                     </ul>
                 </div>
                 <div className="btnMoreMenu">
-                    <a href="#">다양한 메뉴 보러가기 &gt;</a>
+                    <a href="#">MORE MENU &gt;</a>
                 </div>
             </div>
         </>

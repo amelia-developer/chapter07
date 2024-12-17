@@ -19,10 +19,14 @@ const Nav = ({className, onNaviMenu, setTopTitle}) => {
         dispatch(setActiveIndex(categoryNumber))
         setTopTitle(cateName)
     }
+
+    const onMoveHome = () => {
+        navigate(`/`)
+    }
     return (
         <>
             <div className="tab">
-                <h1>KFC</h1>
+                <h1 onClick={onMoveHome}>BURGER</h1>
                 <a className="btn_menu" onClick={onNaviMenu}>
                     <span className="blind">메뉴</span>
                     <span className="menu"></span>
