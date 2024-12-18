@@ -707,7 +707,7 @@ footer {
 } // deliveryAddressBox종료
 
 .deliveryBannerBox {
-    margin: 32px 0;
+    margin: 0 0 32px 0;
     background-image: url('../img/banner_delivery_pattern.png');
     background-color: rgba(0,0,0);
     background-repeat: no-repeat;
@@ -738,16 +738,17 @@ footer {
             max-width: 100%;
             position: absolute;
             bottom: 0;
-            top: -30px;
+            top: 0;
             right: 0;
             max-width: 45%;
             max-height: calc(100% + 32px);
-            height: 116%;
+            height: 100%;
         }
     } // bannerContetns종료
 } // deliveryBannerBox종료
 
 .menuLisBox {
+    margin-bottom: 2rem;
     .swiper-slide {
         width: 9.167rem;
         text-align: center;
@@ -969,7 +970,7 @@ footer {
         padding: 0 1.25rem 1.25rem;
         box-sizing: border-box;
         .panel {
-            margin: 1rem auto;
+            margin: 50% auto;
             width: 100%;
             background-color: transparent;
             position: static;
@@ -1132,7 +1133,7 @@ footer {
             background-color: #666;            
         }
         &.btn_order {
-            background-color: #c90a1f;
+            background-color: #E80;
         }
     }
 } // btnBox종료
@@ -1252,7 +1253,7 @@ footer {
 .basketTopBox {
     padding: 1.25rem 0;
     position: relative;
-    background-color: #c90a1f;
+    background-color: #E80;
     text-align: center;
     p {
         margin: 0;
@@ -1307,7 +1308,7 @@ footer {
                     position: absolute;
                     height: auto;
                     left: 0;
-                    width: 10rem;
+                    width: 7rem;
                 }    
             } // imgbox종료
             .textbox {
@@ -1461,7 +1462,9 @@ footer {
                     }
                 } // values종료
                 .btn_order {
-                    display: block;
+                    // display: block;
+                    display: flex;
+                    justify-content: center;
                     background-color: #c41230;
                     border: 2px solid #a6192e !important;
                     color: #fff;

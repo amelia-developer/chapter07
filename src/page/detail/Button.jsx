@@ -1,36 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBasketInProduct } from '../../redux/setBasketAction'
+import { useLocation } from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
-
-// 메모이제이션된 셀렉터 정의
-const selectBestMenuSelectedId = state => state.setMenu.bestMenuSelectedId
-const selectBurgerMenuSelectedId = state => state.setMenu.burgerSelectedId
-const selectChickenMenuSelectedId = state => state.setMenu.chickenSelectedId
-const selectDrinkSelectedId = state => state.setMenu.drinkSelectedId
-const selectSnackSideSelectedId = state => state.setMenu.snackSideSelectedId
-const selectProductDetailCount = state => state.other.productDetailCount
-const selectOptionChoice = state => state.other.optionChoice
-const selectDetailProdctTotal = state => state.other.detailProdctTotal
-const selectProductTitle = state => state.setMenu.productTitle
-const selectOptionName = state => state.other.optionChoiceName
-const selectOriginPrice = state => state.setBasket.originProductPrice
+import { fetchBasketInProduct, setInitialProductId } from '../../redux/setBasketAction'
+import { setOptionChoiceName, setOptionChoice } from '../../redux/action'
 
 const Button = () => {
   // 상태구독
-  const bestMenuSelectedId = useSelector(selectBestMenuSelectedId)
-  const burgerMenuSelectedId = useSelector(selectBurgerMenuSelectedId)
-  const chickenMenuSelectedId = useSelector(selectChickenMenuSelectedId)
-  const drinkSelectedId = useSelector(selectDrinkSelectedId)
-  const snackSideSelectedId = useSelector(selectSnackSideSelectedId)
-  const productDetailCount = useSelector(selectProductDetailCount)
-  const optionChoice = useSelector(selectOptionChoice)
-  const detailProdctTotal = useSelector(selectDetailProdctTotal)
-  const productTitle = useSelector(selectProductTitle)
-  const optionName = useSelector(selectOptionName)
-  const originPrice = useSelector(selectOriginPrice)
+  const bestMenuSelectedId = useSelector(state => state.setMenu.bestMenuSelectedId)
+  const burgerMenuSelectedId = useSelector(state => state.setMenu.burgerSelectedId)
+  const chickenMenuSelectedId = useSelector(state => state.setMenu.chickenSelectedId)
+  const drinkSelectedId = useSelector(state => state.setMenu.drinkSelectedId)
+  const snackSideSelectedId = useSelector(state => state.setMenu.snackSideSelectedId)
+  const productDetailCount = useSelector(state => state.other.productDetailCount)
+  const optionChoice = useSelector(state => state.other.optionChoice)
+  const detailProdctTotal = useSelector(state => state.other.detailProdctTotal)
+  const productTitle = useSelector(state => state.setMenu.productTitle)
+  const optionName = useSelector(state => state.other.optionChoiceName)
+  const originPrice = useSelector(state => state.setBasket.originProductPrice)
+  const initialProductId = useSelector(state => state.setBasket.initialProductId)
 
   const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const [productsId, setProductId] = useState(null)
   useEffect(() => {
@@ -43,11 +35,23 @@ const Button = () => {
     )
   }, [bestMenuSelectedId, burgerMenuSelectedId, chickenMenuSelectedId, drinkSelectedId, snackSideSelectedId])
 
-  const navigate = useNavigate()
+  // 상품페이지 이동시, 각 상품마다 옵션상태누적과 상품ID가 잘못 들어가는 오류를 수정하기 위한소스
+  const queryStr = new URLSearchParams(location.search);
+  const productNumber = queryStr.get('id');
+  // 페이지 진입 시 옵션 및 기타 상태 초기화(=변덕부리는 마음을 가정할때)
+  useEffect(() => {
+      if(location.pathname && productNumber){
+          dispatch(setInitialProductId(productNumber))
+          // setProductId(productNumber) // 상품ID는 화면주소의 id로 초기화
+          dispatch(setOptionChoiceName('')) // 옵션이름초기화
+          dispatch(setOptionChoice('')) // 옵션값초기화    
+      }
+  }, [dispatch, location.pathname, productNumber]);
 
   const onBasket = () => {
     const basketInProduct = {
-      productID: productsId, // 베스트메뉴id or 치킨상품id or 버거상품id or 스넥사이드상품id or 음료id
+      // productID: productsId, // 베스트메뉴id or 치킨상품id or 버거상품id or 스넥사이드상품id or 음료id
+      productID: initialProductId === productNumber ?  initialProductId : productsId, // (변덕부리는 마음을 가정할때)
       count: productDetailCount,
       price: detailProdctTotal,
       option: optionChoice,

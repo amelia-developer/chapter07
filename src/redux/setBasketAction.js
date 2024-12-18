@@ -3,6 +3,7 @@ import {v4 as uuid4} from 'uuid'
 
 // 액션타입정의
 export const IN_BASKET_PRODUCT = "IN_BASKET_PRODUCT"
+export const RESET_PRODUCT_ID = "RESET_PRODUCT_ID"
 export const CALL_PRODUCT = "CALL_PRODUCT"
 export const SET_PRODUCT_COUNT_PRICE = "SET_PRODUCT_COUNT_PRICE"
 export const SET_ORIGIN_PRODUCT_PRICE = "SET_ORIGIN_PRODUCT_PRICE"
@@ -15,6 +16,11 @@ export const OUT_BASKET_PRODUCT = "OUT_BASKET_PRODUCT"
 export const setBasketInProduct = inBasketProductId => ({ // 장바구니에 상품넣는 상태액션
     type:IN_BASKET_PRODUCT,
     payload:inBasketProductId
+})
+
+export const setInitialProductId = (productID) => ({
+    type: RESET_PRODUCT_ID,
+    payload:productID
 })
 
 export const setBasketOutProduct = callProductInfo => ({
@@ -51,8 +57,11 @@ export const setEachProductPlus = eachProductPlus => ({ // 장바구니에 있�
 // export const fetchBasketInProduct = (inBasketProductId, productDetailCount, detailProdctTotal, optionChoice, productTitle) => {
 export const fetchBasketInProduct = (basketInProduct) => { 
     return dispatch => {
-        const {productID, count, price, originPrice, option, title, optionName} = basketInProduct // export const fetchBasketInProduct구조분해
+        const {productID, count, price, originPrice, title} = basketInProduct // export const fetchBasketInProduct구조분해
+        const optionName = basketInProduct.optionName || '';
+        const option = basketInProduct.option || '';
         const id = uuid4()
+
         axios.post(`http://localhost:3000/basket/`, {
             id,
             productID,
@@ -64,7 +73,9 @@ export const fetchBasketInProduct = (basketInProduct) => {
             optionName
         })
         .then(response => {
+// console.log(`response.data = ${JSON.stringify(response.data)}`);
             dispatch(setBasketInProduct(response.data))
+            dispatch(setInitialProductId(null))
         })
         .catch(error => {
             console.error(error)

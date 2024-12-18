@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import layerImg1 from '../../img/info_nutrition.png'
+import layerImg1 from '../../img/info_nutrition.jpg'
 
 const LayerInfo1 = ({isLayerOpen, isLayerClose}) => {
     useEffect(() => {

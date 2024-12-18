@@ -4,13 +4,26 @@ const initialState = {
     productCountPrice: 0,
     originProductPrice: 0,
     eachProductMinus: 0,
-    eachProductPlus: 0
+    eachProductPlus: 0,
+    initialProductId: null
 }
 
 const setBasketReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "RESET_PRODUCT_ID":
+            return { ...state, initialProductId: action.payload};
         case "IN_BASKET_PRODUCT":
-            return {...state, inBasketProductId:[...state.inBasketProductId, action.payload]}            
+// console.log("담은상품의 정보는:", action.payload); 
+// console.log(`initialProductId = ${state.initialProductId}`);
+// console.log(`inBasketProductId = ${typeof state.inBasketProductId}`);
+        if (!Array.isArray(state.inBasketProductId)) {  // 주어진 값이 배열인지 = Array.isArray , 여기if문을 해석하면 !Array.isArray(state.inBasketProductId)
+                                                        // state.inBasketProductId가 배열이 아니라면 참(true)
+            return {...state, inBasketProductId:[action.payload]} 
+        }
+        return {
+            ...state,
+            inBasketProductId: [...state.inBasketProductId, action.payload]
+        }
         case "CALL_PRODUCT":
             return {...state, callProductInfo: action.payload}
         case "SET_PRODUCT_COUNT_PRICE":

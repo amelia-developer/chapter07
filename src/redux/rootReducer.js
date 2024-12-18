@@ -34,6 +34,7 @@ const otherReducers  = (state = initialState, action) => {
         case "SET_OPTION_CHOICE": // 선택한상품의 하위에 있는 옵션의값
             return {...state, optionChoice:action.payload}
         case "SET_OPTION_CHOICE_NAME": // 선택한상품의 하위에 있는 옵션의이름
+// console.log("옵션 이름 초기화:", action.payload); 
             return {...state, optionChoiceName:action.payload}
         case "SET_CHICKEN":
             return {...state, chickenSet: action.payload}
