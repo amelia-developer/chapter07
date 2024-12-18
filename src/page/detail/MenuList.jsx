@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import icon1 from '../../img/dv_mn_new.png'
@@ -12,6 +12,7 @@ import DetailCategory from './DetailCategory'
 import { useNavigate } from 'react-router-dom'
 import { setUpdateCategory, setActiveIndex } from '../../redux/action'
 import { setResetProductTitle } from '../../redux/setMenuAction'
+import LayerInfo3 from '../layer/LayerInfo3'
 
 const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopTitle}) => {
     // 상태구독
@@ -39,6 +40,18 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
         }
     }
 
+    const [isLayerOpen, setIsLayerOpen] = useState(false)
+    const [activeLayer, setActiveLayer] = useState(null)
+
+    const onLayerInfo3 = () => {
+        setIsLayerOpen(true)
+        setActiveLayer('LayerInfo3')
+    }
+
+    const onLayerClose = () => {
+        setIsLayerOpen(false)
+        document.body.style.overflowY='auto'
+    }
     return (
         <>
             <div className="menuLisBox">
@@ -59,7 +72,7 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(2, '버거세트')} className={activeIndex === 2 ? 'active': ''}><span className="img_cover"><img src={icon3} alt="버거세트"/></span><span>버거&세트</span></a></SwiperSlide>
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(3, '스낵사이드')} className={activeIndex === 3 ? 'active': ''}><span className="img_cover"><img src={icon4} alt="스낵사이드"/></span><span>스낵&사이드</span></a></SwiperSlide>
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(4, '음료')} className={activeIndex === 4 ? 'active': ''}><span className="img_cover"><img src={icon5} alt="음료"/></span><span>음료</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={() => onSelectDetailMenu(5, '주소등록')} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={onLayerInfo3} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
                 </Swiper>
                 {
                     showCategoryList && 
@@ -71,6 +84,9 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
                             snackSideSet={snackSideSet} drinkSet={drinkSet2} activeIndex={activeIndex} onProductClick={onProductClick}></DetailCategory> : null
                         }
                     </div>
+                }
+                {
+                    isLayerOpen === true && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onLayerInfo3} isLayerClose={onLayerClose}></LayerInfo3> : null
                 }
             </div>
         </>
