@@ -8,12 +8,12 @@ import Youtube from './Youtube'
 import Footer from './Footer'
 import BottomNav from './BottomNav'
 
-const Main = ({isNaviMenu, onNaviMenu}) => {
+const Main = ({isNaviMenu, onNaviMenu, topTitle, setTopTitle}) => {
   return (
     <>
         <TopRolling></TopRolling>
-        <Banner></Banner>
-        <BestMenu></BestMenu>
+        <Banner topTitle={topTitle} setTopTitle={setTopTitle}></Banner>
+        <BestMenu topTitle={topTitle} setTopTitle={setTopTitle}></BestMenu>
         <BannerOrder></BannerOrder>
         <SNS></SNS>
         <Youtube></Youtube>

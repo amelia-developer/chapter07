@@ -17,6 +17,8 @@ const initialState = { // state의 초기값을 정의하는 객체
     optionChoiceName: "",
     categoryTitle: "",
     activeIndex: null,
+    isLayerOpen: false,
+    activeLayer: null
 }
 
 const otherReducers  = (state = initialState, action) => {
@@ -62,6 +64,12 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, categoryTitle: action.payload}
         case "SET_ACTIVE_INDEX": // 선택한 카테고리의 인덱스
             return {...state, activeIndex: action.payload}
+        case "SET_LAYER_STATE":
+            return {
+                ...state,
+                isLayerOpen: action.payload.isOpen,
+                activeLayer: action.payload.layer
+            }
         default:
             return state
     }

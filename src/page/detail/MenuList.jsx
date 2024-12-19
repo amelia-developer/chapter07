@@ -26,6 +26,9 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const [isLayerOpen, setIsLayerOpen] = useState(false)
+    const [activeLayer, setActiveLayer] = useState(null)
+
     const onSelectDetailMenu = (indexNumber, cateName) => {
         if(indexNumber !== activeIndex){ // 이전상태랑비교
             dispatch(setActiveIndex(indexNumber)) // 리덕스 상태 업데이트(카테고리인덱스)
@@ -34,21 +37,22 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
             onShowCategoryMenu() // 메뉴클릭시 호출     
             setTopTitle(cateName) // props로 받은 함수를 다시 콜했네? 이게 콜백함수(파라미터 유무랑 상관없음)
             navigate(`/detail/category/${indexNumber}`) // url변경 
+            if(indexNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
+                setIsLayerOpen(true)
+                setActiveLayer('LayerInfo3')
+            }
         } else { // 상품상세에서 다시 카테고리 클릭하면, 클릭한 카테고리명 리스트들 보여주기
             navigate(`/detail/category/${indexNumber}`)
             dispatch(setResetProductTitle(indexNumber)) 
+            if(indexNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
+                setIsLayerOpen(true)
+                setActiveLayer('LayerInfo3')
+            }
         }
     }
 
-    const [isLayerOpen, setIsLayerOpen] = useState(false)
-    const [activeLayer, setActiveLayer] = useState(null)
-
-    const onLayerInfo3 = () => {
-        setIsLayerOpen(true)
-        setActiveLayer('LayerInfo3')
-    }
-
-    const onLayerClose = () => {
+    const onLayerClose = (index) => {
+        setActiveIndex(index)
         setIsLayerOpen(false)
         document.body.style.overflowY='auto'
     }
@@ -72,7 +76,7 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(2, '버거세트')} className={activeIndex === 2 ? 'active': ''}><span className="img_cover"><img src={icon3} alt="버거세트"/></span><span>버거&세트</span></a></SwiperSlide>
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(3, '스낵사이드')} className={activeIndex === 3 ? 'active': ''}><span className="img_cover"><img src={icon4} alt="스낵사이드"/></span><span>스낵&사이드</span></a></SwiperSlide>
                     <SwiperSlide><a onClick={() => onSelectDetailMenu(4, '음료')} className={activeIndex === 4 ? 'active': ''}><span className="img_cover"><img src={icon5} alt="음료"/></span><span>음료</span></a></SwiperSlide>
-                    <SwiperSlide><a onClick={onLayerInfo3} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
+                    <SwiperSlide><a onClick={() => onSelectDetailMenu(5, '주소등록')} className={activeIndex === 5 ? 'active': ''}><span className="img_cover"><img src={icon6} alt="주소등록"/></span><span>주소등록</span></a></SwiperSlide>
                 </Swiper>
                 {
                     showCategoryList && 
@@ -86,7 +90,7 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
                     </div>
                 }
                 {
-                    isLayerOpen === true && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onLayerInfo3} isLayerClose={onLayerClose}></LayerInfo3> : null
+                    isLayerOpen === true && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onSelectDetailMenu} isLayerClose={onLayerClose}></LayerInfo3> : null
                 }
             </div>
         </>

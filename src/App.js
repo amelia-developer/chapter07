@@ -23,7 +23,7 @@ const App = () => {
       <>
         <Nav className={isNaviMenu ? 'on' : ''} onNaviMenu={toggleNaviMenu} setTopTitle={setTopTitle}/>
         <Routes>
-            <Route path="/" element={<Main isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} />} />
+            <Route path="/" element={<Main isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} topTitle={topTitle} setTopTitle={setTopTitle}/>} />
             <Route path="/detail/*" element={<Detail isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} topTitle={topTitle} setTopTitle={setTopTitle}/>} />
             <Route path="/basket" element={<Basket />}/>
         </Routes>

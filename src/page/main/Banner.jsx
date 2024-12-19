@@ -1,13 +1,51 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import banner1 from '../../img/banner_storesearch.png'
 import banner2 from '../../img/banner_delivery.png'
+import { useNavigate } from 'react-router-dom'
+import LayerInfo3 from '../layer/LayerInfo3'
+import { setActiveIndex, setUpdateCategory, setLayerState } from '../../redux/action'
+import { useDispatch, useSelector } from 'react-redux'
 
-const Banner = () => {
+const Banner = ({topTitle, setTopTitle}) => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const isLayerOpen = useSelector(state => state.other.isLayerOpen)
+  const activeLayer = useSelector(state => state.other.activeLayer)
+
+  const onAddressSearch = () => { 
+    dispatch(setActiveIndex(5))
+    dispatch(setUpdateCategory(5))    
+    if(topTitle === '' || topTitle === undefined || topTitle !== '주소등록') {
+      setTopTitle("주소등록")
+    }
+    dispatch(setLayerState(true, 'LayerInfo3'))
+    document.body.style.overflowY = 'hidden' 
+    // navigate(`/detail/category/5`)
+  }
+
+  const onLayerClose = () => {
+    dispatch(setLayerState(false, null))
+    document.body.style.overflowY='auto'
+  }
+
+  const onGoBestMenu = () => {
+    dispatch(setActiveIndex(0))
+    dispatch(setUpdateCategory(0))
+    if(topTitle === '' || topTitle === undefined || topTitle !== '추천메뉴') {
+      setTopTitle("추천메뉴")
+    }
+    navigate(`/detail/category/0`)
+  }
+
   return (
     <>
       <ul className="bannerBox">
-        <li><a href="#"><img src={banner1} alt=""/></a></li>
-        <li><a href="#"><img src={banner2} alt=""/></a></li>
+        <li><a onClick={onAddressSearch}><img src={banner1} alt=""/></a></li>
+        <li><a onClick={onGoBestMenu}><img src={banner2} alt=""/></a></li>
+        {
+          isLayerOpen && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onAddressSearch} isLayerClose={onLayerClose}></LayerInfo3> : null
+        }
       </ul>
     </>
   )

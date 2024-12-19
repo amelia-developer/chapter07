@@ -1170,11 +1170,11 @@ footer {
             a {
                 display: block;
                 text-align: center;
-                &:hover {
-                    img {
-                        transform: scale(1.1);
-                    }
-                }
+                // &:hover {
+                //     img {
+                //         transform: scale(1.1);
+                //     }
+                // }
                 img {
                     width: 100%;
                 }

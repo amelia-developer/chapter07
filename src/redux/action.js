@@ -9,7 +9,7 @@ export const setCategoryTitle = categoryTitle => ({
 
  // 선택한 카테고리 메뉴 이름
 export const setUpdateCategory = (index) => {
-    const categoryNames = ['추천메뉴', '치킨&세트', '버거&세트', '스낵&사이드', '음료']
+    const categoryNames = ['추천메뉴', '치킨&세트', '버거&세트', '스낵&사이드', '음료', '주소등록']
 
     return (dispatch) => {
         if(index >= 0 && index < categoryNames.length) {
@@ -192,4 +192,9 @@ export const setSearchAddress = (searchAddress) => ({ // 여기서는, 데이터
 export const resetProductDetail = (productDetailCount) => ({ 
     type:"RESET_PRODUCT_DETAIL",
     payload: productDetailCount
+})
+
+export const setLayerState = (isOpen, layer) => ({
+    type:"SET_LAYER_STATE",
+    payload: {isOpen, layer}
 })

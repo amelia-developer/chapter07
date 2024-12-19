@@ -36,7 +36,6 @@ const LayerInfo3 = ({isLayerOpen, isLayerClose}) => {
         return null // false일때 컴포넌트 렌더링 하지 않기 위한 조건_이LayerInfo3.jsx를 불러오기위한 부모컴포넌트
                     // DeliveryAddress컴포넌트에서 if조건에 ' : null'을 줬기때문에 if부정연산자 조건의 결과에 return null을 해주는거임
     }
-
     return (
         <>
              <div className="layoutBox">
@@ -47,14 +46,10 @@ const LayerInfo3 = ({isLayerOpen, isLayerClose}) => {
                             <div className="post">
                                 <h2>배달받을 주소</h2>
                                 <div className="search">
-                                    {/* <input type="text" placeholder="예)판교역로 330, 분당주공" /> */}
                                     <a className="btn_search" onClick={handleClick}>주소찾기</a>
                                 </div>
                                 <div className="list-wrapper">
                                     <div className="info">
-                                        {
-                                            console.log(`choiceAddress = ${choiceAddress}`)                                            
-                                        }
                                         <p>'주소찾기'버튼을 누르면 카카오우편번호 검색화면으로 연결됩니다</p>
                                         <dl>
                                             <dt>입력한 주소</dt>
@@ -62,12 +57,9 @@ const LayerInfo3 = ({isLayerOpen, isLayerClose}) => {
                                         </dl>
                                     </div>
                                 </div>
-                                {/* <div className="detail">
-                                    <input type="text" placeholder="상세주소를 입력하세요"/>
-                                </div> */}
                                 <p className="btn-cover">
                                     <a className="btn" onClick={isLayerClose}>닫기</a>
-                                    <a className="btn_ok">확인</a>
+                                    <a className="btn_ok" onClick={isLayerClose}>확인</a>
                                 </p>
                             </div>
                         </div>

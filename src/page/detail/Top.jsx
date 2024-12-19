@@ -80,7 +80,9 @@ const Top = ({topTitle}) => {
     }
 
     // const displayTitle = productTitle !== '' ? productTitle : categoryTitle
-    const displayTitle = topTitle || (productTitle !== '' ? productTitle : categoryTitle)
+    const displayTitle = topTitle || (productTitle ? productTitle : categoryTitle)
+// console.log(`categoryTitle = ${categoryTitle}`);
+// console.log(`productTitle = ${productTitle}`);
 
     // 카테고리리스트화면인지 확인
     const isCategoryList = location.pathname === `/detail/category/${activeIndex}`
