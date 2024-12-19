@@ -20,8 +20,8 @@ const Banner = ({topTitle, setTopTitle}) => {
       setTopTitle("주소등록")
     }
     dispatch(setLayerState(true, 'LayerInfo3'))
-    document.body.style.overflowY = 'hidden' 
     // navigate(`/detail/category/5`)
+    document.body.style.overflowY = 'hidden'     
   }
 
   const onLayerClose = () => {

@@ -50,7 +50,7 @@ const Detail = ({isNaviMenu, onNaviMenu, topTitle, setTopTitle}) => {
             {showInfo && <Info></Info>} {/* showInfo 상태에 따라 Info 컴포넌트 표시 */}
             {showInfo && <Button></Button>}
             <Footer></Footer>
-            <BottomNav  onNaviMenu={onNaviMenu} isNaviMenu={isNaviMenu}></BottomNav>
+            <BottomNav  onNaviMenu={onNaviMenu} setTopTitle={setTopTitle}></BottomNav>
             <Routes>
                 <Route path="/detail/category/:indexNumber" element={<DetailCategoryBind setTopTitle={setTopTitle} onProductClick={() => {setShowInfo(true); setShowCategoryList(false);}}/>}></Route>
             </Routes>

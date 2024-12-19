@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setUpdateCategory, setActiveIndex } from '../../redux/action'
+import LayerInfo3 from '../layer/LayerInfo3'
 
-const BottomNav = ({onNaviMenu}) => {
+const BottomNav = ({onNaviMenu, setTopTitle}) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onBasket = () => {
     alert(`주문결제PG연결이 안되어\n장바구니 화면으로 이동합니다`)
@@ -12,16 +16,40 @@ const BottomNav = ({onNaviMenu}) => {
   const onSetHome = () => {
     navigate(`/`)
   }
+
+  const [isLayerOpen, setIsLayerOpen] = useState(false)
+  const [activeLayer, setActiveLayer] = useState(null)
+
+  const onMoveCategory = (categoryNumber, cateName) => {
+      navigate(`/detail/category/${categoryNumber}`)
+      dispatch(setUpdateCategory(categoryNumber))
+      dispatch(setActiveIndex(categoryNumber))
+      setTopTitle(cateName)
+      if(categoryNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
+        setIsLayerOpen(true)
+        setActiveLayer('LayerInfo3')
+    }
+  }
+
+  const onLayerClose = (index) => {
+      setActiveIndex(index)
+      setIsLayerOpen(false)
+      document.body.style.overflowY='auto'
+  }
+
   return (
     <>
         <div className="bottomNavbox">
             <ul>
                 <li><a onClick={onSetHome}><span>홈</span></a></li>
                 <li><a onClick={onNaviMenu}><span>리스트</span></a></li>
-                <li><a href="#"><span>딜리버리</span></a></li>
+                <li><a onClick={() => onMoveCategory(5, '주소등록')}><span>딜리버리</span></a></li>
                 <li><a href="#" onClick={onBasket}><span>마이페이지</span></a></li>
             </ul>
         </div>
+        {
+            isLayerOpen === true && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onMoveCategory} isLayerClose={onLayerClose}></LayerInfo3> : null
+        }
     </>
   )
 }
