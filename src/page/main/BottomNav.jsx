@@ -21,14 +21,14 @@ const BottomNav = ({onNaviMenu, setTopTitle}) => {
   const [activeLayer, setActiveLayer] = useState(null)
 
   const onMoveCategory = (categoryNumber, cateName) => {
-      navigate(`/detail/category/${categoryNumber}`)
       dispatch(setUpdateCategory(categoryNumber))
       dispatch(setActiveIndex(categoryNumber))
       setTopTitle(cateName)
       if(categoryNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
         setIsLayerOpen(true)
         setActiveLayer('LayerInfo3')
-    }
+      }
+      // navigate(`/detail/category/${categoryNumber}`)
   }
 
   const onLayerClose = (index) => {
