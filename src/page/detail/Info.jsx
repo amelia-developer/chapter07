@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 const Info = () => {
     // 상태구독
     const bestMenuSelectedId = useSelector(state => state.setMenu.bestMenuSelectedId)
-    const selectedBestMenuProduct = useSelector(state => state.setMenu.selectedBestMenuProduct) // TODO:해야함_다시다시다시다시___이름
+    const selectedBestMenuProduct = useSelector(state => state.setMenu.selectedBestMenuProduct)
     const productDetailCount = useSelector(state => state.other.productDetailCount)
     const optionChoice = useSelector(state => state.other.optionChoice)
     const chickenMenuSelectedId = useSelector(state => state.setMenu.chickenSelectedId)
@@ -225,7 +225,6 @@ const Info = () => {
     )
     return (
         <>
-            {/**TODO:해야함_로딩*/}
             {
                     selectedBestMenuProduct 
                     ? renderProductDetail(selectedBestMenuProduct)

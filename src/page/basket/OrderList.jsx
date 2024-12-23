@@ -13,7 +13,7 @@ const OrderList = () => {
     
     useEffect(() => {
         dispatch(fetchBasketCallProduct())
-    }, [dispatch, eachProductMinus, eachProductPlus, callProductInfo]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
+    }, [dispatch, eachProductMinus, eachProductPlus]) // 단순히 비동기액션만 호출할때는 의존성배열에 dispatch를 넣어도됨
 
     const countTotal = callProductInfo.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.count

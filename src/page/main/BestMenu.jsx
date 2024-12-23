@@ -10,16 +10,11 @@ const BestMenu = ({topTitle, setTopTitle}) => {
     const pageNavigate = useNavigate()
 
     const bestMenu = useSelector(state => state.other.bestMenu)
-    const loading = useSelector(state => state.other.loading)
 
     useEffect(()=> {
         dispatch(setLoading())
         dispatch(fetchBestMenu(bestMenu))
-    }, [bestMenu, dispatch])
-
-    // if (loading) { {/**TODO:해야함*/}
-    //     return <div>로딩중 로딩중 로딩중</div>
-    // }
+    }, [])
 
     const onDetailProduct = (param) => {
         dispatch(setActiveIndex(0));
