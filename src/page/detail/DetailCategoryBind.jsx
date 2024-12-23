@@ -14,7 +14,7 @@ const DetailCategoryBind = ({onProductClick}) => {
     const burgerSet = useSelector(state => state.other.burgerSet)
     const snackSideSet = useSelector(state => state.other.snackSideSet)
     const drinkSet = useSelector(state => state.other.drink)
-console.log(`DetailCategoryBind에서 찍은 indexNumber = ${indexNumber}`);    
+
     useEffect(() => {  
         if(!indexNumber) return // indexNumber이 없을때 무시  
         if(indexNumber !== undefined) {    

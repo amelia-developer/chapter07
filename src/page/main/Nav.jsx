@@ -20,12 +20,12 @@ const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
     const [isLayerOpen, setIsLayerOpen] = useState(false)
     const [activeLayer, setActiveLayer] = useState(null)
 
-    const onMoveCategory = async (categoryNumber, cateName) => {        
+    const onMoveCategory = async (categoryNumber, cateName) => {
+        navigate(`/detail/category/${categoryNumber}`)
         await dispatch(setUpdateCategory(categoryNumber))
         await dispatch(setActiveIndex(categoryNumber))
         await dispatch(setResetProductTitle("")) // // 상품상세에서 카테고리 클릭했을때, 카테고리명을 보여주기 위해 상품명을 강제 초기화
         await dispatch(setCategoryTitle(cateName))
-        
         if(categoryNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
             setIsLayerOpen(true)
             setActiveLayer('LayerInfo3')

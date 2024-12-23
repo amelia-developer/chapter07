@@ -33,6 +33,7 @@ const Info = () => {
     const productNumber = queryStr.get('id');
 
     // ★이게 핵심임, 리덕스초기화하는 useEffect(동기적성격) 에서 핵심은 1. url매개변수기반 초기화 2. 리덕스기반 초기화
+    
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
         const initializeState = async() => { // async를 쓴이유는 비동기작업dispatch의 완료를 기다리려고
             const selectedId = bestMenuSelectedId || chickenMenuSelectedId || burgerMenuSelectedId || snackSideSelectedId || drinkSelectedId;
