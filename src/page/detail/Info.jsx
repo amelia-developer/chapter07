@@ -33,9 +33,11 @@ const Info = () => {
     const productNumber = queryStr.get('id');
 
     // ★이게 핵심임, 리덕스초기화하는 useEffect(동기적성격) 에서 핵심은 1. url매개변수기반 초기화 2. 리덕스기반 초기화
-    
+    const [loading, setLoading] = useState(true)
     useEffect(() => { // 화면새로고침시 state유지_새로고침하면 컴포넌트가 마운트되면서 리덕스상태 초기화
         const initializeState = async() => { // async를 쓴이유는 비동기작업dispatch의 완료를 기다리려고
+            setLoading(true) // 로딩시작
+
             const selectedId = bestMenuSelectedId || chickenMenuSelectedId || burgerMenuSelectedId || snackSideSelectedId || drinkSelectedId;
 
             if(!selectedId) {
@@ -53,6 +55,11 @@ const Info = () => {
                 if(snackSideSelectedId) await dispatch(fetchSelectedSnackSideProductId(productNumber))
                 if(drinkSelectedId) await dispatch(fetchSelectedDrinkProductId(productNumber))
             }
+
+            // setLoading(false) // 데이터로딩 완료 후 로딩상태종료
+            setTimeout(() => {
+                setLoading(false);  // 1.5초 후 로딩 종료
+            }, 1500);  // 1.5초 후 로딩 상태를 false로 바꿈
         }
         initializeState()
     }, [productNumber, dispatch]); 
@@ -214,6 +221,20 @@ const Info = () => {
             </div>
         </div>
     )
+
+    if(loading) {
+        console.log(`로딩중 로딩중 로딩중`)
+        return  <div id="container">
+                    <div className="stick"></div>
+                    <div className="stick"></div>
+                    <div className="stick"></div>
+                    <div className="stick"></div>
+                    <div className="stick"></div>
+                    <div className="stick"></div>
+                    <h1 className="tit-Loadng">Loading...</h1>
+                </div>
+    }
+
     return (
         <>
             {
