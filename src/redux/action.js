@@ -34,7 +34,7 @@ export const setBestMenu = bestMenu => ({   // setBestMenu는 bestMenu(인자=�
 // 베스트메뉴의 비동기액션
 export const fetchBestMenu = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/bestMenu`)
+        axios.get(`https://heather-mire-stream.glitch.me/bestMenu`)
             .then(response => {
                 // console.log(`response = ${JSON.stringify(response.data)}`);
                 dispatch(setBestMenu(response.data))
@@ -54,7 +54,7 @@ export const setChichenSet = chickenSet => ({
 // 치킨세트의 비동기액션
 export const fetchChicken = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/chickenSet`)
+        axios.get(`https://heather-mire-stream.glitch.me/chickenSet`)
             .then(response => {
                 dispatch(setChichenSet(response.data))
             })
@@ -73,7 +73,7 @@ export const setBurgerSet = burgerSet => ({
 // 버거세트의 비동기액션
 export const fetchBurger = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/burgerSet`)
+        axios.get(`https://heather-mire-stream.glitch.me/burgerSet`)
             .then(response => {
                 dispatch(setBurgerSet(response.data))
             })
@@ -92,7 +92,7 @@ export const setSnackSideSet = snackSideSet => ({
 // 스낵사이드의 비동기액션
 export const fetchSnackSide = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/snackSideSet`)
+        axios.get(`https://heather-mire-stream.glitch.me/snackSideSet`)
             .then(response => {
                 dispatch(setSnackSideSet(response.data))
             })
@@ -111,7 +111,7 @@ export const setDrink = drink => ({
 // 음료의 비동기액션
 export const fetchDrink = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/drink`)
+        axios.get(`https://heather-mire-stream.glitch.me/drink`)
             .then(response => {
                 dispatch(setDrink(response.data))
             })
@@ -135,7 +135,7 @@ export const setSNSList = snsList => ({
 // sns의 비동기액션
 export const fetchSNSList = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/sns`)
+        axios.get(`https://heather-mire-stream.glitch.me/sns`)
             .then(response => {
                 // console.log(`response.data = ${JSON.stringify(response.data)}`);      
                 dispatch(setSNSList(response.data))

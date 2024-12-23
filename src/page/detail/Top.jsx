@@ -6,9 +6,7 @@ import { fetchBasketInProduct, setInitialProductId } from '../../redux/setBasket
 import { setResetProductTitle } from '../../redux/setMenuAction'
 import { setOptionChoiceName, setOptionChoice } from '../../redux/action'
 
-const Top = ({topTitle}) => {
-// console.log(`topTitle = ${topTitle}`);
-
+const Top = ({cateName}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -78,14 +76,11 @@ const Top = ({topTitle}) => {
         alert(`상품이 장바구니에 담겼습니다`)
         navigate(`/basket`)
     }
-
-    // const displayTitle = productTitle !== '' ? productTitle : categoryTitle
-    const displayTitle = topTitle || (productTitle ? productTitle : categoryTitle)
-// console.log(`categoryTitle = ${categoryTitle}`);
-// console.log(`productTitle = ${productTitle}`);
-
+    
     // 카테고리리스트화면인지 확인
     const isCategoryList = location.pathname === `/detail/category/${activeIndex}`
+    const displayTitle = productTitle || (isCategoryList ? categoryTitle : cateName)
+
     return (
         <>
             <div className="topBox">

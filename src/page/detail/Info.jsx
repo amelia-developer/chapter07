@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 const Info = () => {
     // 상태구독
     const bestMenuSelectedId = useSelector(state => state.setMenu.bestMenuSelectedId)
-    const selectedBestMenuProduct = useSelector(state => state.setMenu.selectedBestMenuProduct) // TODO:해야함_다시다시다시다시___이름
+    const selectedBestMenuProduct = useSelector(state => state.setMenu.selectedBestMenuProduct)
     const productDetailCount = useSelector(state => state.other.productDetailCount)
     const optionChoice = useSelector(state => state.other.optionChoice)
     const chickenMenuSelectedId = useSelector(state => state.setMenu.chickenSelectedId)
@@ -39,32 +39,22 @@ const Info = () => {
 
             if(!selectedId) {
                 // url기반 초기화상태
-                await dispatch(fetchSelectedBestMenuProductId(productNumber)) // 이거하는중
+                await dispatch(fetchSelectedBestMenuProductId(productNumber))
                 await dispatch(fetchSelectedChickenProductId(productNumber))
                 await dispatch(fetchSelectedBurgerProductId(productNumber))
                 await dispatch(fetchSelectedSnackSideProductId(productNumber))
                 await dispatch(fetchSelectedDrinkProductId(productNumber))
             } else {
                 // 리덕스기반 초기화상태
-                if(bestMenuSelectedId) {
-                    await dispatch(fetchSelectedBestMenuProductId(productNumber))                    
-                }
-                if(chickenMenuSelectedId) {
-                    await dispatch(fetchSelectedChickenProductId(productNumber))
-                }
-                if(burgerMenuSelectedId) {
-                    await dispatch(fetchSelectedBurgerProductId(productNumber))
-                }
-                if(snackSideSelectedId) {
-                    await dispatch(fetchSelectedSnackSideProductId(productNumber))
-                }
-                if(drinkSelectedId) {
-                    await dispatch(fetchSelectedDrinkProductId(productNumber))
-                }
+                if(bestMenuSelectedId) await dispatch(fetchSelectedBestMenuProductId(productNumber))
+                if(chickenMenuSelectedId) await dispatch(fetchSelectedChickenProductId(productNumber))
+                if(burgerMenuSelectedId) await dispatch(fetchSelectedBurgerProductId(productNumber))
+                if(snackSideSelectedId) await dispatch(fetchSelectedSnackSideProductId(productNumber))
+                if(drinkSelectedId) await dispatch(fetchSelectedDrinkProductId(productNumber))
             }
         }
         initializeState()
-    }, [bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, drinkSelectedId, productNumber, dispatch]); 
+    }, [productNumber, dispatch]); 
 
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 베스트메뉴
@@ -225,19 +215,13 @@ const Info = () => {
     )
     return (
         <>
-            {/**TODO:해야함_로딩*/}
             {
-                    selectedBestMenuProduct 
-                    ? renderProductDetail(selectedBestMenuProduct)
-                    : chickenMenuProduct 
-                    ? renderProductDetail(chickenMenuProduct)
-                    : burgerMenuProduct
-                    ? renderProductDetail(burgerMenuProduct)
-                    : snackSideProduct
-                    ? renderProductDetail(snackSideProduct)
-                    : drinkProduct
-                    ? renderProductDetail(drinkProduct)
-                    :<div>Loading...</div>
+                    selectedBestMenuProduct ? renderProductDetail(selectedBestMenuProduct)
+                        : chickenMenuProduct ? renderProductDetail(chickenMenuProduct)
+                        : burgerMenuProduct ? renderProductDetail(burgerMenuProduct)
+                        : snackSideProduct ? renderProductDetail(snackSideProduct)
+                        : drinkProduct ? renderProductDetail(drinkProduct)
+                        :<div>Loading...</div>
             }
         </>
     )

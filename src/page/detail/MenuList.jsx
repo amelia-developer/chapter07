@@ -10,11 +10,11 @@ import icon6 from '../../img/db_mn_address.png'
 import { useDispatch, useSelector } from 'react-redux'
 import DetailCategory from './DetailCategory'
 import { useNavigate } from 'react-router-dom'
-import { setUpdateCategory, setActiveIndex } from '../../redux/action'
+import { setUpdateCategory, setActiveIndex, setCategoryTitle } from '../../redux/action'
 import { setResetProductTitle } from '../../redux/setMenuAction'
 import LayerInfo3 from '../layer/LayerInfo3'
 
-const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopTitle}) => {
+const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
     // 상태구독
     const bestMenu = useSelector(state => state.other.bestMenu)
     const chickenSet = useSelector(state => state.other.chickenSet)
@@ -35,19 +35,19 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList, setTopT
             dispatch(setUpdateCategory(indexNumber)) // 리덕스 상태 업데이트(카테고리명)
             dispatch(setResetProductTitle(indexNumber)) // 리덕스 상태 업데이트(상품명 초기화)
             onShowCategoryMenu() // 메뉴클릭시 호출     
-            setTopTitle(cateName) // props로 받은 함수를 다시 콜했네? 이게 콜백함수(파라미터 유무랑 상관없음)
+            dispatch(setCategoryTitle(cateName))
             navigate(`/detail/category/${indexNumber}`) // url변경 
             if(indexNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
                 setIsLayerOpen(true)
                 setActiveLayer('LayerInfo3')
             }
         } else { // 상품상세에서 다시 카테고리 클릭하면, 클릭한 카테고리명 리스트들 보여주기
-            navigate(`/detail/category/${indexNumber}`)
             dispatch(setResetProductTitle(indexNumber)) 
             if(indexNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
                 setIsLayerOpen(true)
                 setActiveLayer('LayerInfo3')
             }
+            navigate(`/detail/category/${indexNumber}`)
         }
     }
 

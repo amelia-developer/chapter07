@@ -33,9 +33,11 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, productDetailCount: action.payload}
         case "SET_PRODUCT_COUNT_MINUS":
             return {...state, productDetailCount: action.payload}
-        case "SET_OPTION_CHOICE": // 선택한상품의 하위에 있는 옵션의값
+        // 선택한상품의 하위에 있는 옵션의값
+        case "SET_OPTION_CHOICE": 
             return {...state, optionChoice:action.payload}
-        case "SET_OPTION_CHOICE_NAME": // 선택한상품의 하위에 있는 옵션의이름
+        // 선택한상품의 하위에 있는 옵션의이름
+        case "SET_OPTION_CHOICE_NAME":
 // console.log("옵션 이름 초기화:", action.payload); 
             return {...state, optionChoiceName:action.payload}
         case "SET_CHICKEN":
@@ -46,7 +48,8 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, snackSideSet: action.payload}
         case "SET_DRINK":
             return {...state, drink: action.payload}
-        case "SET_DEFAULT_COUNT": // 뒤로가기버튼클릭했을때
+        // 뒤로가기버튼클릭했을때
+        case "SET_DEFAULT_COUNT":
             return {...state,
                 productDetailCount: 1,
                 optionChoice: 0
@@ -55,14 +58,17 @@ const otherReducers  = (state = initialState, action) => {
             return {...state, detailProdctTotal:action.payload}
         case "SET_SEARCH_ADDRESS":
             return {...state, searchAddress:action.payload}
-        case "RESET_PRODUCT_DETAIL": // 장바구니화면에서 닫기버튼 클릭했을때
+        // 장바구니화면에서 닫기버튼 클릭했을때
+        case "RESET_PRODUCT_DETAIL":
             return {...state,
                 productDetailCount: 1,
                 optionChoice: 0
             }
-        case "SET_CATEGORY_TITLE": // 선택한 카테고리의 이름
+        // 선택한 카테고리의 이름
+        case "SET_CATEGORY_TITLE":
             return {...state, categoryTitle: action.payload}
-        case "SET_ACTIVE_INDEX": // 선택한 카테고리의 인덱스
+        // 선택한 카테고리의 인덱스
+        case "SET_ACTIVE_INDEX":
             return {...state, activeIndex: action.payload}
         case "SET_LAYER_STATE":
             return {

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { setUpdateCategory, setActiveIndex, setLayerState } from '../../redux/action'
-import { useDispatch } from 'react-redux'
+import { setUpdateCategory, setActiveIndex, setLayerState, setCategoryTitle } from '../../redux/action'
+import { setResetProductTitle } from '../../redux/setMenuAction'
+import { useDispatch, useSelector } from 'react-redux'
 import LayerInfo3 from '../layer/LayerInfo3'
 
-const Nav = ({className, onNaviMenu, setTopTitle, setIsDimed, setIsNaviMenu}) => {
+const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
     const [isActiveMenu, setIsActiveMenu] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -14,14 +15,17 @@ const Nav = ({className, onNaviMenu, setTopTitle, setIsDimed, setIsNaviMenu}) =>
         setIsActiveMenu(isActiveMenu === menu ? null : menu)
     }
 
+    const categoryNumber = useSelector(state => state.other.activeIndex)
+
     const [isLayerOpen, setIsLayerOpen] = useState(false)
     const [activeLayer, setActiveLayer] = useState(null)
 
-    const onMoveCategory = (categoryNumber, cateName) => {
-        navigate(`/detail/category/${categoryNumber}`)
-        dispatch(setUpdateCategory(categoryNumber))
-        dispatch(setActiveIndex(categoryNumber))
-        setTopTitle(cateName)
+    const onMoveCategory = async (categoryNumber, cateName) => {        
+        await dispatch(setUpdateCategory(categoryNumber))
+        await dispatch(setActiveIndex(categoryNumber))
+        await dispatch(setResetProductTitle("")) // // 상품상세에서 카테고리 클릭했을때, 카테고리명을 보여주기 위해 상품명을 강제 초기화
+        await dispatch(setCategoryTitle(cateName))
+        
         if(categoryNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
             setIsLayerOpen(true)
             setActiveLayer('LayerInfo3')
@@ -29,6 +33,12 @@ const Nav = ({className, onNaviMenu, setTopTitle, setIsDimed, setIsNaviMenu}) =>
             setIsNaviMenu(true)
         }
     }
+    
+    useEffect(() => {
+        if(categoryNumber !== null) {
+            navigate(`/detail/category/${categoryNumber}`)
+        }
+    }, [categoryNumber])
 
     const onLayerClose = (index) => {
         setActiveIndex(index)

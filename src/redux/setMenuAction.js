@@ -71,7 +71,7 @@ export const setBasketInProductTitle = productTitle => ({ // 장바구니에 상
     payload:productTitle
 })
 
-export const setResetProductTitle = productTitle => ({ // 상단에 상품명 또는 카테고리명을 보여줄때
+export const setResetProductTitle = (productTitle = "") => ({ // 상단에 상품명 또는 카테고리명을 보여줄때
     // 상품상세에서 카테고리 클릭했을때, 카테고리명을 보여주기 위해 상품명을 강제 초기화
     type:RESET_PRODUCT_TITLE,
     payload: productTitle
@@ -80,7 +80,7 @@ export const setResetProductTitle = productTitle => ({ // 상단에 상품명 �
 // 선택한 베스트메뉴ID의 비동기액션
 export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
     return dispatch => {
-        axios.get(`http://localhost:3000/bestMenu?id=${bestMenuSelectedId}`)
+        axios.get(`https://heather-mire-stream.glitch.me/bestMenu?id=${bestMenuSelectedId}`)
             .then(response => {
                 if (response.data && response.data.length > 0) {
                     const resultData = response.data[0]
@@ -105,7 +105,7 @@ export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
 // 선택한 치킨세트ID의 비동기액션
 export const fetchSelectedChickenProductId = chickenSelectedId => {
     return dispatch => {
-        axios.get(`http://localhost:3000/chickenSet?id=${chickenSelectedId}`)
+        axios.get(`https://heather-mire-stream.glitch.me/chickenSet?id=${chickenSelectedId}`)
             .then(response => {
                 if (response.data && response.data.length > 0) {
                     const resultData = response.data[0]
@@ -130,7 +130,7 @@ export const fetchSelectedChickenProductId = chickenSelectedId => {
 // 선택한 버거세트ID의 비동기액션
 export const fetchSelectedBurgerProductId = burgerSelectedId => {
     return dispatch => {
-        axios.get(`http://localhost:3000/burgerSet?id=${burgerSelectedId}`)
+        axios.get(`https://heather-mire-stream.glitch.me/burgerSet?id=${burgerSelectedId}`)
             .then(response => {
                 if(response.data && response.data.length > 0) {
                     const resultData = response.data[0]
@@ -155,7 +155,7 @@ export const fetchSelectedBurgerProductId = burgerSelectedId => {
 // 선택한 스낵사이드세트ID의 비동기액션
 export const fetchSelectedSnackSideProductId = snackSideSelectedId => {
     return dispatch => {
-        axios.get(`http://localhost:3000/snackSideSet?id=${snackSideSelectedId}`)
+        axios.get(`https://heather-mire-stream.glitch.me/snackSideSet?id=${snackSideSelectedId}`)
             .then(response => {
                 if(response.data && response.data.length > 0) {
                     const resultData = response.data[0]
@@ -180,7 +180,7 @@ export const fetchSelectedSnackSideProductId = snackSideSelectedId => {
 //  선택한 드링크ID의 비동기액션
 export const fetchSelectedDrinkProductId = drinkSelectedId => {
     return dispatch => {
-        axios.get(`http://localhost:3000/drink?id=${drinkSelectedId}`)
+        axios.get(`https://heather-mire-stream.glitch.me/drink?id=${drinkSelectedId}`)
             .then(response => {
                 if(response.data && response.data.length > 0) {
                     const resultData = response.data[0]
