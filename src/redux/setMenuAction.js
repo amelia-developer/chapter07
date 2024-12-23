@@ -71,7 +71,7 @@ export const setBasketInProductTitle = productTitle => ({ // 장바구니에 상
     payload:productTitle
 })
 
-export const setResetProductTitle = productTitle => ({ // 상단에 상품명 또는 카테고리명을 보여줄때
+export const setResetProductTitle = (productTitle = "") => ({ // 상단에 상품명 또는 카테고리명을 보여줄때
     // 상품상세에서 카테고리 클릭했을때, 카테고리명을 보여주기 위해 상품명을 강제 초기화
     type:RESET_PRODUCT_TITLE,
     payload: productTitle

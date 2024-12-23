@@ -5,7 +5,7 @@ import { fetchBestMenu, setLoading, setActiveIndex, setUpdateCategory } from '..
 import { setSelectedBestMenuProductId } from '../../redux/setMenuAction'
 import { useNavigate } from 'react-router-dom'
 
-const BestMenu = ({topTitle, setTopTitle}) => {
+const BestMenu = () => {
     const dispatch = useDispatch()
     const pageNavigate = useNavigate()
 
@@ -27,9 +27,6 @@ const BestMenu = ({topTitle, setTopTitle}) => {
     const onGoBestMenu = () => {
         dispatch(setActiveIndex(0))
         dispatch(setUpdateCategory(0))
-        if(topTitle === '' || topTitle === undefined || topTitle !== '추천메뉴') {
-          setTopTitle("추천메뉴")
-        }
         pageNavigate(`/detail/category/0`)
     }
     return (

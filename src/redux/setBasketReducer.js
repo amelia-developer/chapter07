@@ -28,7 +28,8 @@ const setBasketReducer = (state = initialState, action) => {
             return {...state, callProductInfo: action.payload}
         case "SET_PRODUCT_COUNT_PRICE":
             return {...state, productCountPrice: action.payload}
-        case "SET_ORIGIN_PRODUCT_PRICE": // 상품의 원래가격
+        // 상품의 원래가격
+        case "SET_ORIGIN_PRODUCT_PRICE":
             return {...state, originProductPrice: action.payload}
         case "EACH_PRODUCT_MINUS":
             return {...state, eachProductMinus: action.payload}

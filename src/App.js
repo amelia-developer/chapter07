@@ -12,21 +12,19 @@ const App = () => {
     const [isNaviMenu, setIsNaviMenu] = useState(false)
     const [isDimed, setIsDimed] = useState(false)
     const dispatch = useDispatch()
-    const cateName = useSelector(state => state.categoryTitle)
+    const cateName = useSelector(state => state.other.categoryTitle)
 
     const toggleNaviMenu = () => {        
         setIsNaviMenu(!isNaviMenu)
         dispatch(setCategoryTitle(cateName))
     }
 
-    const [topTitle, setTopTitle] = useState("") // 상단 타이틀상태
-
     return (
       <>
-        <Nav className={isNaviMenu && !isDimed ? 'on' : ''} onNaviMenu={toggleNaviMenu} setTopTitle={setTopTitle} setIsDimed={setIsDimed} setIsNaviMenu={setIsNaviMenu}/>
+        <Nav className={isNaviMenu && !isDimed ? 'on' : ''} onNaviMenu={toggleNaviMenu} setIsDimed={setIsDimed} setIsNaviMenu={setIsNaviMenu}/>
         <Routes>
-            <Route path="/" element={<Main onNaviMenu={toggleNaviMenu} topTitle={topTitle} setTopTitle={setTopTitle}/>} />
-            <Route path="/detail/*" element={<Detail isNaviMenu={isNaviMenu} onNaviMenu={toggleNaviMenu} topTitle={topTitle} setTopTitle={setTopTitle}/>} />
+            <Route path="/" element={<Main onNaviMenu={toggleNaviMenu}/>} />
+            <Route path="/detail/*" element={<Detail onNaviMenu={toggleNaviMenu} cateName={cateName}/>} />
             <Route path="/basket" element={<Basket />}/>
         </Routes>
       </>

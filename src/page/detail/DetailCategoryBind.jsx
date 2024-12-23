@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink } from '../../redux/action';
+import { fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink, setCategoryTitle } from '../../redux/action';
 import DetailCategory from './DetailCategory';
 
-const DetailCategoryBind = ({onProductClick, setTopTitle}) => {
+const DetailCategoryBind = ({onProductClick}) => {
     const { indexNumber } = useParams();
     const dispatch = useDispatch()
 
@@ -20,30 +20,30 @@ const DetailCategoryBind = ({onProductClick, setTopTitle}) => {
         if(indexNumber !== undefined) {    
             switch(indexNumber) {
                 case 0:
-                    setTopTitle('추천메뉴')
+                    dispatch(setCategoryTitle('추천메뉴'))
                     dispatch(fetchBestMenu())
                     break;
                 case 1:
-                    setTopTitle('치킨세트')
+                    dispatch(setCategoryTitle('치킨세트'))
                     dispatch(fetchChicken())
                     break;
                 case 2:
-                    setTopTitle('버거세트')
+                    dispatch(setCategoryTitle('버거세트'))
                     dispatch(fetchBurger())
                     break;
                 case 3:
-                    setTopTitle('스낵사이드')
+                    dispatch(setCategoryTitle('스낵사이드'))
                     dispatch(fetchSnackSide())
                     break;
                 case 4:
-                    setTopTitle('음료')
+                    dispatch(setCategoryTitle('음료'))
                     dispatch(fetchDrink())
                     break;
                 default:
                     break;
             }
         }
-    }, [indexNumber, dispatch, setTopTitle])
+    }, [indexNumber, dispatch])
 
     return (
         <>

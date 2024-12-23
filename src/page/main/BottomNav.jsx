@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setUpdateCategory, setActiveIndex } from '../../redux/action'
+import { setUpdateCategory, setActiveIndex, setCategoryTitle } from '../../redux/action'
 import LayerInfo3 from '../layer/LayerInfo3'
 
-const BottomNav = ({onNaviMenu, setTopTitle}) => {
+const BottomNav = ({onNaviMenu}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ const BottomNav = ({onNaviMenu, setTopTitle}) => {
   const onMoveCategory = (categoryNumber, cateName) => {
       dispatch(setUpdateCategory(categoryNumber))
       dispatch(setActiveIndex(categoryNumber))
-      setTopTitle(cateName)
+      dispatch(setCategoryTitle(cateName))
       if(categoryNumber === 5) { // 5번이면 '주소등록' 딤드레이어팝업을 보여줌
         setIsLayerOpen(true)
         setActiveLayer('LayerInfo3')

@@ -6,7 +6,7 @@ import LayerInfo3 from '../layer/LayerInfo3'
 import { setActiveIndex, setUpdateCategory, setLayerState } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Banner = ({topTitle, setTopTitle}) => {
+const Banner = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -16,9 +16,6 @@ const Banner = ({topTitle, setTopTitle}) => {
   const onAddressSearch = () => { 
     dispatch(setActiveIndex(5))
     dispatch(setUpdateCategory(5))    
-    if(topTitle === '' || topTitle === undefined || topTitle !== '주소등록') {
-      setTopTitle("주소등록")
-    }
     dispatch(setLayerState(true, 'LayerInfo3'))
     // navigate(`/detail/category/5`)
     document.body.style.overflowY = 'hidden'     
@@ -32,9 +29,6 @@ const Banner = ({topTitle, setTopTitle}) => {
   const onGoBestMenu = () => {
     dispatch(setActiveIndex(0))
     dispatch(setUpdateCategory(0))
-    if(topTitle === '' || topTitle === undefined || topTitle !== '추천메뉴') {
-      setTopTitle("추천메뉴")
-    }
     navigate(`/detail/category/0`)
   }
 
