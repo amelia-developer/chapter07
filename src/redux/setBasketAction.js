@@ -62,7 +62,7 @@ export const fetchBasketInProduct = (basketInProduct) => {
         const option = basketInProduct.option || '';
         const id = uuid4()
 
-        axios.post(`http://localhost:3000/basket/`, {
+        axios.post(`https://heather-mire-stream.glitch.me/basket/`, {
             id,
             productID,
             count,
@@ -86,7 +86,7 @@ export const fetchBasketInProduct = (basketInProduct) => {
 // 장바구니에 상품빼는 비동기액션 -> Request Body로 id를 전달하는방식
 export const fetchBasketOutProdut = (callProductInfo) => {
     return dispatch => {
-        axios.delete(`http://localhost:3000/basket/${callProductInfo}`)
+        axios.delete(`https://heather-mire-stream.glitch.me/basket/${callProductInfo}`)
         .then(() => {
             dispatch(setBasketOutProduct(callProductInfo))
         })
@@ -99,7 +99,7 @@ export const fetchBasketOutProdut = (callProductInfo) => {
 // 장바구니에 상품부르는 비동기액션
 export const fetchBasketCallProduct = () => {
     return dispatch => {
-        axios.get(`http://localhost:3000/basket`)
+        axios.get(`https://heather-mire-stream.glitch.me/basket`)
             .then(response => {
                 dispatch(setBasketCallProduct(response.data))
             })
@@ -112,7 +112,7 @@ export const fetchBasketCallProduct = () => {
 // 장바구니에 있는 상품의 카운트감소 비동기액션
 export const fetchEachProductMinus = (id, updateProductData) => {
     return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
+        axios.put(`https://heather-mire-stream.glitch.me/basket/${id}`, updateProductData)
             .then(response => {
                 dispatch(setEachProductMinus(response.data))                
             })
@@ -125,7 +125,7 @@ export const fetchEachProductMinus = (id, updateProductData) => {
 // 장바구니에 있는 상품의 카운트증가 비동기액션
 export const fetchEachProductPlus = (id, updateProductData) => {
     return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductData)
+        axios.put(`https://heather-mire-stream.glitch.me/basket/${id}`, updateProductData)
             .then(response => {
                 dispatch(setEachProductPlus(response.data))
             })
@@ -138,7 +138,7 @@ export const fetchEachProductPlus = (id, updateProductData) => {
 // 장바구니에 있는 상품카운트옵션 비동기액션
 export const fetchProductCountPrice = (id, updateProductPrice) => {
     return dispatch => {
-        axios.put(`http://localhost:3000/basket/${id}`, updateProductPrice)
+        axios.put(`https://heather-mire-stream.glitch.me/basket/${id}`, updateProductPrice)
             .then(response => {
                 dispatch(setProductCountPrice(response.data))
             })
