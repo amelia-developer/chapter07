@@ -77,6 +77,49 @@ export const setResetProductTitle = (productTitle = "") => ({ // 상단에 상�
     payload: productTitle
 })
 
+// 각 카테고리의 초기화 액션을 객체로 정의
+const categoryResetActions = {
+    bestMenu: [
+        setSelectedBurgerProduct,
+        setSelectedChickenProduct,
+        setSelectedSnackSideProduct,
+        setSelectedDrinkProduct
+    ],
+    chickenSet: [
+        setSelectedBestMenuProduct,
+        setSelectedBurgerProduct,
+        setSelectedSnackSideProduct,
+        setSelectedDrinkProduct
+    ],
+    burgerSet: [
+        setSelectedBestMenuProduct,
+        setSelectedChickenProduct,
+        setSelectedSnackSideProduct,
+        setSelectedDrinkProduct
+    ],
+    snackSideSet: [
+        setSelectedBestMenuProduct,
+        setSelectedChickenProduct,
+        setSelectedBurgerProduct,
+        setSelectedDrinkProduct
+    ],
+    drink: [
+        setSelectedBestMenuProduct,
+        setSelectedChickenProduct,
+        setSelectedBurgerProduct,
+        setSelectedSnackSideProduct
+    ]
+}
+
+// 각 카테고리의 상태초기화 액션
+const resetOtherCategories = (dispatch, currentCategory) => {
+    const actionToReset = categoryResetActions[currentCategory]
+
+    actionToReset.forEach(element => {
+        dispatch(element(null))  
+    })
+}
+
 // 선택한 베스트메뉴ID의 비동기액션
 export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
     return dispatch => {
@@ -86,10 +129,9 @@ export const fetchSelectedBestMenuProductId = bestMenuSelectedId => {
                     const resultData = response.data[0]
                     const resultID = resultData.id
                     if(resultData) {
-                        dispatch(setSelectedChickenProduct(null)) // 베스트메뉴가 아닌 치킨메뉴는null
-                        dispatch(setSelectedBurgerProduct(null)) // 베스트메뉴가 아닌 버거메뉴는null
-                        dispatch(setSelectedSnackSideProduct(null)) // 베스트메뉴가 아닌 스낵사이드메뉴는null
-                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
+                        // 상태초기화
+                        resetOtherCategories(dispatch, 'bestMenu')
+                        // 상태업데이트
                         dispatch(setSelectedBestMenuProduct(resultData))
                         dispatch(setSelectedBestMenuProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
@@ -111,10 +153,9 @@ export const fetchSelectedChickenProductId = chickenSelectedId => {
                     const resultData = response.data[0]
                     const resultID = resultData.id
                     if(resultData) {
-                        dispatch(setSelectedBestMenuProduct(null)) // 치킨메뉴가 아닌 베스트메뉴는null
-                        dispatch(setSelectedBurgerProduct(null)) // 치킨메뉴가 아닌 버거메뉴는 null
-                        dispatch(setSelectedSnackSideProduct(null)) // 치킨메뉴가 아닌 스낵사이드메뉴는null
-                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
+                        // 상태초기화
+                        resetOtherCategories(dispatch, 'chickenSet')
+                        // 상태업데이트
                         dispatch(setSelectedChickenProduct(resultData))
                         dispatch(setSelectedChickenProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
@@ -136,10 +177,9 @@ export const fetchSelectedBurgerProductId = burgerSelectedId => {
                     const resultData = response.data[0]
                     const resultID = resultData.id
                     if(resultData) {
-                        dispatch(setSelectedBestMenuProduct(null)) // 버거메뉴가 아닌 베스트메뉴는null
-                        dispatch(setSelectedChickenProduct(null)) // 버거메뉴가 아닌 치킨메뉴는null
-                        dispatch(setSelectedSnackSideProduct(null)) // 버거메뉴가 아닌 스낵사이드메뉴는null
-                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
+                        // 상태초기화
+                        resetOtherCategories(dispatch, 'burgerSet')
+                        // 상태업데이트
                         dispatch(setSelectedBurgerProduct(resultData))
                         dispatch(setSelectedBurgerProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
@@ -161,10 +201,9 @@ export const fetchSelectedSnackSideProductId = snackSideSelectedId => {
                     const resultData = response.data[0]
                     const resultID = resultData.id
                     if(resultData) {
-                        dispatch(setSelectedBestMenuProduct(null)) // 스낵사이드메뉴가 아닌 베스트메뉴는null
-                        dispatch(setSelectedChickenProduct(null)) // 스낵사이드메뉴가 아닌 치킨메뉴는null
-                        dispatch(setSelectedBurgerProduct(null)) // 스낵사이드메뉴가 아닌 버거메뉴는null
-                        dispatch(setSelectedDrinkProduct(null)) // 스낵사이드메뉴가 아닌 음료메뉴는null
+                        // 상태초기화
+                        resetOtherCategories(dispatch, 'snackSideSet')
+                        // 상태업데이트
                         dispatch(setSelectedSnackSideProduct(resultData))
                         dispatch(setSelectedSnackSideProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
@@ -186,10 +225,9 @@ export const fetchSelectedDrinkProductId = drinkSelectedId => {
                     const resultData = response.data[0]
                     const resultID = resultData.id
                     if(resultData) {
-                        dispatch(setSelectedBestMenuProduct(null)) // 음료메뉴가 아닌 베스트메뉴는null
-                        dispatch(setSelectedChickenProduct(null)) // 음료메뉴가 아닌 치킨메뉴는null
-                        dispatch(setSelectedBurgerProduct(null)) // 음료메뉴가 아닌 버거메뉴는null
-                        dispatch(setSelectedSnackSideProduct(null)) // 음료메뉴가 아닌 스낵사이드메뉴는null
+                        // 상태초기화
+                        resetOtherCategories(dispatch, 'drink')
+                        // 상태업데이트
                         dispatch(setSelectedDrinkProduct(resultData))
                         dispatch(setSelectedDrinkProductId(resultID))
                         dispatch(setBasketInProductTitle(resultData.title))
