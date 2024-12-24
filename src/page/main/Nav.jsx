@@ -33,12 +33,6 @@ const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
             setIsNaviMenu(true)
         }
     }
-    
-    useEffect(() => {
-        if(categoryNumber !== null) {
-            navigate(`/detail/category/${categoryNumber}`)
-        }
-    }, [categoryNumber])
 
     const onLayerClose = (index) => {
         setActiveIndex(index)

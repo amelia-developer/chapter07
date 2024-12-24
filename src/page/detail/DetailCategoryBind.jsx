@@ -6,6 +6,7 @@ import DetailCategory from './DetailCategory';
 
 const DetailCategoryBind = ({onProductClick}) => {
     const { indexNumber } = useParams();
+console.log(`detailCategoryBind컴포넌트에서 indexNumber = ${indexNumber}`);
     const dispatch = useDispatch()
 
     // 상태구독

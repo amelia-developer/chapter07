@@ -5,7 +5,7 @@ import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSel
 import { setBasketInOriginProductPrice } from '../../redux/setBasketAction'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Info = () => {
     // 상태구독
@@ -23,7 +23,6 @@ const Info = () => {
     const drinkProduct = useSelector(state => state.setMenu.selectedDrinkProduct)
 
     const dispatch = useDispatch()
-
     // const navigate = useNavigate() // 최상위 레벨에서 호출되도록(리엑트 훅들은 최상위 레벨에서만 호출되도록, useEffect/useState/useNavigage모두 동일)
     const [isLayerOpen, setIsLayerOpen] = useState(false)
     const [activeLayer, setActiveLayer] = useState(null)
@@ -55,14 +54,13 @@ const Info = () => {
                 if(snackSideSelectedId) await dispatch(fetchSelectedSnackSideProductId(productNumber))
                 if(drinkSelectedId) await dispatch(fetchSelectedDrinkProductId(productNumber))
             }
-
-            // setLoading(false) // 데이터로딩 완료 후 로딩상태종료
+            
             setTimeout(() => {
                 setLoading(false);  // 1.5초 후 로딩 종료
             }, 1500);  // 1.5초 후 로딩 상태를 false로 바꿈
         }
         initializeState()
-    }, [productNumber, dispatch]); 
+    }, [dispatch, productNumber]); 
 
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 베스트메뉴
@@ -234,16 +232,15 @@ const Info = () => {
                     <h1 className="tit-Loadng">Loading...</h1>
                 </div>
     }
-
     return (
         <>
             {
                     selectedBestMenuProduct ? renderProductDetail(selectedBestMenuProduct)
-                        : chickenMenuProduct ? renderProductDetail(chickenMenuProduct)
-                        : burgerMenuProduct ? renderProductDetail(burgerMenuProduct)
-                        : snackSideProduct ? renderProductDetail(snackSideProduct)
-                        : drinkProduct ? renderProductDetail(drinkProduct)
-                        :<div>Loading...</div>
+                    : chickenMenuProduct ? renderProductDetail(chickenMenuProduct)
+                    : burgerMenuProduct ? renderProductDetail(burgerMenuProduct)
+                    : snackSideProduct ? renderProductDetail(snackSideProduct)
+                    : drinkProduct ? renderProductDetail(drinkProduct)
+                    :<div>데이터 못불러왔어요, 확인부탁드려요</div>
             }
         </>
     )

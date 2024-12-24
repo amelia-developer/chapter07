@@ -11,20 +11,23 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import DetailCategoryBind from './DetailCategoryBind'
 
 const Detail = ({onNaviMenu, cateName}) => {
-    const [showInfo, setShowInfo] = useState(true) // Info 컴포넌트 표시 여부 상태
+    const [showInfo, setShowInfo] = useState(false) // Info 컴포넌트 표시 여부 상태
     const [showCategoryList, setShowCategoryList] = useState(true) // 카테고리 리스트 표시 여부 상태
     const location = useLocation()
-    
-    // url변경감지
+
     useEffect(() => {
-        if(location.pathname.startsWith(`/detail/category/`)) { // 현재화면주소가 어떤 문자열로 시작하는지(=detail.category의 문자열로 시작하는지)
-            setShowInfo(false) // 메뉴 클릭 시 Info 컴포넌트 숨기기
-            setShowCategoryList(true) // 카테고리 리스트 표시
-        } else {
-            setShowInfo(true) // 상품 클릭 시 Info 컴포넌트 표시
-            setShowCategoryList(false) // 카테고리 리스트 숨기기
+        const initializeState = () => {
+            if (location.pathname.startsWith(`/detail/category/`)) {
+                // 카테고리 리스트화면인 경우
+                setShowInfo(false); // Info 컴포넌트 숨기기
+                setShowCategoryList(true); // 카테고리 리스트 표시
+            } else {                        
+                setShowInfo(true); // Info 컴포넌트 표시
+                setShowCategoryList(false); // 카테고리 리스트 숨기기
+            }
         }
-    }, [location])
+        initializeState()
+    }, [location.pathname])
 
     return (
         <>
@@ -44,7 +47,7 @@ const Detail = ({onNaviMenu, cateName}) => {
                 onProductClick={() => { setShowInfo(true); setShowCategoryList(false); /*setTopTitle()*/}}
                 showCategoryList={showCategoryList}
             ></MenuList>
-            {showInfo && <Info></Info>} {/* showInfo 상태에 따라 Info 컴포넌트 표시 */}
+            {showInfo && <Info></Info>}
             {showInfo && <Button></Button>}
             <Footer></Footer>
             <BottomNav onNaviMenu={onNaviMenu}></BottomNav>
