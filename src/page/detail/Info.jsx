@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProductCountMinus, setProductCountPlus, setOptionChoice, setDetailProductTotal, setOptionChoiceName} from '../../redux/action'
 import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSelectedBurgerProductId, fetchSelectedSnackSideProductId, fetchSelectedDrinkProductId } from '../../redux/setMenuAction'
@@ -63,70 +63,48 @@ const Info = () => {
     }, [dispatch, productNumber]); 
 
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
+    // 각 카테고리별 상세 상품들에 대한 가격과 옵션정의
+    const useCalculateAndSetPrice = (optionChoice, productDetailCount, setTypeOfTotalPrice) => {
+        return useCallback((product) => {
+            if(product) { // 비동기로 state값들을 불러올때 체크해야하는 3가지(undefined, null, 빈값) 中 나는 null 또는 undefined체크
+                const calculatePrice = ((optionChoice + product.price) * productDetailCount)
+                const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    
+                setTypeOfTotalPrice(calculatePriceCommaDigit)
+    
+                dispatch(setBasketInOriginProductPrice(product.price)) // 상품의 원가
+                dispatch(setDetailProductTotal(calculatePrice))
+            }    
+        }, [optionChoice, productDetailCount, dispatch, setTypeOfTotalPrice])
+    }
+
+    const resultCalculateAndSetPrice = useCalculateAndSetPrice(optionChoice, productDetailCount, setTypeOfTotalPrice)
+
+    // resultCalculateAndSetPrice을 사용하는 useEffect
     // 베스트메뉴
     useEffect(() => {
-        if(selectedBestMenuProduct) { // 비동기로 state값들을 불러올때 체크해야하는 3가지(undefined, null, 빈값) 中 나는 빈값체크(=length)
-            const calculatePrice = ((optionChoice + selectedBestMenuProduct.price) * productDetailCount)
-            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-            setTypeOfTotalPrice(calculatePriceCommaDigit)
-            
-            dispatch(setBasketInOriginProductPrice(selectedBestMenuProduct.price)) // 상품의 원가
-            dispatch(setDetailProductTotal(calculatePrice))
-        }
-    }, [productDetailCount, optionChoice, selectedBestMenuProduct, dispatch])
+        resultCalculateAndSetPrice(selectedBestMenuProduct)
+    }, [selectedBestMenuProduct, resultCalculateAndSetPrice])
 
     // 치킨메뉴
     useEffect(() => {
-        if(chickenMenuProduct) {
-            const calculatePrice = ((optionChoice + chickenMenuProduct.price) * productDetailCount)
-            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-            setTypeOfTotalPrice(calculatePriceCommaDigit)
-
-            dispatch(setBasketInOriginProductPrice(chickenMenuProduct.price))
-            dispatch(setDetailProductTotal(calculatePrice))
-        }
-    }, [productDetailCount, optionChoice, chickenMenuProduct, dispatch])
+        resultCalculateAndSetPrice(chickenMenuProduct)
+    }, [chickenMenuProduct, resultCalculateAndSetPrice])
 
     // 버거메뉴
     useEffect(() => {
-        if(burgerMenuProduct) {
-            const calculatePrice = ((optionChoice + burgerMenuProduct.price) * productDetailCount)
-            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-            setTypeOfTotalPrice(calculatePriceCommaDigit)
-
-            dispatch(setBasketInOriginProductPrice(burgerMenuProduct.price))
-            dispatch(setDetailProductTotal(calculatePrice))
-        }
-    }, [productDetailCount, optionChoice, burgerMenuProduct, dispatch])
+        resultCalculateAndSetPrice(burgerMenuProduct)
+    }, [burgerMenuProduct, resultCalculateAndSetPrice])
 
     // 스낵사이드메뉴
     useEffect(() => {
-        if(snackSideProduct) {
-            const calculatePrice = ((optionChoice + snackSideProduct.price) * productDetailCount)
-            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-            setTypeOfTotalPrice(calculatePriceCommaDigit)
-
-            dispatch(setBasketInOriginProductPrice(snackSideProduct.price))
-            dispatch(setDetailProductTotal(calculatePrice))
-        }
-    }, [productDetailCount, optionChoice, snackSideProduct, dispatch])
+        resultCalculateAndSetPrice(snackSideProduct)
+    }, [snackSideProduct, resultCalculateAndSetPrice])
 
     // 음료메뉴
     useEffect(() => {
-        if(drinkProduct) {
-            const calculatePrice = ((optionChoice + drinkProduct.price) * productDetailCount)
-            const calculatePriceCommaDigit = calculatePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-
-            setTypeOfTotalPrice(calculatePriceCommaDigit)
-
-            dispatch(setBasketInOriginProductPrice(drinkProduct.price))
-            dispatch(setDetailProductTotal(calculatePrice))
-        }
-    }, [productDetailCount, optionChoice, drinkProduct, dispatch])
+        resultCalculateAndSetPrice(drinkProduct)
+    }, [drinkProduct, resultCalculateAndSetPrice])
 
     const onCountMinus = () => {
         if(productDetailCount <= 1){
