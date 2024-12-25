@@ -8,7 +8,6 @@ import Footer from '../main/Footer'
 import BottomNav from '../main/BottomNav'
 import Button from './Button'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import DetailCategoryBind from './DetailCategoryBind'
 
 const Detail = ({onNaviMenu, cateName}) => {
     const [showInfo, setShowInfo] = useState(false) // Info 컴포넌트 표시 여부 상태
@@ -51,9 +50,6 @@ const Detail = ({onNaviMenu, cateName}) => {
             {showInfo && <Button></Button>}
             <Footer></Footer>
             <BottomNav onNaviMenu={onNaviMenu}></BottomNav>
-            {/* <Routes>
-                <Route path="/detail/category/:indexNumber" element={<DetailCategoryBind onProductClick={() => {setShowInfo(true); setShowCategoryList(false);}}/>}></Route>
-            </Routes> */}
         </>
     )
 }

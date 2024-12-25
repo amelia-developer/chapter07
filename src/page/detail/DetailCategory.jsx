@@ -16,7 +16,7 @@ const DetailCategory = ({activeIndex, onProductClick}) => {
     const chickenSet = useSelector(state => state.other.chickenSet);
     const burgerSet = useSelector(state => state.other.burgerSet);
     const snackSideSet = useSelector(state => state.other.snackSideSet);
-    const drinkSet = useSelector(state => state.other.drinkSet);
+    const drinkSet = useSelector(state => state.other.drink);
 
     useEffect(() => {
         let cateGubun = [
@@ -31,7 +31,7 @@ const DetailCategory = ({activeIndex, onProductClick}) => {
             setResultCateGory(selectCategory.setName)
         }
     }, [activeIndex, bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet])
-console.log(`resultCategory = ${JSON.stringify(resultCategory)}`);
+// console.log(`resultCategory = ${JSON.stringify(resultCategory)}`);
 
     useEffect(() => {
         // 필요한 데이터만 비동기로 불러오기
@@ -109,7 +109,7 @@ console.log(`resultCategory = ${JSON.stringify(resultCategory)}`);
             <div className="detailCategoryBox">
                 <ul>
                     {
-                        resultCategory.length > 0 ? (
+                        Array.isArray(resultCategory) && resultCategory.length > 0 ? (
                             resultCategory.map((value, idx)=> {
                                 const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')                       
                                 return  <li key={idx}>

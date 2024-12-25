@@ -56,7 +56,7 @@ export const fetchChicken = () => {
     return dispatch => {
         axios.get(`https://heather-mire-stream.glitch.me/chickenSet`)
             .then(response => {
-console.log(`치킨세트의response.data = ${JSON.stringify(response.data)}`);
+// console.log(`치킨세트의response.data = ${JSON.stringify(response.data)}`);
                 dispatch(setChichenSet(response.data))
             })
             .catch(error => {
@@ -76,7 +76,7 @@ export const fetchBurger = () => {
     return dispatch => {
         axios.get(`https://heather-mire-stream.glitch.me/burgerSet`)
             .then(response => {
-console.log(`버거세트의response.data = ${JSON.stringify(response.data)}`);
+// console.log(`버거세트의response.data = ${JSON.stringify(response.data)}`);
                 dispatch(setBurgerSet(response.data))
             })
             .catch(error => {
@@ -115,6 +115,7 @@ export const fetchDrink = () => {
     return dispatch => {
         axios.get(`https://heather-mire-stream.glitch.me/drink`)
             .then(response => {
+// console.log(`음료세트의response.data = ${JSON.stringify(response.data)}`);
                 dispatch(setDrink(response.data))
             })
             .catch(error => {
