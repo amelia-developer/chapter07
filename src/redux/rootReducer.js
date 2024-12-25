@@ -41,8 +41,10 @@ const otherReducers  = (state = initialState, action) => {
 // console.log("옵션 이름 초기화:", action.payload); 
             return {...state, optionChoiceName:action.payload}
         case "SET_CHICKEN":
+console.log(`set치킨: ${action.payload}`);
             return {...state, chickenSet: action.payload}
         case "SET_BURGER":
+console.log(`set버거: ${action.payload}`);
             return {...state, burgerSet: action.payload}
         case "SET_SNACK_SIDE":
             return {...state, snackSideSet: action.payload}

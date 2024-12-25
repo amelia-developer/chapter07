@@ -84,8 +84,7 @@ const MenuList = ({onShowCategoryMenu, onProductClick, showCategoryList}) => {
                         {                        
                             activeIndex === 0 || activeIndex === 1 || activeIndex === 2 || 
                             activeIndex === 3 || activeIndex === 4
-                            ? <DetailCategory bestMenu={bestMenu} chickenSet={chickenSet} burgerSet={burgerSet} 
-                            snackSideSet={snackSideSet} drinkSet={drinkSet2} activeIndex={activeIndex} onProductClick={onProductClick}></DetailCategory> : null
+                            ? <DetailCategory activeIndex={activeIndex} onProductClick={onProductClick}></DetailCategory> : null
                         }
                     </div>
                 }

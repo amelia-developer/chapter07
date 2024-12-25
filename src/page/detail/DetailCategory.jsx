@@ -1,45 +1,61 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {setSelectedBestMenuProductId, setSelectedChickenProductId, setSelectedBurgerProductId,
 setSelectedSnackSideProductId, setSelectedDrinkProductId} from '../../redux/setMenuAction'
 import { fetchBasketInProduct } from '../../redux/setBasketAction'
+import { fetchBestMenu, fetchChicken, fetchBurger, fetchSnackSide, fetchDrink} from '../../redux/action'
 
-const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex, onProductClick}) => {
+const DetailCategory = ({activeIndex, onProductClick}) => {
     const [resultCategory, setResultCateGory] = useState([])
     const pageNavigate = useNavigate()
     const dispatch = useDispatch()
 
+    // 상태구독
+    const bestMenu = useSelector(state => state.other.bestMenu);
+    const chickenSet = useSelector(state => state.other.chickenSet);
+    const burgerSet = useSelector(state => state.other.burgerSet);
+    const snackSideSet = useSelector(state => state.other.snackSideSet);
+    const drinkSet = useSelector(state => state.other.drinkSet);
+
     useEffect(() => {
         let cateGubun = [
-            {
-                idx: 0,
-                setName: bestMenu
-            },
-            {
-                idx:1,
-                setName: chickenSet
-            },
-            {
-                idx:2,
-                setName: burgerSet
-            },
-            {
-                idx:3,
-                setName: snackSideSet
-            },
-            {
-                idx:4,
-                setName: drinkSet
-            }
+            { idx: 0, setName: bestMenu },
+            { idx: 1, setName: chickenSet },
+            { idx: 2, setName: burgerSet },
+            { idx: 3, setName: snackSideSet },
+            { idx: 4, setName: drinkSet },
         ] 
         let selectCategory = cateGubun.find((value) => value.idx === activeIndex)
-       
-        if(selectCategory && selectCategory.setName) {
+        if(selectCategory) {
             setResultCateGory(selectCategory.setName)
         }
-    }, [bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet, activeIndex])
-    
+    }, [activeIndex, bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet])
+console.log(`resultCategory = ${JSON.stringify(resultCategory)}`);
+
+    useEffect(() => {
+        // 필요한 데이터만 비동기로 불러오기
+        switch (activeIndex) {
+            case 0:
+                dispatch(fetchBestMenu());
+                break;
+            case 1:
+                dispatch(fetchChicken());
+                break;
+            case 2:
+                dispatch(fetchBurger());
+                break;
+            case 3:
+                dispatch(fetchSnackSide());
+                break;
+            case 4:
+                dispatch(fetchDrink());
+                break;
+            default:
+                break;
+        }
+    }, [dispatch, activeIndex]);
+
     const actionMap  = {
         0: setSelectedBestMenuProductId,
         1: setSelectedChickenProductId,
@@ -93,21 +109,23 @@ const DetailCategory = ({bestMenu, chickenSet, burgerSet, snackSideSet, drinkSet
             <div className="detailCategoryBox">
                 <ul>
                     {
-                        resultCategory.map((value, idx)=> {
-                            const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')                       
-                            return  <li key={idx}>
-                                        <a onClick={() => onDetailProduct(value.id)}>
-                                            <img src={`/images/${value.id}.png`} alt={value.title}/>
-                                            <span className="title">{value.title}</span>
-                                            <span className="subtext">{value.subText}</span>
-                                        </a>
-                                        <div className="order">
-                                            <a className="btn_basket" onClick={() => onBasket(value)}><span className="blind">장바구니</span></a>
-                                            <a className="btn_order"><span>바로주문</span></a>
-                                        </div>
-                                        <p className="price"><span>{formatPrice}</span></p>
-                                    </li>
-                        })
+                        resultCategory.length > 0 ? (
+                            resultCategory.map((value, idx)=> {
+                                const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')                       
+                                return  <li key={idx}>
+                                            <a onClick={() => onDetailProduct(value.id)}>
+                                                <img src={`/images/${value.id}.png`} alt={value.title}/>
+                                                <span className="title">{value.title}</span>
+                                                <span className="subtext">{value.subText}</span>
+                                            </a>
+                                            <div className="order">
+                                                <a className="btn_basket" onClick={() => onBasket(value)}><span className="blind">장바구니</span></a>
+                                                <a className="btn_order"><span>바로주문</span></a>
+                                            </div>
+                                            <p className="price"><span>{formatPrice}</span></p>
+                                        </li>
+                            })
+                        ) : (<p>카테고리 데이터가 없습니다다</p>)
                     }
                 </ul>
             </div>

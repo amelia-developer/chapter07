@@ -51,9 +51,9 @@ const Detail = ({onNaviMenu, cateName}) => {
             {showInfo && <Button></Button>}
             <Footer></Footer>
             <BottomNav onNaviMenu={onNaviMenu}></BottomNav>
-            <Routes>
+            {/* <Routes>
                 <Route path="/detail/category/:indexNumber" element={<DetailCategoryBind onProductClick={() => {setShowInfo(true); setShowCategoryList(false);}}/>}></Route>
-            </Routes>
+            </Routes> */}
         </>
     )
 }
