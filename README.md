@@ -15,11 +15,11 @@
 </p>
 <br>
 <p align="center">
-  react-burger 프로젝트🚀
+   <h1><strong>React-Burger 프로젝트</strong>🍔</h1>
 
   <ul>
     <li><span>목표: KFC웹사이트를 클론하여, react와 redux를 활용한 상태관리 및 전자상거래 사이트의 구조를 파악</span></li>
-    <li><span>기술스택: react, redux, scss, firebaseHosting</li>
+    <li><span>기술스택: react, redux, scss, firebaseHosting, json-server를 Glitch에서 호스팅하여 API 엔드포인트 변경</li>
     <li><span>배포링크: https://react-burger-99022.web.app/</span></li>
     <li>
       <span>주요기능</span>
