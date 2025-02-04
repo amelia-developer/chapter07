@@ -13,4 +13,22 @@
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
   <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 </p>
+<br>
+<p align="center">
+  react-burger 프로젝트🚀
 
+  <ul>
+    <li><span>목표: KFC웹사이트를 클론하여, react와 redux를 활용한 상태관리 및 전자상거래 사이트의 구조를 파악</span></li>
+    <li><span>기술스택: react, redux, scss, firebaseHosting</li>
+    <li><span>배포링크: https://react-burger-99022.web.app/</span></li>
+    <li>
+      <span>주요기능</span>
+      <ol>
+        <li>카테고리별 제품 보기</li>
+        <li>장바구니 담기 및 상태관리</li>
+        <li>API를 통한 제품 데이터 연동 및 주소 검색</li>
+        <li>장바구니와 상품상세페이지에서 사용자가 선택한 데이터 유지(redux-persist사용)</li>
+      </ol>
+    </li>
+  </ul>
+</p>
