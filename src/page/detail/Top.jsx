@@ -85,9 +85,9 @@ const Top = ({cateName}) => {
         <>
             <div className="topBox">
                 <h2>{displayTitle}</h2>
-                <a href="#" className="btn_back" onClick={onBack}><span className="blind">뒤로가기</span></a>
+                <a href="#!" className="btn_back" onClick={onBack}><span className="blind">뒤로가기</span></a>
                 {
-                    !isCategoryList && (<a href="#" className="btn_basket" onClick={onBasket}><span className="blind">장바구니</span></a>)
+                    !isCategoryList && (<a href="#!" className="btn_basket" onClick={onBasket}><span className="blind">장바구니</span></a>)
                 }
             </div>
         </>

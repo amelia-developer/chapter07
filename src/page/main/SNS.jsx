@@ -33,7 +33,7 @@ const SNS = ({snsList, fetchSNSList}) => {
                         {
                            snsList.map((value, idx) => {                                
                                 return  <li key={idx}>
-                                            <a href="#">
+                                            <a href="#!">
                                                 <img src={`/images/${value.id}.jpg`} alt=""/>
                                             </a>
                                             <p>

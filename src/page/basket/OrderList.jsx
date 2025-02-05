@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useEffect } from 'react'
 import recycle from '../../img/ico_recycle.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -72,7 +73,7 @@ const OrderList = () => {
                                             <div className="textbox">
                                                 <h3>{value.title}</h3>
                                                 <p>{value.optionName}</p>
-                                                <a className="btn_delete" onClick={() => onDeleteProduct(value.id)}></a>
+                                                <a className="btn_delete" href="#!" onClick={() => onDeleteProduct(value.id)}></a>
                                             </div>
                                         </div>
                                         <div className="price">
@@ -95,7 +96,7 @@ const OrderList = () => {
                                     <dt>담긴 상품</dt>
                                     <dd>       
                                         <span className="nanum">{countTotal}개</span>                              
-                                        <a><img src={recycle} alt="지우기"/></a>
+                                        <a href="#!"><img src={recycle} alt="지우기"/></a>
                                     </dd>
                                 </dl>
                                 <dl className="price">
@@ -103,7 +104,7 @@ const OrderList = () => {
                                     <dd><span className="ico_price black">{priceTotalCommaDigit}</span></dd>
                                 </dl>
                             </div>
-                            <a className="btn_order">주문하기</a>
+                            <a className="btn_order" href="#!">주문하기</a>
                         </div>
                     </div>
                 </ul>

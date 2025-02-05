@@ -5,7 +5,7 @@ import { fetchSelectedBestMenuProductId, fetchSelectedChickenProductId, fetchSel
 import { setBasketInOriginProductPrice } from '../../redux/setBasketAction'
 import LayerInfo1 from '../layer/LayerInfo1';
 import LayerInfo2 from '../layer/LayerInfo2';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Info = () => {
     // 상태구독
@@ -60,7 +60,7 @@ const Info = () => {
             }, 1500);  // 1.5초 후 로딩 상태를 false로 바꿈
         }
         initializeState()
-    }, [dispatch, productNumber]); 
+    }, [dispatch, productNumber, bestMenuSelectedId, chickenMenuSelectedId, burgerMenuSelectedId, snackSideSelectedId, drinkSelectedId]) 
 
     const [typeOfTotalPrice, setTypeOfTotalPrice] = useState('')
     // 각 카테고리별 상세 상품들에 대한 가격과 옵션정의
@@ -75,7 +75,7 @@ const Info = () => {
                 dispatch(setBasketInOriginProductPrice(product.price)) // 상품의 원가
                 dispatch(setDetailProductTotal(calculatePrice))
             }    
-        }, [optionChoice, productDetailCount, dispatch, setTypeOfTotalPrice])
+        }, [optionChoice, productDetailCount, setTypeOfTotalPrice])
     }
 
     const resultCalculateAndSetPrice = useCalculateAndSetPrice(optionChoice, productDetailCount, setTypeOfTotalPrice)
@@ -107,6 +107,7 @@ const Info = () => {
     }, [drinkProduct, resultCalculateAndSetPrice])
 
     const onCountMinus = () => {
+        let productDetailCount
         if(productDetailCount <= 1){
             productDetailCount = 1
         } else {
@@ -185,8 +186,8 @@ const Info = () => {
             <div className="infoTextBox">
                 <ul>
                     
-                    <li><a onClick={onLayerInfo1}><span>영양정보표 및 원산지 정보</span></a></li>
-                    <li><a onClick={onLayerInfo2}><span>알레르기 유발물질 정보</span></a></li>
+                    <li><a onClick={onLayerInfo1} href="#!"><span>영양정보표 및 원산지 정보</span></a></li>
+                    <li><a onClick={onLayerInfo2} href="#!"><span>알레르기 유발물질 정보</span></a></li>
                     {
                         isLayerOpen === true && activeLayer === 'LayerInfo1' ? <LayerInfo1 isLayerOpen={onLayerInfo1} isLayerClose={onLayerClose}></LayerInfo1> : null
                     }

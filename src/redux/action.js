@@ -1,4 +1,3 @@
-import { buildCreateSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 // 선택한 카테고리명의 상태액션

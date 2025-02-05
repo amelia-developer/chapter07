@@ -7,7 +7,7 @@ import Info from './Info'
 import Footer from '../main/Footer'
 import BottomNav from '../main/BottomNav'
 import Button from './Button'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Detail = ({onNaviMenu, cateName}) => {
     const [showInfo, setShowInfo] = useState(false) // Info 컴포넌트 표시 여부 상태

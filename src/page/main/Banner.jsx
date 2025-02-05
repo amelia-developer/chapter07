@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import banner1 from '../../img/banner_storesearch.png'
 import banner2 from '../../img/banner_delivery.png'
 import { useNavigate } from 'react-router-dom'
@@ -35,8 +35,8 @@ const Banner = () => {
   return (
     <>
       <ul className="bannerBox">
-        <li><a onClick={onAddressSearch}><img src={banner1} alt=""/></a></li>
-        <li><a onClick={onGoBestMenu}><img src={banner2} alt=""/></a></li>
+        <li><a onClick={onAddressSearch} href="#!"><img src={banner1} alt=""/></a></li>
+        <li><a onClick={onGoBestMenu} href="#!"><img src={banner2} alt=""/></a></li>
         {
           isLayerOpen && activeLayer === 'LayerInfo3' ? <LayerInfo3 isLayerOpen={onAddressSearch} isLayerClose={onLayerClose}></LayerInfo3> : null
         }

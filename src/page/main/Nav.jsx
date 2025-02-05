@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setUpdateCategory, setActiveIndex, setLayerState, setCategoryTitle } from '../../redux/action'
 import { setResetProductTitle } from '../../redux/setMenuAction'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import LayerInfo3 from '../layer/LayerInfo3'
 
 const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
@@ -15,7 +15,7 @@ const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
         setIsActiveMenu(isActiveMenu === menu ? null : menu)
     }
 
-    const categoryNumber = useSelector(state => state.other.activeIndex)
+    // const categoryNumber = useSelector(state => state.other.activeIndex)
 
     const [isLayerOpen, setIsLayerOpen] = useState(false)
     const [activeLayer, setActiveLayer] = useState(null)
@@ -51,33 +51,33 @@ const Nav = ({className, onNaviMenu, setIsDimed, setIsNaviMenu}) => {
         <>
             <div className="tab">
                 <h1 onClick={onMoveHome}>BURGER</h1>
-                <a className="btn_menu" onClick={onNaviMenu}>
+                <a className="btn_menu" onClick={onNaviMenu} href="#!">
                     <span className="blind">메뉴</span>
                     <span className="menu"></span>
                 </a>
             </div>
             <nav className={className}>
-                <a className="btn_close" onClick={onNaviMenu}><span></span></a>
+                <a className="btn_close" onClick={onNaviMenu} href="#!"><span></span></a>
                 <ul>
                     <li>
-                        <a href="#" className={isActiveMenu === 'DELIVERY' ? "btn_subMenu on" : "btn_subMenu"} onClick={()=>onSubMenu('DELIVERY')}>DELIVERY</a>
+                        <a href="#!" className={isActiveMenu === 'DELIVERY' ? "btn_subMenu on" : "btn_subMenu"} onClick={()=>onSubMenu('DELIVERY')}>DELIVERY</a>
                         <ul className="subMenu">
-                            <li><a onClick={() => onMoveCategory(0, '추천메뉴')}>추천메뉴</a></li>
-                            <li><a onClick={() => onMoveCategory(1, '치킨&세트')}>치킨&세트</a></li>
-                            <li><a onClick={() => onMoveCategory(2, '버거&세트')}>버거&세트</a></li>
-                            <li><a onClick={() => onMoveCategory(3, '스낵&사이드')}>스낵&사이드</a></li>
-                            <li><a onClick={() => onMoveCategory(4, '음료')}>음료</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(0, '추천메뉴')}>추천메뉴</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(1, '치킨&세트')}>치킨&세트</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(2, '버거&세트')}>버거&세트</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(3, '스낵&사이드')}>스낵&사이드</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(4, '음료')}>음료</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#" className={isActiveMenu === 'STORE' ? "btn_subMenu on" : "btn_subMenu"} onClick={()=>onSubMenu('STORE')}>STORE</a>
+                        <a href="#!" className={isActiveMenu === 'STORE' ? "btn_subMenu on" : "btn_subMenu"} onClick={()=>onSubMenu('STORE')}>STORE</a>
                         <ul className="subMenu">
-                            <li><a onClick={() => onMoveCategory(5, '주소등록')}>주소등록</a></li>
+                            <li><a href="#!" onClick={() => onMoveCategory(5, '주소등록')}>주소등록</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">EVENT</a></li>
-                    <li><a href="#">KFC SERVICE</a></li>
-                    <li><a href="#">가맹 및 입점 문의</a></li>
+                    <li><a href="#!">EVENT</a></li>
+                    <li><a href="#!">KFC SERVICE</a></li>
+                    <li><a href="#!">가맹 및 입점 문의</a></li>
                 </ul>
                 
             </nav>

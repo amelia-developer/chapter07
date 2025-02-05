@@ -44,7 +44,7 @@ const Button = () => {
           dispatch(setInitialProductId(productNumber))
           // setProductId(productNumber) // 상품ID는 화면주소의 id로 초기화
           dispatch(setOptionChoiceName('')) // 옵션이름초기화
-          dispatch(setOptionChoice('')) // 옵션값초기화    
+          dispatch(setOptionChoice('')) // 옵션값초기화
       }
   }, [dispatch, location.pathname, productNumber]);
 
@@ -68,8 +68,8 @@ const Button = () => {
   return (
     <>
       <div className="btnBox">
-        <a className="btn_basket" onClick={onBasket}>장바구니</a>
-        <a className="btn_order">바로주문</a>
+        <a className="btn_basket" onClick={onBasket} href="#!">장바구니</a>
+        <a className="btn_order" href="#!">바로주문</a>
       </div>
     </> 
   )

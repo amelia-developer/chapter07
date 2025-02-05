@@ -113,14 +113,14 @@ const DetailCategory = ({activeIndex, onProductClick}) => {
                             resultCategory.map((value, idx)=> {
                                 const formatPrice = (value.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')                       
                                 return  <li key={idx}>
-                                            <a onClick={() => onDetailProduct(value.id)}>
+                                            <a onClick={() => onDetailProduct(value.id)} href="#!">
                                                 <img src={`/images/${value.id}.png`} alt={value.title}/>
                                                 <span className="title">{value.title}</span>
                                                 <span className="subtext">{value.subText}</span>
                                             </a>
                                             <div className="order">
-                                                <a className="btn_basket" onClick={() => onBasket(value)}><span className="blind">장바구니</span></a>
-                                                <a className="btn_order"><span>바로주문</span></a>
+                                                <a className="btn_basket" onClick={() => onBasket(value)} href="#!"><span className="blind">장바구니</span></a>
+                                                <a className="btn_order" href="#!"><span>바로주문</span></a>
                                             </div>
                                             <p className="price"><span>{formatPrice}</span></p>
                                         </li>

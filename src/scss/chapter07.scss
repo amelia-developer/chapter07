@@ -1046,6 +1046,7 @@ footer {
                             text-align: center;
                             color: #fff;
                             border-radius: 23px;
+                            text-decoration: none;
                         }
                     } // search종료
                     .list-wrapper {
@@ -1108,6 +1109,7 @@ footer {
                             line-height: 1.8rem;
                             color: #2c251e;
                             text-align: center;
+                            text-decoration: none;
                         }
                         .btn_ok {
                             vertical-align: top;
@@ -1122,6 +1124,7 @@ footer {
                             line-height: 1.8rem;
                             border-radius: 2.08rem;
                             text-align: center;
+                            text-decoration: none;
                         }
                     } // btn-cover종료
                 } // post종료
@@ -1147,6 +1150,7 @@ footer {
         font-weight: 400;
         width: 100%;
         cursor: pointer;
+        text-decoration: none;
         &.btn_basket {
             background-color: #666;            
         }
@@ -1172,6 +1176,8 @@ footer {
             a {
                 display: block;
                 text-align: center;
+                text-decoration: none;
+                color: #000;
                 // &:hover {
                 //     img {
                 //         transform: scale(1.1);
@@ -1498,6 +1504,7 @@ footer {
                     line-height: 2rem;
                     border-radius: 2.083rem;
                     text-align: center;
+                    text-decoration: none;
                 }
             } // total종료
         }
