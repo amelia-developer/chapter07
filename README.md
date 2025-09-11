@@ -1,4 +1,5 @@
-<strong># 글리치에서 호스팅종료로 인한 오류 vercel로 옮겨서 현재 디벨롭 작업중(2025-09-09)<br><br></strong>
+<strong>깃 주소 변경: https://github.com/lab-ml-22/chapter07-develop<br><br></strong>
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
@@ -21,7 +22,7 @@
   <ul>
     <li><span>목표: KFC웹사이트를 클론하여, react와 redux를 활용한 상태관리 및 전자상거래 사이트의 구조를 파악</span></li>
     <li><span>기술스택: react, redux, scss, firebaseHosting, json-server를 Glitch에서 호스팅하여 API 엔드포인트 변경</li>
-    <li><span>배포링크: https://react-burger-99022.web.app/</span></li>
+    <li><span>배포링크: https://rainbow-liger-51da29.netlify.app/</span></li>
     <li>
       <span>주요기능</span>
       <ol>
